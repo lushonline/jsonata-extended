@@ -10,6 +10,9 @@ It is NOT published to NPMJS and so install from this repo
 npm install https://github.com/martinholden-skillsoft/jsonata-extended
 ```
 
+## JSDOCS
+https://martinholden-skillsoft.github.io/jsonata-extended/doc/
+
 ## License
 
 MIT © Martin Holden
