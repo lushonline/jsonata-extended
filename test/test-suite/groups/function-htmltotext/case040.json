@@ -1,0 +1,7 @@
+{
+  "description": "Confirm undefined result when undefined",
+  "expr": "$htmltotext()",
+  "dataset": "metadata",
+  "bindings": {},
+  "undefinedResult": true
+}

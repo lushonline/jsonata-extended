@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when more than one parameter",
+  "expr": "$shortenUuid(\"1\",2)",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Argument 2 of function \"shortenUuid\" does not match function signature"
+  }
+}

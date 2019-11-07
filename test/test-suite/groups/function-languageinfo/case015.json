@@ -1,0 +1,68 @@
+{
+  "description": "Confirm success, get info for multiple RFC5646 tag using $map",
+  "expr": "$.( $allLocales:= ['en-US', 'fr-FR', 'zh-CN']; $map($allLocales, function($v, $i, $a) { $languageInfo($v) }) )",
+  "dataset": "empty",
+  "bindings": {},
+  "result": [
+    {
+      "region": {
+        "name": "United States",
+        "native": "United States",
+        "phone": "1",
+        "continent": "NA",
+        "capital": "Washington D.C.",
+        "currency": "USD,USN,USS",
+        "languages": [
+          "en"
+        ],
+        "emoji": "🇺🇸",
+        "emojiU": "U+1F1FA U+1F1F8"
+      },
+      "language": {
+        "name": "English",
+        "native": "English"
+      },
+      "rfc5646": "en-US"
+    },
+    {
+      "region": {
+        "name": "France",
+        "native": "France",
+        "phone": "33",
+        "continent": "EU",
+        "capital": "Paris",
+        "currency": "EUR",
+        "languages": [
+          "fr"
+        ],
+        "emoji": "🇫🇷",
+        "emojiU": "U+1F1EB U+1F1F7"
+      },
+      "language": {
+        "name": "French",
+        "native": "Français"
+      },
+      "rfc5646": "fr-FR"
+    },
+    {
+      "region": {
+        "name": "China",
+        "native": "中国",
+        "phone": "86",
+        "continent": "AS",
+        "capital": "Beijing",
+        "currency": "CNY",
+        "languages": [
+          "zh"
+        ],
+        "emoji": "🇨🇳",
+        "emojiU": "U+1F1E8 U+1F1F3"
+      },
+      "language": {
+        "name": "Chinese",
+        "native": "中文"
+      },
+      "rfc5646": "zh-CN"
+    }
+  ]
+}

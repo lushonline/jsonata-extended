@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when parameter is not a UUID",
+  "expr": "$shortenUuid(\"Hello World\")",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Invalid UUID"
+  }
+}

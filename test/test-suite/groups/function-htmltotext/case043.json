@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success (Double Byte Localised)",
+  "expr": "$htmltotext(localizedMetadata[5].description)",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "作为领导者，怎么才能更具战略性？战略性思维者会不断提出问题，以帮助在战略和战术之间架起桥梁。"
+}

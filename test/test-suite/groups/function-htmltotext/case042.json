@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success (Single Byte Localised)",
+  "expr": "$htmltotext(localizedMetadata[1].description)",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "Comment devenir un leader plus stratégique ? Les penseurs stratégiques posent continuellement des questions pour jeter des ponts entre stratégie et tactiques."
+}

@@ -1,0 +1,2263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>jsonata-functions - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/martinholden-skillsoft/jsonata-extended.git" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-jsonata-functions.html">jsonata-functions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~htmltotext">htmltotext</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~languageInfo">languageInfo</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~registerWithJSONATA">registerWithJSONATA</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~shortenUuid">shortenUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~truncate">truncate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#jsonataExtended">jsonataExtended</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">jsonata-functions</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description">Extension functions for JSONata</div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~htmltotext"><span class="type-signature">(private, inner) </span>htmltotext<span class="signature">(value, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String|Void}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line52">line 52</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.npmjs.com/package/html-to-text">html-to-text NPM</a></li>
+        
+            <li><a href="https://www.npmjs.com/package/he">HE NPM</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Convert HTML to plain text
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Example usage. The &lt;p&gt; tags and the HTML entities are converted</p>
+    
+    <pre class="prettyprint"><code>// returns// 'Leadership has a dark side; a "leadership shadow" that often creates an unknown; lurking fear.'htmltotext('&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>');</code></pre>
+
+        <p class="code-caption">Example usage within a JSONata transform. The &lt;p&gt; tags and the HTML entities are converted</p>
+    
+    <pre class="prettyprint"><code>// returns// result = 'Leadership has a dark side; a "leadership shadow" that often creates an unknown; lurking fear.'const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');const result = expr.evaluate();</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The HTML string to convert</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{}</code>
+                
+                </td>
+            
+
+            <td class="description last">The options object. For more information see the <a href="https://www.npmjs.com/package/html-to-text">html-to-text NPM</a>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tables</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;String></span>
+|
+
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>[]</code>
+                
+                </td>
+            
+
+            <td class="description last">allows to select certain tables by the 'class' or 'id' attribute from the HTML document. This is necessary because the majority of HTML E-Mails uses a table based layout. Prefix your table selectors with an '.' for the 'class' and with a '#' for the 'id' attribute. All other tables are ignored. You can assign 'true' to this attribute to select all tables.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>wordwrap</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>80</code>
+                
+                </td>
+            
+
+            <td class="description last">defines after how many chars a line break should follow in 'p' elements. Set to 'null' or 'false' to disable word-wrapping.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>linkHrefBaseUrl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>null</code>
+                
+                </td>
+            
+
+            <td class="description last">allows you to specify the server host for href attributes, where the links start at the root ('/'). For example, 'linkHrefBaseUrl = 'http://asdf.com'' and '<a href='/dir/subdir'>...</a>' the link in the text will be 'http://asdf.com/dir/subdir'. Keep in mind that 'linkHrefBaseUrl' shouldn't end with a '/'.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hideLinkHrefIfSameAsText</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last">allows you to specify the server host for href attributes, where the links start at the root ('/'). For example, 'linkHrefBaseUrl = 'http://asdf.com'' and '<a href='/dir/subdir'>...</a>' the link in the text will be 'http://asdf.com/dir/subdir'. Keep in mind that 'linkHrefBaseUrl' shouldn't end with a '/'.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>noLinkBrackets</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last">dont print brackets around the link if 'true'</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ignoreHref</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last">ignore all document links if 'true'</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ignoreImage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last">ignore all document images if 'true'.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>preserveNewlines</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last">by default, any newlines \n in a block of text will be removed. If true, these newlines will not be removed.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>uppercaseHeadings</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>true</code>
+                
+                </td>
+            
+
+            <td class="description last">by default, headings (h1, h2, etc) are uppercased. Set to 'false' to leave headings as they are.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>singleNewLineParagraphs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last">by default, paragraphs are converted with two newlines ('\n\n'). Set to 'true' to convert to a single newline.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>baseElement</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Array.&lt;String></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'body'</code>
+                
+                </td>
+            
+
+            <td class="description last">defines the tags whose text content will be captured from the html.  All content will be captured below the baseElement tags and added to the resulting text output.  This option allows the user to specify an array of elements as base elements using a single tag with css class and id parameters e.g. ['p.class1.class2#id1#id2', 'p.class1.class2#id1#id2'].</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>returnDomByDefault</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>true</code>
+                
+                </td>
+            
+
+            <td class="description last">onvert the entire document if we don't find the tag we're looking for if 'true'</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>unorderedListItemPrefix</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>' * '</code>
+                
+                </td>
+            
+
+            <td class="description last">defines the string that is used as item prefix for unordered lists '&lt;ol&gt;'</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>longWordSplit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{}</code>
+                
+                </td>
+            
+
+            <td class="description last">describes how to wrap long words
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>wrapCharacters</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;String></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>[]</code>
+                
+                </td>
+            
+
+            <td class="description last">is an array containing the characters that may be wrapped on, these are used in order</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>forceWrapOnLimit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last">defines whether to break long words on the limit if 'true'</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>decodeOptions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{}</code>
+                
+                </td>
+            
+
+            <td class="description last">defines the text decoding options given to 'he.decode'. For more informations see the <a href="https://www.npmjs.com/package/he">HE NPM</a>.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>isAttributeValue</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last">false means that decode() will decode the string as if it were used in a text context in an HTML document. HTML has different rules for parsing character references in attribute values — set this option to true to treat the input string as if it were used as an attribute value.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>strict</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last">false means that decode() will decode any HTML text content you feed it, even if it contains any entities that cause parse errors. To throw an error when such invalid HTML is encountered, set the strict option to true. This option makes it possible to use he as part of HTML parsers and HTML validators.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>format</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{}}</code>
+                
+                </td>
+            
+
+            <td class="description last">pass an object to enable custom formatting for specific elements. By using the format option, you can specify formatting for these elements: text, image, lineBreak, paragraph, anchor, heading, table, orderedList, unorderedList, listItem, horizontalLine. Each key must be a function which eventually receive elem (the current elem), fn (the next formatting function) and options (the options passed to html-to-text).</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns a string of the plain text, or undefined for undefined input
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~languageInfo"><span class="type-signature">(private, inner) </span>languageInfo<span class="signature">(value)</span><span class="type-signature"> &rarr; {Array.&lt;Object>|Void}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line258">line 258</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Get detailed information based on an RFC5646 tag for region and language
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Example usage with single tag</p>
+    
+    <pre class="prettyprint"><code>// returns// {//     "rfc5646": "en-US",//     "region": {//       "name": "United States",//       "native": "United States",//       "phone": "1",//       "continent": "NA",//       "capital": "Washington D.C.",//       "currency": "USD,USN,USS",//       "languages": [//         "en"//       ],//       "emoji": "🇺🇸",//       "emojiU": "U+1F1FA U+1F1F8"//     },//     "language": {//       "name": "English",//       "native": "English"//     }//   }// }languageInfo('en-us');</code></pre>
+
+        <p class="code-caption">Example usage within a JSONata transform to get the region native language name for a locale</p>
+    
+    <pre class="prettyprint"><code>// returns// result = "中文"const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$languageInfo("zh-CN").language.native');const result = expr.evaluate();</code></pre>
+
+        <p class="code-caption">Example usage within a JSONata transform to get the information for three locales</p>
+    
+    <pre class="prettyprint"><code>// returns// result = [//      {//         "region": {//          "name": "United States",//          "native": "United States",//          "phone": "1",//          "continent": "NA",//          "capital": "Washington D.C.",//          "currency": "USD,USN,USS",//          "languages": [//            "en"//          ],//          "emoji": "🇺🇸",//          "emojiU": "U+1F1FA U+1F1F8"//        },//        "language": {//          "name": "English",//          "native": "English"//        },//        "rfc5646": "en-US"//      },//      {//        "region": {//          "name": "France",//          "native": "France",//          "phone": "33",//          "continent": "EU",//          "capital": "Paris",//          "currency": "EUR",//          "languages": [//            "fr"//          ],//          "emoji": "🇫🇷",//          "emojiU": "U+1F1EB U+1F1F7"//        },//        "language": {//          "name": "French",//          "native": "Français"//        },//        "rfc5646": "fr-FR"//      },//      {//        "region": {//          "name": "China",//          "native": "中国",//          "phone": "86",//          "continent": "AS",//          "capital": "Beijing",//          "currency": "CNY",//          "languages": [//            "zh"//          ],//          "emoji": "🇨🇳",//          "emojiU": "U+1F1E8 U+1F1F3"//        },//        "language": {//          "name": "Chinese",//          "native": "中文"//        },//        "rfc5646": "zh-CN"//      }//    ]const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { $languageInfo($v) }) )');const result = expr.evaluate();</code></pre>
+
+        <p class="code-caption">Example usage within a JSONata transform to get a new object with the RFC5646 tag, and a string 'region (language)' representing the native locale for three locales</p>
+    
+    <pre class="prettyprint"><code>// returns// result = [//        {//        "rfc5646": "en-US",//        "locale": "United States (English)"//        },//        {//        "rfc5646": "fr-FR",//        "locale": "France (Français)"//        },//        {//        "rfc5646": "zh-CN",//        "locale": "中国 (中文)"//        }//      ]const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { ( $lang := $languageInfo($v); { "rfc5646": $lang.rfc5646, "locale" : $lang.region.native &amp; " (" &amp; $lang.language.native &amp;")" })}) )');const result = expr.evaluate();</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The RFC5646 locales to retrieve detailed information on</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Will throw an error if the value is not a valid RFC5646 language tag
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    object contain details on the tags, keyed on the language tag, or undefined for undefined input
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;Object></span>
+|
+
+<span class="param-type">Void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~registerWithJSONATA"><span class="type-signature">(inner) </span>registerWithJSONATA<span class="signature">(expression)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line293">line 293</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.npmjs.com/package/jsonata">JSONata NPM</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Register the functions in this library to the JSONata expression
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage to add the functions in this library to a JSONata expression object, and utilise them</p>
+    
+    <pre class="prettyprint"><code>const jsonata = require('jsonata');const jsonataFunctions = require('./lib/jsonata/jsonata-functions');const expression = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');jsonataFunctions.registerWithJSONATA(expression);const result = expression.evaluate();</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>expression</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The JSONata Expression Object <a href="https://www.npmjs.com/package/jsonata">JSONata NPM</a></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        expression must be a JSONata expression object
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl class="param-type">
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">TypeError</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~shortenUuid"><span class="type-signature">(private, inner) </span>shortenUuid<span class="signature">(value)</span><span class="type-signature"> &rarr; {String|Void}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line86">line 86</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.npmjs.com/package/uuid-encoder">uuid-encoder NPM</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Shorten the supplied UUID
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Example usage</p>
+    
+    <pre class="prettyprint"><code>// returns// '1m5otdkthiyq143crwujacdqg'shortenUuid('1b49aa30-e719-11e6-9835-f723b46a2688');</code></pre>
+
+        <p class="code-caption">Example usage within a JSONata transform</p>
+    
+    <pre class="prettyprint"><code>// returns// result = '1m5otdkthiyq143crwujacdqg'const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688")');const result = expr.evaluate();</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Properly formatted UUID</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Will throw an error if the value is not a valid uuid
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns a string containing the encoded version of the uuid, or undefined for undefined input
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~truncate"><span class="type-signature">(private, inner) </span>truncate<span class="signature">(value<span class="signature-attributes">opt</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String|Void}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line123">line 123</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.npmjs.com/package/lodash">lodash NPM</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Truncate the string
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Example usage with default options</p>
+    
+    <pre class="prettyprint"><code>// returns// '123456789012345678901234567...'truncate('1234567890123456789012345678901234567890');</code></pre>
+
+        <p class="code-caption">Example usage with option for length of 13</p>
+    
+    <pre class="prettyprint"><code>// returns// '1234567890...'truncate('1234567890123456789012345678901234567890', { length: 13 });</code></pre>
+
+        <p class="code-caption">Example usage within a JSONata transform for length of 13</p>
+    
+    <pre class="prettyprint"><code>// returns// result = '1234567890...'const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$truncate("1234567890123456789012345678901234567890", {"length": 13, "omission": "..."})');const result = expr.evaluate();</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>''</code>
+                
+                </td>
+            
+
+            <td class="description last">The string to truncate.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{}</code>
+                
+                </td>
+            
+
+            <td class="description last">The options object. For more information see the <a href="https://www.npmjs.com/package/lodash">lodash NPM</a> truncate function
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>length</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>30</code>
+                
+                </td>
+            
+
+            <td class="description last">The maximum string length.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>omission</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'...'</code>
+                
+                </td>
+            
+
+            <td class="description last">The string to indicate text is omitted.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>separator</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">RegExp</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The separator pattern to truncate to.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns the truncated string, or undefined for undefined input
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Thu Nov 07 2019 12:50:23 GMT+0000 (Greenwich Mean Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

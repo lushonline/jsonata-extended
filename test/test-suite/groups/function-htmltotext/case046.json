@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success using custom options : wordwrap",
+  "expr": "$htmltotext(localizedMetadata[0].description, { 'wordwrap': 20 })",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "How can you be more\nstrategic as a\nleader? Strategic\nthinkers continually\nask questions to\nhelp create the\nbridge between\nstrategy and\ntactics."
+}

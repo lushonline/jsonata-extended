@@ -1,0 +1,7 @@
+{
+  "description": "Confirm function available in jsonata",
+  "expr": "$exists($htmltotext)",
+  "dataset": "empty",
+  "bindings": {},
+  "result": true
+}

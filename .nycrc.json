@@ -1,0 +1,12 @@
+{
+  "all": true,
+  "include": [
+    "lib/**/*.js"
+  ],
+  "exclude": [
+    "test/**/*.js",
+    ".eslintrc.js",
+    "coverage",
+    ".github"
+  ]
+}

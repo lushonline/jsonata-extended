@@ -1,0 +1,55 @@
+{
+	"name": "jsonata-extended",
+	"version": "0.0.0",
+	"description": "Extended JSONata object with custom functions",
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/martinholden-skillsoft/jsonata-extended.git"
+	},
+	"main": "index.js",
+	"scripts": {
+		"pretest": "npm run lint",
+		"mocha": "node ./node_modules/mocha/bin/mocha \"test/**/*.js\"",
+		"test": "npm run mocha",
+		"posttest": "npm run doc",
+		"start": "",
+		"lint": "eslint **/*.js",
+		"preversion": "npm run test",
+		"postversion": "git push && git push --tags && npm run changelog && git push ",
+		"postinstall": "",
+		"changelog": "rimraf CHANGELOG.md && auto-changelog --template keepachangelog && git add . && git commit . -m changelog && git push",
+		"doc": "rimraf doc/* && jsdoc --configure jsdoc.json .",
+		"coverage": "nyc --reporter=lcov --reporter=text-summary npm run test"
+	},
+	"keywords": [
+		"JSONata"
+	],
+	"author": "Martin Holden &lt;martin.holden@skillsoft.com&gt;",
+	"license": "MIT",
+	"dependencies": {
+		"countries-list": "^2.5.0",
+		"html-to-text": "^5.1.1",
+		"jsonata": "^1.6.5",
+		"lodash": "^4.17.15",
+		"rfc5646": "^3.0.0",
+		"uuid-encoder": "^1.2.0",
+		"uuid-validate": "0.0.3"
+	},
+	"devDependencies": {
+		"auto-changelog": "^1.16.1",
+		"babel-eslint": "^10.0.3",
+		"chai": "^4.2.0",
+		"coveralls": "^3.0.7",
+		"docdash": "^1.1.1",
+		"eslint": "^6.3.0",
+		"eslint-config-airbnb-base": "^14.0.0",
+		"eslint-config-prettier": "^6.2.0",
+		"eslint-plugin-import": "^2.18.2",
+		"eslint-plugin-prettier": "^3.1.0",
+		"jsdoc": "^3.6.3",
+		"mocha": "^6.2.2",
+		"nyc": "^14.1.1",
+		"prettier": "^1.18.2",
+		"rimraf": "^3.0.0"
+	}
+}

@@ -1,0 +1,20 @@
+{
+  "description": "Confirm success, get specific info for multiple RFC5646 tag using $map, and string concatenation",
+  "expr": "$.( $allLocales:= ['en-US', 'fr-FR', 'zh-CN']; $map($allLocales, function($v, $i, $a) { ( $lang := $languageInfo($v); { 'rfc5646': $lang.rfc5646, 'locale' : $lang.region.native & ' (' & $lang.language.native &')' })}) )",
+  "dataset": "empty",
+  "bindings": {},
+  "result": [
+    {
+      "rfc5646": "en-US",
+      "locale": "United States (English)"
+    },
+    {
+      "rfc5646": "fr-FR",
+      "locale": "France (Français)"
+    },
+    {
+      "rfc5646": "zh-CN",
+      "locale": "中国 (中文)"
+    }
+  ]
+}

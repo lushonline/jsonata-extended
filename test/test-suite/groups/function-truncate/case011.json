@@ -1,0 +1,7 @@
+{
+  "description": "Confirm undefined result when passed undefined",
+  "expr": "$truncate()",
+  "dataset": "empty",
+  "bindings": {},
+  "undefinedResult": true
+}

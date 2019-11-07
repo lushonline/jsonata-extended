@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when parameter is not an RFC5646 tag",
+  "expr": "$languageInfo(\"Hello World\")",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Invalid RFC5646 Tag. Value: Hello World"
+  }
+}

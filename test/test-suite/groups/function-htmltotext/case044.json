@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success using empty options object",
+  "expr": "$htmltotext(localizedMetadata[0].description, {})",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "How can you be more strategic as a leader? Strategic thinkers continually ask questions to help create the bridge between strategy and tactics."
+}

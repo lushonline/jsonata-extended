@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error when parameter is not a string",
+  "expr": "$htmltotext(1)",
+  "dataset": "metadata",
+  "bindings": {},
+  "error": {
+    "message": "Argument 1 of function \"htmltotext\" does not match function signature"
+  }
+}

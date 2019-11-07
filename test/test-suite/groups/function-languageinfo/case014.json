@@ -1,0 +1,26 @@
+{
+  "description": "Confirm success, get info for one RFC5646 tag",
+  "expr": "$languageInfo('en-US')",
+  "dataset": "empty",
+  "bindings": {},
+  "result": {
+    "rfc5646": "en-US",
+    "region": {
+      "name": "United States",
+      "native": "United States",
+      "phone": "1",
+      "continent": "NA",
+      "capital": "Washington D.C.",
+      "currency": "USD,USN,USS",
+      "languages": [
+        "en"
+      ],
+      "emoji": "🇺🇸",
+      "emojiU": "U+1F1FA U+1F1F8"
+    },
+    "language": {
+      "name": "English",
+      "native": "English"
+    }
+  }
+}

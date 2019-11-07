@@ -1,0 +1,82 @@
+{
+  "id": "1b49aa30-e719-11e6-9835-f723b46a2688",
+  "code": null,
+  "xapiActivityId": "https://xapi.percipio.com/xapi/channel/1b49aa30-e719-11e6-9835-f723b46a2688",
+  "xapiActivityTypeId": "https://xapi.percipio.com/xapi/activity-type/channel",
+  "contentType": {
+    "percipioType": "CHANNEL",
+    "category": "CHANNEL",
+    "displayLabel": "Channel",
+    "source": null
+  },
+  "localeCodes": [
+    "en-US",
+    "fr-FR",
+    "de-DE",
+    "es",
+    "pt-BR",
+    "zh-CN",
+    "ja-JP"
+  ],
+  "localizedMetadata": [
+    {
+      "localeCode": "en-US",
+      "title": "Strategic Thinking",
+      "description": "<p>How can you be more strategic as a leader? Strategic thinkers continually ask questions to help create the bridge between strategy and tactics.</p>"
+    },
+    {
+      "localeCode": "fr-FR",
+      "title": "Pensée stratégique",
+      "description": "<p>Comment devenir un leader plus stratégique ? Les penseurs stratégiques posent continuellement des questions pour jeter des ponts entre stratégie et tactiques.</p>"
+    },
+    {
+      "localeCode": "de-DE",
+      "title": "Strategisches Denken",
+      "description": "<p>Wie können Sie als Führungskraft strategischer werden? Strategische Denker stellen fortlaufend Fragen, um dabei zu helfen, die Brücke zwischen Strategie und Taktiken zu schlagen.</p>"
+    },
+    {
+      "localeCode": "es",
+      "title": "Pensamiento estratégico",
+      "description": "<p>¿Cómo puede ser un líder más estratega? Los estrategas formulan preguntas constantemente para crear un puente entre la estrategia y la táctica.</p>"
+    },
+    {
+      "localeCode": "pt-BR",
+      "title": "Pensamento estratégico",
+      "description": "<p>Como você pode ser mais estratégico(a) como líder? Os pensadores estratégicos continuamente fazem perguntas para ajudar a criar a ponte entre estratégia e tática.</p>"
+    },
+    {
+      "localeCode": "zh-CN",
+      "title": "战略性思维 ",
+      "description": "<p>作为领导者&#xff0c;怎么才能更具战略性&#xff1f;战略性思维者会不断提出问题&#xff0c;以帮助在战略和战术之间架起桥梁。</p>"
+    },
+    {
+      "localeCode": "ja-JP",
+      "title": "戦略的思考",
+      "description": "<p>リーダーとして戦略的な思考を向上させるにはどうしたらよいでしょうか。戦略的な思考ができるリーダーは、戦略を実践に変えるための方策について常に検討しています。</p>"
+    }
+  ],
+  "lifecycle": {
+    "status": "ACTIVE",
+    "publishDate": "2017-02-02T15:49:06Z",
+    "lastUpdatedDate": "2019-10-22T19:53:42Z"
+  },
+  "link": "https://share.percipio.com/cd/ByqP0kIVn74",
+  "imageUrl": "https://cdn2.percipio.com/public/c/channel/images/saved/1b49aa30-e719-11e6-9835-f723b46a2688/fe3e557e-75df-40a7-a14e-9baabf1b61d5.jpg",
+  "keywords": [],
+  "duration": null,
+  "by": [],
+  "publication": null,
+  "expertiseLevels": [],
+  "modalities": [],
+  "technologies": [],
+  "associations": {
+    "areas": [
+      "Management"
+    ],
+    "subjects": [
+      "Business Strategy"
+    ],
+    "channels": [],
+    "parent": null
+  }
+}

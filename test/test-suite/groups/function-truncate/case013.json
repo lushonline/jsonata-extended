@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when options parameter is not an object",
+  "expr": "$truncate(\"1\",2)",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Argument 2 of function \"truncate\" does not match function signature"
+  }
+}

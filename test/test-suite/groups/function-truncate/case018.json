@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success using undefined options object",
+  "expr": "$truncate('1234567890123456789012345678901234567890', $iamundefined)",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "123456789012345678901234567..."
+}
