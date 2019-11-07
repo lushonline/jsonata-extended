@@ -1291,7 +1291,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line258">line 258</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line270">line 270</a>
     </li></ul></dd>
     
 
@@ -1344,9 +1344,13 @@
 
     <h5>Examples</h5>
     
-        <p class="code-caption">Example usage with single tag</p>
+        <p class="code-caption">Example usage with single tag with language and locale</p>
     
-    <pre class="prettyprint"><code>// returns// {//     "rfc5646": "en-US",//     "region": {//       "name": "United States",//       "native": "United States",//       "phone": "1",//       "continent": "NA",//       "capital": "Washington D.C.",//       "currency": "USD,USN,USS",//       "languages": [//         "en"//       ],//       "emoji": "🇺🇸",//       "emojiU": "U+1F1FA U+1F1F8"//     },//     "language": {//       "name": "English",//       "native": "English"//     }//   }// }languageInfo('en-us');</code></pre>
+    <pre class="prettyprint"><code>// returns// {//     "rfc5646": "en-US",//     "region": {//       "name": "United States",//       "native": "United States",//       "phone": "1",//       "continent": "NA",//       "capital": "Washington D.C.",//       "currency": "USD,USN,USS",//       "languages": [//         "en"//       ],//       "emoji": "🇺🇸",//       "emojiU": "U+1F1FA U+1F1F8"//     },//     "language": {//       "name": "English",//       "native": "English"//     }//   }// }languageInfo('en-US');</code></pre>
+
+        <p class="code-caption">Example usage with single tag with language only</p>
+    
+    <pre class="prettyprint"><code>// returns// {//     "rfc5646": "es",//     "region": null,//     "language": {//       "name": "Spanish",//       "native": "Español"//     }//   }// }languageInfo('es');</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform to get the region native language name for a locale</p>
     
@@ -1442,7 +1446,7 @@
 
         
 <div class="param-desc">
-    object contain details on the tags, keyed on the language tag, or undefined for undefined input
+    object contain details on the region and language, region is null if language only passed. Returns undefined for undefined input
 </div>
 
 
@@ -1483,7 +1487,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line293">line 293</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line305">line 305</a>
     </li></ul></dd>
     
 

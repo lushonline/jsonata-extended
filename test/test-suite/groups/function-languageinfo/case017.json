@@ -1,0 +1,14 @@
+{
+  "description": "Confirm success, get info for one RFC5646 tag with no 'locale' so null region",
+  "expr": "$languageInfo('es')",
+  "dataset": "empty",
+  "bindings": {},
+  "result": {
+    "rfc5646": "es",
+    "region": null,
+    "language": {
+      "name": "Spanish",
+      "native": "Español"
+    }
+  }
+}
