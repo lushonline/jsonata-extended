@@ -18,7 +18,7 @@
 		"postversion": "git push && git push --tags && npm run changelog && git push ",
 		"postinstall": "",
 		"changelog": "rimraf CHANGELOG.md && auto-changelog --template keepachangelog && git add . && git commit . -m changelog && git push",
-		"doc": "rimraf doc/* && jsdoc --configure jsdoc.json .",
+		"doc": "rimraf doc/* && jsdoc --readme README.md --configure jsdoc.json .",
 		"coverage": "nyc --reporter=lcov --reporter=text-summary npm run test"
 	},
 	"keywords": [
