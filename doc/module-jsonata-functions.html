@@ -29,7 +29,7 @@
     
     <input type="text" id="nav-search" placeholder="Search" />
     
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/martinholden-skillsoft/jsonata-extended.git" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-jsonata-functions.html">jsonata-functions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~htmltotext">htmltotext</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~languageInfo">languageInfo</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~registerWithJSONATA">registerWithJSONATA</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~shortenUuid">shortenUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~truncate">truncate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#jsonataExtended">jsonataExtended</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/martinholden-skillsoft/jsonata-extended.git" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-jsonata-functions.html">jsonata-functions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~htmltotext">htmltotext</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~languageInfo">languageInfo</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~moment">moment</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parsePath">parsePath</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parseUrl">parseUrl</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~registerWithJSONATA">registerWithJSONATA</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~shortenUuid">shortenUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~truncate">truncate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#jsonataExtended">jsonataExtended</a></li></ul>
 </nav>
 
 <div id="main">
@@ -176,7 +176,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line52">line 52</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -1291,7 +1291,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line270">line 270</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line273">line 273</a>
     </li></ul></dd>
     
 
@@ -1475,6 +1475,565 @@
 
     
 
+    <h4 class="name" id="~moment"><span class="type-signature">(private, inner) </span>moment<span class="signature">(args)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line432">line 432</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Wrapper around MomentJS <a href="https://www.npmjs.com/package/moment">Moment NPM</a>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Example usage within a JSONata transform to get the year of a ISO8601 string</p>
+    
+    <pre class="prettyprint"><code>// returns// result = "2017"const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$moment("2017-02-02T15:49:06Z").year()');const result = expr.evaluate();</code></pre>
+
+        <p class="code-caption">Example usage within a JSONata transform to get the localised Italian month name for a date</p>
+    
+    <pre class="prettyprint"><code>// returns// result = "dicembre"const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$.( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\")))');const result = expr.evaluate();</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The moment parse argument options</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A moment object
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parsePath"><span class="type-signature">(private, inner) </span>parsePath<span class="signature">(value)</span><span class="type-signature"> &rarr; {Object|Void}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line402">line 402</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://nodejs.org/api/path.html">Node Path</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Parse the supplied path and return the parsed values
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Example usage</p>
+    
+    <pre class="prettyprint"><code>// returns{   "base": "page.html",   "dir": "/p/a/t",   "ext": ".html",   "name": "page",   "root": "/"}parsePath('/p/a/t/page.html');</code></pre>
+
+        <p class="code-caption">Example usage within a JSONata transform</p>
+    
+    <pre class="prettyprint"><code>// returnsresult = {   "base": "page.html",   "dir": "/p/a/t",   "ext": ".html",   "name": "page",   "root": "/"}const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$parsePath("/p/a/t/page.html")');const result = expr.evaluate();</code></pre>
+
+        <p class="code-caption">Example usage within a JSONata transform to get the file extension</p>
+    
+    <pre class="prettyprint"><code>// returnsresult = ".html"const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$parsePath("/p/a/t/page.html").ext');const result = expr.evaluate();</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Properly formatted path</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Will throw an error if the value is not a valid url
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns an object containing the parsed components of the path, or undefined for undefined input
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">Void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~parseUrl"><span class="type-signature">(private, inner) </span>parseUrl<span class="signature">(value)</span><span class="type-signature"> &rarr; {Object|Void}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line352">line 352</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.npmjs.com/package/url-parse">url-parse NPM</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Parse the supplied URL and return the parsed values
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Example usage</p>
+    
+    <pre class="prettyprint"><code>// returns{   "slashes": true,   "protocol": "http:",   "hash": "#hash",   "query": {     "param1": "string",     "param2": "true"   },   "pathname": "/p/a/t/page.html",   "auth": "user:pass",   "host": "host.com:8080",   "port": "8080",   "hostname": "host.com",   "password": "pass",   "username": "user",   "origin": "http://host.com:8080",   "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash" }parseUrl('http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash');</code></pre>
+
+        <p class="code-caption">Example usage within a JSONata transform</p>
+    
+    <pre class="prettyprint"><code>// returnsresult = {   "slashes": true,   "protocol": "http:",   "hash": "#hash",   "query": {     "param1": "string",     "param2": "true"   },   "pathname": "/p/a/t/page.html",   "auth": "user:pass",   "host": "host.com:8080",   "port": "8080",   "hostname": "host.com",   "password": "pass",   "username": "user",   "origin": "http://host.com:8080",   "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash" }const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash")');const result = expr.evaluate();</code></pre>
+
+        <p class="code-caption">Example usage within a JSONata transform to get the hostname</p>
+    
+    <pre class="prettyprint"><code>// returnsresult = "host.com"const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash").hostname');const result = expr.evaluate();</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Properly formatted URL</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Will throw an error if the value is not a valid url
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns an object containing the parsed components of the URL, or undefined for undefined input
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">Void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="~registerWithJSONATA"><span class="type-signature">(inner) </span>registerWithJSONATA<span class="signature">(expression)</span><span class="type-signature"></span></h4>
 
     
@@ -1487,7 +2046,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line305">line 305</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line451">line 451</a>
     </li></ul></dd>
     
 
@@ -1666,7 +2225,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line86">line 86</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line89">line 89</a>
     </li></ul></dd>
     
 
@@ -1857,7 +2416,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line123">line 123</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line126">line 126</a>
     </li></ul></dd>
     
 
