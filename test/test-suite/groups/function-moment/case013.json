@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success parse date value string en-GB, using en-US format, and strict and check if valid (false)",
+  "expr": "$moment(\"25-12-1995\",\"MM-DD-YYYY\", true).isValid()",
+  "dataset": "empty",
+  "bindings": {},
+  "result": false
+}

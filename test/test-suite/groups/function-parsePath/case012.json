@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when parameter is not a string",
+  "expr": "$parsePath(1)",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Argument 1 of function \"parsePath\" does not match function signature"
+  }
+}

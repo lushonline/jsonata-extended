@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success parse array of values and get month (zero index)",
+  "expr": "$moment([2010, 1, 14, 15, 25, 50, 125]).month()",
+  "dataset": "empty",
+  "bindings": {},
+  "result": 1
+}

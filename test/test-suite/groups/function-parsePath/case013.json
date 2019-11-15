@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when more than one parameter",
+  "expr": "$parsePath(\"/p/a/t/page.html\",2)",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Argument 2 of function \"parsePath\" does not match function signature"
+  }
+}

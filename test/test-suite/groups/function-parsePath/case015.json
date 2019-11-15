@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success, retrieve extension",
+  "expr": "$parsePath(\"/p/a/t/page.html\").ext",
+  "dataset": "empty",
+  "bindings": {},
+  "result": ".html"
+}

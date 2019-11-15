@@ -1,0 +1,13 @@
+{
+  "description": "Confirm success",
+  "expr": "$parsePath(\"/p/a/t/page.html\")",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": {
+    "base": "page.html",
+    "dir": "/p/a/t",
+    "ext": ".html",
+    "name": "page",
+    "root": "/"
+  }
+}

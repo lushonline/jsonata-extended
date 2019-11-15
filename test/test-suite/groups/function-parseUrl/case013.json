@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when more than one parameter",
+  "expr": "$parseUrl(\"http://user:pass@host.com:8080/p/a/t/page.html?query=string#hash\",2)",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Argument 2 of function \"parseUrl\" does not match function signature"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success parse ISO8601 date value string only and get month (zero index)",
+  "expr": "$moment(\"2017-02-12T15:49:06Z\", $moment().ISO_8601 ).month()",
+  "dataset": "empty",
+  "bindings": {},
+  "result": 1
+}

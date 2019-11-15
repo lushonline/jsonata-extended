@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success parse ISO8601 date value in millis and get year",
+  "expr": "$moment($toMillis(\"2017-02-12T15:49:06Z\")).year()",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": 2017
+}

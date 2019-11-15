@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success parse date value string, specifying a single format as array and get month (zero index)",
+  "expr": "$moment(\"12-25-1995\", [\"MM-DD-YYYY\"]).month()",
+  "dataset": "empty",
+  "bindings": {},
+  "result": 11
+}

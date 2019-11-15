@@ -1,0 +1,24 @@
+{
+  "description": "Confirm success",
+  "expr": "$parseUrl(\"http://user:pass@host.com:8080/p/a/t/page.html?param1=string&param2=true#hash\")",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": {
+    "slashes": true,
+    "protocol": "http:",
+    "hash": "#hash",
+    "query": {
+      "param1": "string",
+      "param2": "true"
+    },
+    "pathname": "/p/a/t/page.html",
+    "auth": "user:pass",
+    "host": "host.com:8080",
+    "port": "8080",
+    "hostname": "host.com",
+    "password": "pass",
+    "username": "user",
+    "origin": "http://host.com:8080",
+    "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&param2=true#hash"
+  }
+}

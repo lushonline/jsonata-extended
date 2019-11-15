@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when parameter is not a URL",
+  "expr": "$parseUrl(\"Hello World\")",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Invalid URL"
+  }
+}
