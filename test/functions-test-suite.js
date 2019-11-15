@@ -120,12 +120,16 @@ describe('Functions Test Suite', () => {
         spec.forEach(item => {
           if (!item.description) {
             item.description = name;
+          } else {
+            item.description = `${name} - ${item.description}`;
           }
         });
         cases = cases.concat(spec);
       } else {
         if (!spec.description) {
           spec.description = name;
+        } else {
+          spec.description = `${name} - ${spec.description}`;
         }
         cases.push(spec);
       }
