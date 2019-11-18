@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success parse ISO8601 Duration and result as total seconds",
+  "expr": "$momentDuration(\"PT1H2M10S\").asSeconds()",
+  "dataset": "empty",
+  "bindings": {},
+  "result": 3730
+}

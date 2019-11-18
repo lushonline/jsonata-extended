@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success parse ISO8601 Duration and result as hh:mm:ss",
+  "expr": "$.( $duration := $momentDuration(\"P3DT2H2M10S\"); $formatNumber($floor($duration.asHours()),\"#00\") & \":\" & $formatNumber($floor($duration.minutes()),\"00\") & \":\" & $formatNumber($floor($duration.seconds()),\"00\") )",
+  "dataset": "empty",
+  "bindings": {},
+  "result": "74:02:10"
+}

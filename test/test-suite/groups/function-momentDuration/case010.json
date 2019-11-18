@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success parse numeric value (ms) and as total seconds",
+  "expr": "$momentDuration(150).asSeconds()",
+  "dataset": "empty",
+  "bindings": {},
+  "result": 0.15
+}

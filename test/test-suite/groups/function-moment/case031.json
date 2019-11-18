@@ -1,0 +1,36 @@
+{
+  "description": "Confirm success display localised long date formats for all the localeCodes for lifecycle.publishDate (note use of $$ as we are in loop and need to reference original context)",
+  "expr": "$map(localeCodes, function($v, $i, $a) {($momentlcl := $moment($$.lifecycle.publishDate).locale($v);{ \"locale\" : $v, \"longdate\" : $momentlcl.format('LLLL')} )})",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": [
+    {
+      "locale": "en-US",
+      "longdate": "Thursday, February 2, 2017 3:49 PM"
+    },
+    {
+      "locale": "fr-FR",
+      "longdate": "jeudi 2 février 2017 15:49"
+    },
+    {
+      "locale": "de-DE",
+      "longdate": "Donnerstag, 2. Februar 2017 15:49"
+    },
+    {
+      "locale": "es",
+      "longdate": "jueves, 2 de febrero de 2017 15:49"
+    },
+    {
+      "locale": "pt-BR",
+      "longdate": "Quinta-feira, 2 de Fevereiro de 2017 às 15:49"
+    },
+    {
+      "locale": "zh-CN",
+      "longdate": "2017年2月2日星期四下午3点49分"
+    },
+    {
+      "locale": "ja-JP",
+      "longdate": "2017年2月2日 木曜日 15:49"
+    }
+  ]
+}

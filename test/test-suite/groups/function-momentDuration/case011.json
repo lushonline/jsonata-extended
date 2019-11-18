@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success parse numeric value with units and result as total seconds",
+  "expr": "$momentDuration(2, \"minutes\").asSeconds()",
+  "dataset": "empty",
+  "bindings": {},
+  "result": 120
+}

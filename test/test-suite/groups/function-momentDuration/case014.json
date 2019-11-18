@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success parse hh:mm:ss string and result as total seconds",
+  "expr": "$momentDuration(\"01:02:10\").asSeconds()",
+  "dataset": "empty",
+  "bindings": {},
+  "result": 3730
+}
