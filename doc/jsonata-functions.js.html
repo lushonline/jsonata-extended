@@ -29,7 +29,7 @@
     
     <input type="text" id="nav-search" placeholder="Search" />
     
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/martinholden-skillsoft/jsonata-extended.git" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-jsonata-functions.html">jsonata-functions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~htmltotext">htmltotext</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~languageInfo">languageInfo</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~moment">moment</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~momentDuration">momentDuration</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parsePath">parsePath</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parseUrl">parseUrl</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~registerWithJSONATA">registerWithJSONATA</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~shortenUuid">shortenUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~truncate">truncate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#jsonataExtended">jsonataExtended</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/martinholden-skillsoft/jsonata-extended.git" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-jsonata-functions.html">jsonata-functions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~htmltotext">htmltotext</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~languageInfo">languageInfo</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~moment">moment</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~momentDuration">momentDuration</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~mustache">mustache</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parsePath">parsePath</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parseUrl">parseUrl</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~registerWithJSONATA">registerWithJSONATA</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~shortenUuid">shortenUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~truncate">truncate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#jsonataExtended">jsonataExtended</a></li></ul>
 </nav>
 
 <div id="main">
@@ -58,6 +58,7 @@ const countriesList = require('countries-list');
 const momentjs = require('moment');
 const urlParse = require('url-parse');
 const path = require('path');
+const Mustache = require('mustache');
 
 /**
  * Convert HTML to plain text
@@ -88,7 +89,7 @@ const path = require('path');
  * @example &lt;caption>Example usage within a JSONata transform. The &amp;lt;p&amp;gt; tags and the HTML entities are converted&lt;/caption>
  * // returns
  * // result = 'Leadership has a dark side; a "leadership shadow" that often creates an unknown; lurking fear.'
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');
  * const result = expr.evaluate();
  *
@@ -121,7 +122,7 @@ const htmltotext = (value, options) => {
  * @example &lt;caption>Example usage within a JSONata transform&lt;/caption>
  * // returns
  * // result = '1m5otdkthiyq143crwujacdqg'
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688")');
  * const result = expr.evaluate();
  *
@@ -154,7 +155,7 @@ const shortenUuid = value => {
  * @example &lt;caption>Example usage within a JSONata transform for length of 13&lt;/caption>
  * // returns
  * // result = '1234567890...'
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$truncate("1234567890123456789012345678901234567890", {"length": 13, "omission": "..."})');
  * const result = expr.evaluate();
  *
@@ -190,14 +191,14 @@ const truncate = (value, options) => {
  * //     }
  * //   }
  * // }
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$languageInfo("es")');
  * const result = expr.evaluate();
  *
  * @example &lt;caption>Example usage within a JSONata transform to get the region native language name for a locale&lt;/caption>
  * // returns
  * // result = "中文"
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$languageInfo("zh-CN").language.native');
  * const result = expr.evaluate();
  *
@@ -265,7 +266,7 @@ const truncate = (value, options) => {
  * //        "rfc5646": "zh-CN"
  * //      }
  * //    ]
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { $languageInfo($v) }) )');
  * const result = expr.evaluate();
  *
@@ -285,7 +286,7 @@ const truncate = (value, options) => {
  * //        "locale": "中国 (中文)"
  * //        }
  * //      ]
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { ( $lang := $languageInfo($v); { "rfc5646": $lang.rfc5646, "locale" : $lang.region.native &amp; " (" &amp; $lang.language.native &amp;")" })}) )');
  * const result = expr.evaluate();
  *
@@ -340,7 +341,7 @@ const languageInfo = value => {
  *    "origin": "http://host.com:8080",
  *    "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash"
  *  }
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash")');
  * const result = expr.evaluate();
  *
@@ -348,7 +349,7 @@ const languageInfo = value => {
  * // returns
  * result = "host.com"
  *
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash").hostname');
  * const result = expr.evaluate();
  *
@@ -384,7 +385,7 @@ const parseUrl = value => {
  *    "name": "page",
  *    "root": "/"
  * }
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$parsePath("/p/a/t/page.html")');
  * const result = expr.evaluate();
  *
@@ -392,7 +393,7 @@ const parseUrl = value => {
  * // returns
  * result = ".html"
  *
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$parsePath("/p/a/t/page.html").ext');
  * const result = expr.evaluate();
  *
@@ -418,14 +419,14 @@ const parsePath = value => {
  * @example &lt;caption>Example usage within a JSONata transform to get the year of a ISO8601 string&lt;/caption>
  * // returns
  * // result = "2017"
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$moment("2017-02-02T15:49:06Z").year()');
  * const result = expr.evaluate();
  *
  * @example &lt;caption>Example usage within a JSONata transform to get the localised Italian month name for a date&lt;/caption>
  * // returns
  * // result = "dicembre"
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$.( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\")))');
  * const result = expr.evaluate();
  *
@@ -445,14 +446,14 @@ const moment = (...args) => {
  * @example &lt;caption>Example usage within a JSONata transform to get the total seconds of an ISO8601 duration string&lt;/caption>
  * // returns
  * // result = 3730
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$momentDuration(\"PT1H2M10S\").asSeconds()');
  * const result = expr.evaluate();
  *
  * @example &lt;caption>Example usage within a JSONata transform to convert ISO8601 duration string to hh:mm:ss&lt;/caption>
  * // returns
  * // result = "74:02:10"
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$.( $duration := $momentDuration(\"P3DT2H2M10S\"); $formatNumber($floor($duration.asHours()),\"#00\") &amp; \":\" &amp; $formatNumber($floor($duration.minutes()),\"00\") &amp; \":\" &amp; $formatNumber($floor($duration.seconds()),\"00\") )');
  * const result = expr.evaluate();
  *
@@ -466,13 +467,49 @@ const momentDuration = (...args) => {
 };
 
 /**
+ * Render a mustache template
+ * @access private
+ * @param {Object} [value=] The object to use with the template
+ * @param {String} [template=] The template object. For more information see the {@link https://www.npmjs.com/package/mustache | mustache NPM}
+ *
+ * @example &lt;caption>Example usage within a JSONata transform for converting object&lt;/caption>
+ * // returns
+ * // result = 'Martin Holden is a Learner'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$mustache( { "name" : "Martin Holden" , "role" : "Learner"}, \"{{name}} is a {{role}}\")');
+ * const result = expr.evaluate();
+ *
+ * @example &lt;caption>Example usage within a JSONata transform for converting more complex object&lt;/caption>
+ * // returns
+ * // result = '&lt;h1>Nincompoopery: Why Your Customers Hate You--And How to Fix It&lt;/h1>&lt;h2>Authors:&lt;/h2>&lt;ul>&lt;li>John R. Brandt&lt;/li>&lt;/ul>&lt;p>HarperCollins Leadership&amp;copy;2019&lt;/p>'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$mustache({ "title" : "Nincompoopery: Why Your Customers Hate You--And How to Fix It", "publication" : { "copyrightYear": 2019, "isbn": "9781400213672", "publisher": "HarperCollins Leadership" } , "authors" : ["John R. Brandt"]}, "&lt;h1>{{title}}&lt;/h1>{{#authors.length}}&lt;h2>Authors:&lt;/h2>&lt;ul>{{#authors}}&lt;li>{{.}}&lt;/li>{{/authors}}&lt;/ul>{{/authors.length}}{{#publication}}&lt;p>{{publisher}}&amp;copy;{{copyrightYear}}&lt;/p>{{/publication}}")');
+ * const result = expr.evaluate();
+ *
+ * @returns {String|Void} Returns the resulting string, or undefined for undefined value or value for undefined template
+ *
+ * @see {@link https://www.npmjs.com/package/mustache | Mustache NPM}
+ */
+const mustache = (value, template) => {
+  if (typeof value === 'undefined') {
+    return undefined;
+  }
+
+  if (typeof template === 'undefined') {
+    return value;
+  }
+
+  return Mustache.render(template, value);
+};
+
+/**
  * Register the functions in this library to the JSONata expression
  * @access public
  * @param {Object} expression - The JSONata Expression Object {@link https://www.npmjs.com/package/jsonata | JSONata NPM}
  *
  * @example &lt;caption>Example usage to add the functions in this library to a JSONata expression object, and utilise them&lt;/caption>
  * const jsonata = require('jsonata');
- * const jsonataFunctions = require('./lib/jsonata/jsonata-functions');
+ * const jsonataFunctions = require('jsonata-functions');
  *
  * const expression = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');
  * jsonataFunctions.registerWithJSONATA(expression);
@@ -517,6 +554,12 @@ const registerWithJSONATA = expression => {
   // moment.duration(String);
   // moment.duration(Object);
   expression.registerFunction('momentDuration', momentDuration, '&lt;(sno)?s?:o>');
+
+  expression.registerFunction(
+    'mustache',
+    (value, template) => mustache(value, template),
+    '&lt;o?s?:s>'
+  );
 };
 
 module.exports = {
