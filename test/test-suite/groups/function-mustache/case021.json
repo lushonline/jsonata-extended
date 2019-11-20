@@ -1,0 +1,10 @@
+{
+  "description": "Confirm response equals value when no template",
+  "expr": "$mustache( { \"name\" : \"Martin Holden\" , \"role\" : \"Learner\"} )",
+  "dataset": "empty",
+  "bindings": {},
+  "result": {
+    "name": "Martin Holden",
+    "role": "Learner"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success",
+  "expr": "$mustache({ \"name\" : \"Martin Holden\" , \"role\" : \"Learner\"}, \"{{name}} is a {{role}}\")",
+  "dataset": "empty",
+  "bindings": {},
+  "result": "Martin Holden is a Learner"
+}

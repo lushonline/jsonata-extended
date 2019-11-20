@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when template parameter is not a string",
+  "expr": "$mustache( { \"name\" : \"martin\" },2)",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Argument 2 of function \"mustache\" does not match function signature"
+  }
+}

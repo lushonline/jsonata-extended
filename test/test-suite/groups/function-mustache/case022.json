@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success",
+  "expr": "$mustache({ \"title\" : localizedMetadata[0].title, \"publication\" : publication , \"authors\" : by}, \"<h1>{{title}}</h1>{{#authors.length}}<h2>Authors:</h2><ul>{{#authors}}<li>{{.}}</li>{{/authors}}</ul>{{/authors.length}}{{#publication}}<p>{{publisher}}&copy;{{copyrightYear}}</p>{{/publication}}\")",
+  "dataset": "metadatabook",
+  "bindings": {},
+  "result": "<h1>Nincompoopery: Why Your Customers Hate You--And How to Fix It</h1><h2>Authors:</h2><ul><li>John R. Brandt</li></ul><p>HarperCollins Leadership&copy;2019</p>"
+}

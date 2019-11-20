@@ -1,0 +1,50 @@
+  {
+    "id": "250112c4-e1f7-424e-aa20-bb11748e6103",
+    "code": null,
+    "xapiActivityId": "https://xapi.percipio.com/xapi/book/250112c4-e1f7-424e-aa20-bb11748e6103",
+    "xapiActivityTypeId": "https://xapi.percipio.com/xapi/activity-type/book",
+    "contentType": {
+      "percipioType": "BOOK",
+      "category": "BOOK",
+      "displayLabel": "Book",
+      "source": null
+    },
+    "localeCodes": [
+      "en-US"
+    ],
+    "localizedMetadata": [
+      {
+        "localeCode": "en-US",
+        "title": "Nincompoopery: Why Your Customers Hate You--And How to Fix It",
+        "description": "CEO and award-winning business writer John R. Brandt offers concrete examples of how any organization--large or small, and regardless of industry--can innovate in ways that delight customers and attract top-level talent."
+      }
+    ],
+    "lifecycle": {
+      "status": "ACTIVE",
+      "publishDate": "2019-11-18T03:01:20Z",
+      "lastUpdatedDate": "2019-11-18T04:01:27Z"
+    },
+    "link": "https://share.percipio.com/cd/TteQGlIQF",
+    "imageUrl": "https://images.books24x7.com/coverimages/9781400213672.png",
+    "keywords": [],
+    "duration": "PT2H36M",
+    "by": [
+      "John R. Brandt"
+    ],
+    "publication": {
+      "copyrightYear": 2019,
+      "isbn": "9781400213672",
+      "publisher": "HarperCollins Leadership"
+    },
+    "expertiseLevels": [],
+    "modalities": [
+      "READ"
+    ],
+    "technologies": [],
+    "associations": {
+      "areas": [],
+      "subjects": [],
+      "channels": [],
+      "parent": null
+    }
+  }
