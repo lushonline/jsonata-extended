@@ -1,6 +1,6 @@
 {
   "description": "Confirm success parse date value string, specifying a single format, an italian locale and get month name (0 index)",
-  "expr": "$.( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\")))",
+  "expr": "$.( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\", \"DD-MM-YYYY\")))",
   "dataset": "empty",
   "bindings": {},
   "result": "dicembre"
