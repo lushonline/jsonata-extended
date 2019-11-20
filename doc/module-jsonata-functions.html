@@ -176,7 +176,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line55">line 55</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line54">line 54</a>
     </li></ul></dd>
     
 
@@ -210,9 +210,9 @@
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://www.npmjs.com/package/html-to-text">html-to-text NPM</a></li>
+            <li><a href="https://www.npmjs.com/package/html-to-text%20"> html-to-text NPM</a></li>
         
-            <li><a href="https://www.npmjs.com/package/he">HE NPM</a></li>
+            <li><a href="https://www.npmjs.com/package/he%20"> HE NPM</a></li>
         </ul>
     </dd>
     
@@ -236,12 +236,8 @@
 
 
 
-    <h5>Examples</h5>
+    <h5>Example</h5>
     
-        <p class="code-caption">Example usage. The &lt;p&gt; tags and the HTML entities are converted</p>
-    
-    <pre class="prettyprint"><code>// returns// 'Leadership has a dark side; a "leadership shadow" that often creates an unknown; lurking fear.'htmltotext('&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>');</code></pre>
-
         <p class="code-caption">Example usage within a JSONata transform. The &lt;p&gt; tags and the HTML entities are converted</p>
     
     <pre class="prettyprint"><code>// returns// result = 'Leadership has a dark side; a "leadership shadow" that often creates an unknown; lurking fear.'const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');const result = expr.evaluate();</code></pre>
@@ -345,7 +341,7 @@
                 </td>
             
 
-            <td class="description last">The options object. For more information see the <a href="https://www.npmjs.com/package/html-to-text">html-to-text NPM</a>
+            <td class="description last">The options object. For more information see the <a href="https://www.npmjs.com/package/html-to-text%20"> html-to-text NPM</a>
                 <h6>Properties</h6>
                 
 
@@ -1070,7 +1066,7 @@
                 </td>
             
 
-            <td class="description last">defines the text decoding options given to 'he.decode'. For more informations see the <a href="https://www.npmjs.com/package/he">HE NPM</a>.
+            <td class="description last">defines the text decoding options given to 'he.decode'. For more informations see the <a href="https://www.npmjs.com/package/he%20"> HE NPM</a>.
                 <h6>Properties</h6>
                 
 
@@ -1291,7 +1287,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line273">line 273</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line252">line 252</a>
     </li></ul></dd>
     
 
@@ -1322,6 +1318,15 @@
     
 
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.npmjs.com/package/rfc5646%20"> rfc5646 NPM</a></li>
+        
+            <li><a href="https://www.npmjs.com/package/countries-list%20"> countries-list NPM</a></li>
+        </ul>
+    </dd>
+    
 
     
 </dl>
@@ -1344,13 +1349,9 @@
 
     <h5>Examples</h5>
     
-        <p class="code-caption">Example usage with single tag with language and locale</p>
+        <p class="code-caption">ample usage within a JSONata transform to get detailed info with single tag with language only no locale</p>
     
-    <pre class="prettyprint"><code>// returns// {//     "rfc5646": "en-US",//     "region": {//       "name": "United States",//       "native": "United States",//       "phone": "1",//       "continent": "NA",//       "capital": "Washington D.C.",//       "currency": "USD,USN,USS",//       "languages": [//         "en"//       ],//       "emoji": "🇺🇸",//       "emojiU": "U+1F1FA U+1F1F8"//     },//     "language": {//       "name": "English",//       "native": "English"//     }//   }// }languageInfo('en-US');</code></pre>
-
-        <p class="code-caption">Example usage with single tag with language only</p>
-    
-    <pre class="prettyprint"><code>// returns// {//     "rfc5646": "es",//     "region": null,//     "language": {//       "name": "Spanish",//       "native": "Español"//     }//   }// }languageInfo('es');</code></pre>
+    <pre class="prettyprint"><code>// returns// result = {//     "rfc5646": "es",//     "region": null,//     "language": {//       "name": "Spanish",//       "native": "Español"//     }//   }// }const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$languageInfo("es")');const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform to get the region native language name for a locale</p>
     
@@ -1487,7 +1488,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line432">line 432</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line390">line 390</a>
     </li></ul></dd>
     
 
@@ -1518,6 +1519,13 @@
     
 
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.npmjs.com/package/moment%20"> Moment NPM</a></li>
+        </ul>
+    </dd>
+    
 
     
 </dl>
@@ -1527,7 +1535,7 @@
 
 
 <div class="description">
-    Wrapper around MomentJS <a href="https://www.npmjs.com/package/moment">Moment NPM</a>
+    Wrapper around MomentJS <a href="https://www.npmjs.com/package/moment%20"> Moment NPM</a>
 </div>
 
 
@@ -1668,7 +1676,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line458">line 458</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line418">line 418</a>
     </li></ul></dd>
     
 
@@ -1702,7 +1710,9 @@
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://momentjs.com/docs/#/durations/">Moment Durations</a></li>
+            <li><a href="https://www.npmjs.com/package/moment%20"> Moment NPM</a></li>
+        
+            <li><a href="https://momentjs.com/docs/#/durations/%20"> Moment Durations</a></li>
         </ul>
     </dd>
     
@@ -1715,7 +1725,7 @@
 
 
 <div class="description">
-    Wrapper around MomentJS Duration <a href="https://www.npmjs.com/package/moment">Moment NPM</a>
+    Wrapper around MomentJS Duration <a href="https://www.npmjs.com/package/moment%20"> Moment NPM</a>
 </div>
 
 
@@ -1856,7 +1866,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line402">line 402</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line358">line 358</a>
     </li></ul></dd>
     
 
@@ -1890,7 +1900,7 @@
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://nodejs.org/api/path.html">Node Path</a></li>
+            <li><a href="https://nodejs.org/api/path.html%20"> Node Path</a></li>
         </ul>
     </dd>
     
@@ -1916,10 +1926,6 @@
 
     <h5>Examples</h5>
     
-        <p class="code-caption">Example usage</p>
-    
-    <pre class="prettyprint"><code>// returns{   "base": "page.html",   "dir": "/p/a/t",   "ext": ".html",   "name": "page",   "root": "/"}parsePath('/p/a/t/page.html');</code></pre>
-
         <p class="code-caption">Example usage within a JSONata transform</p>
     
     <pre class="prettyprint"><code>// returnsresult = {   "base": "page.html",   "dir": "/p/a/t",   "ext": ".html",   "name": "page",   "root": "/"}const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$parsePath("/p/a/t/page.html")');const result = expr.evaluate();</code></pre>
@@ -2051,7 +2057,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line352">line 352</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line314">line 314</a>
     </li></ul></dd>
     
 
@@ -2085,7 +2091,7 @@
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://www.npmjs.com/package/url-parse">url-parse NPM</a></li>
+            <li><a href="https://www.npmjs.com/package/url-parse%20"> url-parse NPM</a></li>
         </ul>
     </dd>
     
@@ -2111,10 +2117,6 @@
 
     <h5>Examples</h5>
     
-        <p class="code-caption">Example usage</p>
-    
-    <pre class="prettyprint"><code>// returns{   "slashes": true,   "protocol": "http:",   "hash": "#hash",   "query": {     "param1": "string",     "param2": "true"   },   "pathname": "/p/a/t/page.html",   "auth": "user:pass",   "host": "host.com:8080",   "port": "8080",   "hostname": "host.com",   "password": "pass",   "username": "user",   "origin": "http://host.com:8080",   "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash" }parseUrl('http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash');</code></pre>
-
         <p class="code-caption">Example usage within a JSONata transform</p>
     
     <pre class="prettyprint"><code>// returnsresult = {   "slashes": true,   "protocol": "http:",   "hash": "#hash",   "query": {     "param1": "string",     "param2": "true"   },   "pathname": "/p/a/t/page.html",   "auth": "user:pass",   "host": "host.com:8080",   "port": "8080",   "hostname": "host.com",   "password": "pass",   "username": "user",   "origin": "http://host.com:8080",   "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash" }const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash")');const result = expr.evaluate();</code></pre>
@@ -2246,7 +2248,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line477">line 477</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line439">line 439</a>
     </li></ul></dd>
     
 
@@ -2280,7 +2282,7 @@
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://www.npmjs.com/package/jsonata">JSONata NPM</a></li>
+            <li><a href="https://www.npmjs.com/package/jsonata%20"> JSONata NPM</a></li>
         </ul>
     </dd>
     
@@ -2354,7 +2356,7 @@
 
             
 
-            <td class="description last">The JSONata Expression Object <a href="https://www.npmjs.com/package/jsonata">JSONata NPM</a></td>
+            <td class="description last">The JSONata Expression Object <a href="https://www.npmjs.com/package/jsonata%20"> JSONata NPM</a></td>
         </tr>
 
     
@@ -2425,7 +2427,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line89">line 89</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -2459,7 +2461,7 @@
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://www.npmjs.com/package/uuid-encoder">uuid-encoder NPM</a></li>
+            <li><a href="https://www.npmjs.com/package/uuid-encoder%20"> uuid-encoder NPM</a></li>
         </ul>
     </dd>
     
@@ -2483,12 +2485,8 @@
 
 
 
-    <h5>Examples</h5>
+    <h5>Example</h5>
     
-        <p class="code-caption">Example usage</p>
-    
-    <pre class="prettyprint"><code>// returns// '1m5otdkthiyq143crwujacdqg'shortenUuid('1b49aa30-e719-11e6-9835-f723b46a2688');</code></pre>
-
         <p class="code-caption">Example usage within a JSONata transform</p>
     
     <pre class="prettyprint"><code>// returns// result = '1m5otdkthiyq143crwujacdqg'const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688")');const result = expr.evaluate();</code></pre>
@@ -2616,7 +2614,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line126">line 126</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line119">line 119</a>
     </li></ul></dd>
     
 
@@ -2650,7 +2648,7 @@
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://www.npmjs.com/package/lodash">lodash NPM</a></li>
+            <li><a href="https://www.npmjs.com/package/lodash%20"> lodash NPM</a></li>
         </ul>
     </dd>
     
@@ -2674,16 +2672,8 @@
 
 
 
-    <h5>Examples</h5>
+    <h5>Example</h5>
     
-        <p class="code-caption">Example usage with default options</p>
-    
-    <pre class="prettyprint"><code>// returns// '123456789012345678901234567...'truncate('1234567890123456789012345678901234567890');</code></pre>
-
-        <p class="code-caption">Example usage with option for length of 13</p>
-    
-    <pre class="prettyprint"><code>// returns// '1234567890...'truncate('1234567890123456789012345678901234567890', { length: 13 });</code></pre>
-
         <p class="code-caption">Example usage within a JSONata transform for length of 13</p>
     
     <pre class="prettyprint"><code>// returns// result = '1234567890...'const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$truncate("1234567890123456789012345678901234567890", {"length": 13, "omission": "..."})');const result = expr.evaluate();</code></pre>
@@ -2791,7 +2781,7 @@
                 </td>
             
 
-            <td class="description last">The options object. For more information see the <a href="https://www.npmjs.com/package/lodash">lodash NPM</a> truncate function
+            <td class="description last">The options object. For more information see the <a href="https://www.npmjs.com/package/lodash%20"> lodash NPM</a> truncate function
                 <h6>Properties</h6>
                 
 
