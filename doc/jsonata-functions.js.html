@@ -29,7 +29,7 @@
     
     <input type="text" id="nav-search" placeholder="Search" />
     
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/martinholden-skillsoft/jsonata-extended.git" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-jsonata-functions.html">jsonata-functions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~htmltotext">htmltotext</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~languageInfo">languageInfo</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~moment">moment</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~momentDuration">momentDuration</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~mustache">mustache</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parsePath">parsePath</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parseUrl">parseUrl</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~registerWithJSONATA">registerWithJSONATA</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~shortenUuid">shortenUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~truncate">truncate</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#jsonataExtended">jsonataExtended</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/martinholden-skillsoft/jsonata-extended.git" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-jsonata-functions.html">jsonata-functions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~htmltotext">htmltotext</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~languageInfo">languageInfo</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~moment">moment</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~momentDuration">momentDuration</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~mustache">mustache</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parsePath">parsePath</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parseUrl">parseUrl</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~registerWithJSONATA">registerWithJSONATA</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~shortenUuid">shortenUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~truncate">truncate</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~unicodeToASCII">unicodeToASCII</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#jsonataExtended">jsonataExtended</a></li></ul>
 </nav>
 
 <div id="main">
@@ -59,6 +59,7 @@ const momentjs = require('moment');
 const urlParse = require('url-parse');
 const path = require('path');
 const Mustache = require('mustache');
+const ASCIIFolder = require('fold-to-ascii');
 
 /**
  * Convert HTML to plain text
@@ -141,38 +142,6 @@ const shortenUuid = value => {
   }
 
   return new UuidEncoder('base36').encode(value);
-};
-
-/**
- * Truncate the string
- * @access private
- * @param {String} [value=''] The string to truncate.
- * @param {Object} [options={}] The options object. For more information see the {@link https://www.npmjs.com/package/lodash | lodash NPM} truncate function
- * @param {number} [options.length=30] The maximum string length.
- * @param {String} [options.omission='...'] The string to indicate text is omitted.
- * @param {RegExp|String} [options.separator] The separator pattern to truncate to.
- *
- * @example &lt;caption>Example usage within a JSONata transform for length of 13&lt;/caption>
- * // returns
- * // result = '1234567890...'
- * const jsonata = require('jsonata-extended');
- * const expr = jsonata('$truncate("1234567890123456789012345678901234567890", {"length": 13, "omission": "..."})');
- * const result = expr.evaluate();
- *
- * @returns {String|Void} Returns the truncated string, or undefined for undefined input
- *
- * @see {@link https://www.npmjs.com/package/lodash | lodash NPM}
- */
-const truncate = (value, options) => {
-  if (typeof value === 'undefined') {
-    return undefined;
-  }
-
-  const defaultOptions = {};
-
-  const localOptions = { ...defaultOptions, ...options };
-
-  return _.truncate(value, localOptions);
 };
 
 /**
@@ -503,6 +472,112 @@ const mustache = (value, template) => {
 };
 
 /**
+ * Convert UNICODE String to ASCII
+ * Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the "Basic Latin" Unicode block) into their ASCII equivalents.
+ *
+ * @access private
+ * @param {String} [value=''] The UNICODE string to convert.
+ * @param {Object} [options={}] The options object.
+ * @param {String} [options.replacement=Void] The string to replace unknown UNICODE characters with, each byte of the UNICODE string is replaced if Void then unknown characters are maintained.
+ *
+ * @example &lt;caption>Example usage within a JSONata transform&lt;/caption>
+ * // returns
+ * // result = 'Lorem 🤧 eripuit'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$unicodeToASCII("Lörem 🤧 ëripuît")');
+ * const result = expr.evaluate();
+ *
+ * @example &lt;caption>Example usage within a JSONata transform with replacement of Unknown characters&lt;/caption>
+ * // returns
+ * // result = 'Lorem  eripuit'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$unicodeToASCII("Lörem 🤧 ëripuît", { "replacement": ""})');
+ * const result = expr.evaluate();
+ *
+ * @example &lt;caption>Example usage within a JSONata transform with replacement of Unknown characters, most UNICODE characters are 2 bytes long the UTF8 Encoding for this emoji is 0xF0 0x9F 0xA4 0xA7&lt;/caption>
+ * // returns
+ * // result = 'Lorem XX eripuit'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$unicodeToASCII("Lörem 🤧 ëripuît", { "replacement": "X"})');
+ * const result = expr.evaluate();
+ *
+ * @returns {String|Void} Returns the truncated string, or undefined for undefined input
+ *
+ * @see {@link https://www.npmjs.com/package/fold-to-ascii | fold-to-ascii NPM}
+ */
+const unicodeToASCII = (value, options) => {
+  if (typeof value === 'undefined') {
+    return undefined;
+  }
+
+  const defaultOptions = {};
+  defaultOptions.replacement = undefined;
+  const localOptions = { ...defaultOptions, ...options };
+
+  return localOptions.replacement !== undefined
+    ? ASCIIFolder.foldReplacing(value, localOptions.replacement)
+    : ASCIIFolder.foldMaintaining(value);
+};
+
+/**
+ * Truncate the string
+ * @access private
+ * @param {String} [value=''] The string to truncate.
+ * @param {Object} [options={}] The options object.
+ * @param {number} [options.length=30] The maximum string length.
+ * @param {String} [options.omission='...'] The string to indicate text is omitted.
+ * @param {String[]|String} [options.wordbreak] The wordbreak strings to truncate to. Either an array of strings or a single string
+ *
+ * @example &lt;caption>Example usage within a JSONata transform for length of 13&lt;/caption>
+ * // returns
+ * // result = '1234567890...'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$truncate("1234567890123456789012345678901234567890", {"length": 13, "omission": "..."})');
+ * const result = expr.evaluate();
+ *
+ * @example &lt;caption>Example usage within a JSONata transform for length of 20, and with a list of wordbreaks (these will be trimmed from end if present)&lt;/caption>
+ * // returns
+ * // result = '1234567890123456....'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$truncate('1234567890123456 , 789012345678901234567890', { 'length': 20 , 'omission': '...', 'wordbreak': [ '-',',','.','&amp;', ' ' ]})');
+ * const result = expr.evaluate();
+ *
+ * @example &lt;caption>Example usage within a JSONata transform for length of 20, and with a single wordbreak (this will be trimmed from end if present)&lt;/caption>
+ * // returns
+ * // result = '1234567890123456....'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$truncate('1234567890123456 , 789012345678901234567890', { 'length': 20 , 'omission': '...', 'wordbreak': ' ' })');
+ * const result = expr.evaluate();
+ *
+ * @returns {String|Void} Returns the truncated string, or undefined for undefined input
+ *
+ * Based on the lodash Truncate Function
+ * @see {@link https://www.npmjs.com/package/lodash | lodash NPM}
+ */
+const truncate = (value, options) => {
+  if (typeof value === 'undefined') {
+    return undefined;
+  }
+
+  const defaultOptions = {};
+  defaultOptions.length = 30;
+  defaultOptions.omission = '...';
+  defaultOptions.separator = undefined;
+
+  const localOptions = { ...defaultOptions, ...options };
+
+  if (localOptions.wordbreak &amp;&amp; _.isArray(localOptions.wordbreak)) {
+    localOptions.separator = new RegExp(`[${localOptions.wordbreak.join('')}]`);
+  }
+
+  if (localOptions.wordbreak &amp;&amp; _.isString(localOptions.wordbreak)) {
+    localOptions.separator = localOptions.wordbreak;
+  }
+
+  return _.truncate(value, localOptions);
+};
+
+/**
  * Register the functions in this library to the JSONata expression
  * @access public
  * @param {Object} expression - The JSONata Expression Object {@link https://www.npmjs.com/package/jsonata | JSONata NPM}
@@ -559,6 +634,12 @@ const registerWithJSONATA = expression => {
     'mustache',
     (value, template) => mustache(value, template),
     '&lt;o?s?:s>'
+  );
+
+  expression.registerFunction(
+    'unicodeToASCII',
+    (value, options) => unicodeToASCII(value, options),
+    '&lt;s?o?:s>'
   );
 };
 
