@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success using UNICODE",
+  "expr": "$truncate('Lörem 🤧 ëripuît', { 'length': 12 , 'omission': '...' , 'wordbreak':' '})",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "Lörem 🤧..."
+}

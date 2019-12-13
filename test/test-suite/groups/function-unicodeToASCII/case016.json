@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success using empty string custom replacement (UNICODE character equals two ASCII)",
+  "expr": "$unicodeToASCII('Lörem 🤧 ëripuît', { 'replacement' :  ''})",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "Lorem  eripuit"
+}

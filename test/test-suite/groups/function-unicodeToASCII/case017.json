@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success using empty options object",
+  "expr": "$unicodeToASCII('Lörem 🤧 ëripuît', {} )",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "Lorem 🤧 eripuit"
+}

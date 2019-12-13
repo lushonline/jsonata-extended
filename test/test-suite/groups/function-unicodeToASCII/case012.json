@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when parameter is not a string",
+  "expr": "$unicodeToASCII(1)",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Argument 1 of function \"unicodeToASCII\" does not match function signature"
+  }
+}

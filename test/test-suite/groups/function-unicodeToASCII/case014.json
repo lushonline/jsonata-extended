@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success using defaults",
+  "expr": "$unicodeToASCII('Lörem 🤧 ëripuît')",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "Lorem 🤧 eripuit"
+}

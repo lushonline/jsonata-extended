@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when options parameter is not an object",
+  "expr": "$unicodeToASCII(\"1\",2)",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Argument 2 of function \"unicodeToASCII\" does not match function signature"
+  }
+}

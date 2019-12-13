@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success using custom length, single character to wordbreak on and omission",
+  "expr": "$truncate('1234567890123456 , 789012345678901234567890', { 'length': 20 , 'omission': '...', 'wordbreak': ' ' })",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "1234567890123456..."
+}

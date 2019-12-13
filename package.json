@@ -28,6 +28,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"countries-list": "^2.5.0",
+		"fold-to-ascii": "^5.0.0",
 		"html-to-text": "^5.1.1",
 		"jsonata": "^1.6.5",
 		"lodash": "^4.17.15",
