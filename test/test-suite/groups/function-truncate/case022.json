@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success using UNICODE, and split on SPACE",
+  "expr": "$truncate('Iñtërnâtiônàlizætiøn☃ 💩 are bad.', { 'length': 27 , 'omission': '...' , 'wordbreak':' '})",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "Iñtërnâtiônàlizætiøn☃ 💩..."
+}

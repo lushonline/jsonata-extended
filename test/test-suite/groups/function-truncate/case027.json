@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when options.wordbreakregex is not a string",
+  "expr": "$truncate('1234567890123456789012345678901234567890', { 'wordbreakregex' : 3} )",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Expected a string. Received options.wordbreakregex=3 Type: number"
+  }
+}

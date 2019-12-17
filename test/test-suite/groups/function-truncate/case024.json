@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when options.length is not a number",
+  "expr": "$truncate('1234567890123456789012345678901234567890', { 'length' : 'test'} )",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Expected a number. Received options.length=test Type: string"
+  }
+}

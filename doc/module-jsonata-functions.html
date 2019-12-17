@@ -2472,7 +2472,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line551">line 551</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line613">line 613</a>
     </li></ul></dd>
     
 
@@ -2838,7 +2838,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line511">line 511</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line510">line 510</a>
     </li></ul></dd>
     
 
@@ -2869,13 +2869,6 @@
     
 
     
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="https://www.npmjs.com/package/lodash%20"> lodash NPM</a></li>
-        </ul>
-    </dd>
-    
 
     
 </dl>
@@ -2904,7 +2897,7 @@
 
         <p class="code-caption">Example usage within a JSONata transform for length of 20, and with a list of wordbreaks (these will be trimmed from end if present)</p>
     
-    <pre class="prettyprint"><code>// returns// result = '1234567890123456....'const jsonata = require('jsonata-extended');const expr = jsonata('$truncate('1234567890123456 , 789012345678901234567890', { 'length': 20 , 'omission': '...', 'wordbreak': [ '-',',','.','&amp;', ' ' ]})');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns// result = '1234567890123456....'const jsonata = require('jsonata-extended');const expr = jsonata('$truncate('1234567890123456 , 789012345678901234567890', { 'length': 20 , 'omission': '...', 'wordbreakregex': '[\\\\s\\\\.%,:;\\\\?_]'})');const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform for length of 20, and with a single wordbreak (this will be trimmed from end if present)</p>
     
@@ -3127,9 +3120,6 @@
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;String></span>
-|
-
 <span class="param-type">String</span>
 
 
@@ -3154,7 +3144,44 @@
                 </td>
             
 
-            <td class="description last">The wordbreak strings to truncate to. Either an array of strings or a single string</td>
+            <td class="description last">The wordbreak strings to truncate to.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>wordbreakregex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The string representation of the regex</td>
         </tr>
 
     
@@ -3187,7 +3214,7 @@
 
         
 <div class="param-desc">
-    Returns the truncated string, or undefined for undefined inputBased on the lodash Truncate Function
+    Returns the truncated string, or undefined for undefined input
 </div>
 
 
