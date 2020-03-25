@@ -7,8 +7,12 @@
     ]
   },
   "source": {
+    "exclude": [
+      "jsonata-extended.js",
+      "jsonata-extended.min.js"
+    ],
     "includePattern": ".+\\.js(doc)?$",
-    "excludePattern": "(^|\\/|\\\\)_|node_modules|doc|coverage|test"
+    "excludePattern": "(^|\\/|\\\\)_|node_modules|doc|coverage|test|dist"
   },
   "plugins": [],
   "templates": {

@@ -1,10 +1,9 @@
-const jsonata = require('jsonata');
-
 const jsonataFunctions = require('./jsonata-functions');
 
 /**
  * Return a JSONata expression object that includes the custom functions registered
  *
+ * @param {Object} jsonataOrginal - JSONata object {@link https://www.npmjs.com/package/jsonata|JSONata NPM}
  * @param {Object} expr - JSONata expression {@link https://www.npmjs.com/package/jsonata|JSONata NPM}
  * @param {boolean} options - recover: attempt to recover on parse error
  * @example <caption>Example using the extended JSONata as a dropin replacement for the standard {@link https://www.npmjs.com/package/jsonata|JSONata NPM}</caption>
@@ -16,8 +15,8 @@ const jsonataFunctions = require('./jsonata-functions');
  * @returns {{evaluate: evaluate, assign: assign, registerFunction: registerFunction,
  *            ast: ast, errors: errors}} Evaluated expression
  */
-function jsonataExtended(expr, options) {
-  const expression = jsonata(expr, options);
+function jsonataExtended(jsonataOriginal, expr, options) {
+  const expression = jsonataOriginal(expr, options);
   jsonataFunctions.registerWithJSONATA(expression);
   return expression;
 }

@@ -2,7 +2,7 @@
 
 Extended JSONata object with custom functions
 
-This can be a drop in substitue for the standard [JSONata](https://www.npmjs.com/package/jsonata)
+This can be used to add extended functions to the standard [JSONata](https://www.npmjs.com/package/jsonata)
 
 It is NOT published to NPMJS and so install from this repo
 
@@ -12,15 +12,44 @@ It is NOT published to NPMJS and so install from this repo
 npm install https://github.com/martinholden-skillsoft/jsonata-extended
 ```
 
-## Example
+## Example - Node
 
 ```javascript
-// const jsonata = require('jsonata');
-const jsonata = require('jsonata-extended');
-const expr = jsonata(
+const jsonataOriginal = require('jsonata');
+const jsonataExtended = require('jsonata-extended');
+const expr = jsonataExtended(
+  jsonataOriginal,
   '$htmltotext("<p>Leadership has a dark side; a &#34;leadership shadow&#34; that often creates an unknown; lurking fear.</p>")'
 );
 const result = expr.evaluate();
+```
+
+## Example - Browser
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>JSONata Extended Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/jsonata/jsonata.min.js"></script>
+    <script src="jsonata-extended.js"></script>
+    <script>
+      function runTransform() {
+        var json = JSON.parse(document.getElementById('json').value);
+        var transform = document.getElementById('transform').value;
+        var resultJSONataExtended = jsonataExtended(jsonata,transform).evaluate(json);
+        document.getElementById('results').innerHTML = JSON.stringify(resultJSONataExtended);
+      }
+    </script>
+  </head>
+  <body>
+    <textarea id="json">{ "name": "Wilbur", "uuid": "11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000" }</textarea>
+    <textarea id="transform">$.{ "responsename": name, "responseuuid": uuid, "responseshortenUuid" : $shortenUuid ? $shortenUuid(uuid) : "function not defined"}</textarea>
+    <button onclick="runTransform()">Click me</button>
+    <p id="results"></p>
+  </body>
+</html>
 ```
 
 ## JSDOCS

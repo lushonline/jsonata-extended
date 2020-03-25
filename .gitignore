@@ -79,3 +79,6 @@ typings/
 .deployment
 .vscode/launch.json
 .vscode/settings.json
+
+# Build
+dist

@@ -6,20 +6,23 @@
 		"type": "git",
 		"url": "git+ssh://git@github.com/martinholden-skillsoft/jsonata-extended.git"
 	},
-	"main": "index.js",
+	"main": "src/index.js",
 	"scripts": {
-		"pretest": "npm run lint",
+		"lint": "eslint src/**/*.js",
 		"mocha": "node ./node_modules/mocha/bin/mocha \"test/**/*.js\"",
+		"doc": "rimraf doc/* && jsdoc --readme README.md --configure jsdoc.json .",
+		"pretest": "npm run lint",
 		"test": "npm run mocha",
-		"posttest": "npm run doc",
-		"start": "",
-		"lint": "eslint **/*.js",
+		"posttest": "npm run doc && npm run browserify && npm run minify",
 		"preversion": "npm run test",
 		"postversion": "git push && git push --tags && npm run changelog && git push ",
-		"postinstall": "",
 		"changelog": "rimraf CHANGELOG.md && auto-changelog --template keepachangelog && git add . && git commit . -m changelog && git push",
-		"doc": "rimraf doc/* && jsdoc --readme README.md --configure jsdoc.json .",
-		"coverage": "nyc --reporter=lcov --reporter=text-summary npm run test"
+		"coverage": "nyc --reporter=lcov --reporter=text-summary npm run test",
+		"check-coverage": "istanbul check-coverage -statement 100 -branch 100 -function 100 -line 100",
+		"browserify": "browserify src/index.js --outfile jsonata-extended.js --standalone jsonata-extended",
+		"mkdir-dist": "mkdirp ./dist",
+		"regenerator": "babel src --out-dir dist --presets=@babel/env",
+		"minify": "uglifyjs jsonata-extended.js -o jsonata-extended.min.js --compress --mangle"
 	},
 	"keywords": [
 		"JSONata"
@@ -27,10 +30,9 @@
 	"author": "Martin Holden &lt;martin.holden@skillsoft.com&gt;",
 	"license": "MIT",
 	"dependencies": {
-		"countries-list": "^2.5.0",
+		"countries-list": "^2.5.4",
 		"fold-to-ascii": "^5.0.0",
 		"html-to-text": "^5.1.1",
-		"jsonata": "^1.6.5",
 		"lodash": "^4.17.15",
 		"moment": "^2.24.0",
 		"mustache": "^3.1.0",
@@ -40,20 +42,28 @@
 		"uuid-validate": "0.0.3"
 	},
 	"devDependencies": {
+		"@babel/cli": "^7.8.4",
+		"@babel/core": "^7.8.4",
+		"@babel/preset-env": "^7.8.4",
 		"auto-changelog": "^1.16.1",
-		"babel-eslint": "^10.0.3",
+		"babel-eslint": "^10.1.0",
+		"browserify": "^16.5.0",
 		"chai": "^4.2.0",
-		"coveralls": "^3.0.7",
-		"docdash": "^1.1.1",
-		"eslint": "^6.3.0",
-		"eslint-config-airbnb-base": "^14.0.0",
-		"eslint-config-prettier": "^6.6.0",
-		"eslint-plugin-import": "^2.18.2",
-		"eslint-plugin-prettier": "^3.1.0",
+		"coveralls": "^3.0.11",
+		"docdash": "^1.2.0",
+		"eslint": "^6.8.0",
+		"eslint-config-airbnb-base": "^14.1.0",
+		"eslint-config-prettier": "^6.10.1",
+		"eslint-plugin-import": "^2.20.1",
+		"eslint-plugin-prettier": "^3.1.2",
 		"jsdoc": "^3.6.3",
+		"jsonata": "^1.8.1",
 		"mocha": "^6.2.2",
 		"nyc": "^14.1.1",
 		"prettier": "^1.19.1",
-		"rimraf": "^3.0.0"
+		"request": "^2.88.0",
+		"regenerator": "^0.14.2",
+		"rimraf": "^3.0.2",
+		"uglify-es": "^3.3.9"
 	}
 }

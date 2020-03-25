@@ -58,21 +58,47 @@
 
 
 
-    <section class="readme">
+    <section class="readme usertext">
         <article><h1>jsonata-extended</h1>
 <p>Extended JSONata object with custom functions</p>
-<p>This can be a drop in substitue for the standard <a href="https://www.npmjs.com/package/jsonata">JSONata</a></p>
+<p>This can be used to add extended functions to the standard <a href="https://www.npmjs.com/package/jsonata">JSONata</a></p>
 <p>It is NOT published to NPMJS and so install from this repo</p>
 <h2>Installation</h2>
 <pre class="prettyprint source lang-bash"><code>npm install https://github.com/martinholden-skillsoft/jsonata-extended
 </code></pre>
-<h2>Example</h2>
-<pre class="prettyprint source lang-javascript"><code>// const jsonata = require('jsonata');
-const jsonata = require('jsonata-extended');
-const expr = jsonata(
+<h2>Example - Node</h2>
+<pre class="prettyprint source lang-javascript"><code>const jsonataOriginal = require('jsonata');
+const jsonataExtended = require('jsonata-extended');
+const expr = jsonataExtended(
+  jsonataOriginal,
   '$htmltotext(&quot;&lt;p>Leadership has a dark side; a &#34;leadership shadow&#34; that often creates an unknown; lurking fear.&lt;/p>&quot;)'
 );
 const result = expr.evaluate();
+</code></pre>
+<h2>Example - Browser</h2>
+<pre class="prettyprint source lang-html"><code>&lt;!DOCTYPE html>
+&lt;html lang=&quot;en&quot;>
+  &lt;head>
+    &lt;meta charset=&quot;UTF-8&quot;>
+    &lt;title>JSONata Extended Test&lt;/title>
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/jsonata/jsonata.min.js&quot;>&lt;/script>
+    &lt;script src=&quot;jsonata-extended.js&quot;>&lt;/script>
+    &lt;script>
+      function runTransform() {
+        var json = JSON.parse(document.getElementById('json').value);
+        var transform = document.getElementById('transform').value;
+        var resultJSONataExtended = jsonataExtended(jsonata,transform).evaluate(json);
+        document.getElementById('results').innerHTML = JSON.stringify(resultJSONataExtended);
+      }
+    &lt;/script>
+  &lt;/head>
+  &lt;body>
+    &lt;textarea id=&quot;json&quot;>{ &quot;name&quot;: &quot;Wilbur&quot;, &quot;uuid&quot;: &quot;11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000&quot; }&lt;/textarea>
+    &lt;textarea id=&quot;transform&quot;>$.{ &quot;responsename&quot;: name, &quot;responseuuid&quot;: uuid, &quot;responseshortenUuid&quot; : $shortenUuid ? $shortenUuid(uuid) : &quot;function not defined&quot;}&lt;/textarea>
+    &lt;button onclick=&quot;runTransform()&quot;>Click me&lt;/button>
+    &lt;p id=&quot;results&quot;>&lt;/p>
+  &lt;/body>
+&lt;/html>
 </code></pre>
 <h2>JSDOCS</h2>
 <p><a href="https://martinholden-skillsoft.github.io/jsonata-extended/doc/">JavaScript Documentation</a></p>

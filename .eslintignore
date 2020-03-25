@@ -1,4 +1,9 @@
 # /node_modules/* and /bower_components/* in the project root are ignored by default
 
 # Ignore built files except build/index.js
+coverage/*
 doc/*
+dist/*
+jsonata.js
+jsonata-es5.js
+*.min.js

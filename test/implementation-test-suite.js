@@ -6,7 +6,7 @@ const chai = require('chai');
 
 const { describe, it } = require('mocha');
 const jsonata = require('jsonata');
-const jsonataFunctions = require('../lib/jsonata-functions');
+const jsonataFunctions = require('../src/lib/jsonata-functions');
 
 // This is the start of the set of tests associated with the test cases
 // found in the test-suite directory.

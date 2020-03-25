@@ -14,9 +14,9 @@
 const fs = require('fs');
 const path = require('path');
 const chai = require('chai');
-
 const { describe, it } = require('mocha');
-const jsonata = require('../lib/jsonata-extended');
+const jsonataOriginal = require('jsonata');
+const jsonataExtended = require('../src/lib/jsonata-extended');
 
 /**
  * Based on the collection of datasets and the information provided as part of the testcase,
@@ -154,7 +154,7 @@ describe('Functions Test Suite', () => {
           let expr;
           // Start by trying to compile the expression associated with this test case
           try {
-            expr = jsonata(testcase.expr);
+            expr = jsonataExtended(jsonataOriginal, testcase.expr);
             // If there is a timelimit and depth limit for this case, use the
             // `timeboxExpression` function to limit evaluation
             if ('timelimit' in testcase && 'depth' in testcase) {
