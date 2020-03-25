@@ -4,6 +4,8 @@
     "src/lib/**/*.js"
   ],
   "exclude": [
+    "*.js",
+    "dist/**/*.js",
     "test/**/*.js",
     ".eslintrc.js",
     "coverage",
