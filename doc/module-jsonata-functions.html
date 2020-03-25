@@ -240,7 +240,11 @@
     
         <p class="code-caption">Example usage within a JSONata transform. The &lt;p&gt; tags and the HTML entities are converted</p>
     
-    <pre class="prettyprint"><code>// returns// result = 'Leadership has a dark side; a "leadership shadow" that often creates an unknown; lurking fear.'const jsonata = require('jsonata-extended');const expr = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = 'Leadership has a dark side; a "leadership shadow" that often creates an unknown; lurking fear.'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');
+const result = expr.evaluate();</code></pre>
 
 
 
@@ -1351,19 +1355,117 @@
     
         <p class="code-caption">ample usage within a JSONata transform to get detailed info with single tag with language only no locale</p>
     
-    <pre class="prettyprint"><code>// returns// result = {//     "rfc5646": "es",//     "region": null,//     "language": {//       "name": "Spanish",//       "native": "Español"//     }//   }// }const jsonata = require('jsonata-extended');const expr = jsonata('$languageInfo("es")');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = {
+//     "rfc5646": "es",
+//     "region": null,
+//     "language": {
+//       "name": "Spanish",
+//       "native": "Español"
+//     }
+//   }
+// }
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$languageInfo("es")');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform to get the region native language name for a locale</p>
     
-    <pre class="prettyprint"><code>// returns// result = "中文"const jsonata = require('jsonata-extended');const expr = jsonata('$languageInfo("zh-CN").language.native');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = "中文"
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$languageInfo("zh-CN").language.native');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform to get the information for three locales</p>
     
-    <pre class="prettyprint"><code>// returns// result = [//      {//         "region": {//          "name": "United States",//          "native": "United States",//          "phone": "1",//          "continent": "NA",//          "capital": "Washington D.C.",//          "currency": "USD,USN,USS",//          "languages": [//            "en"//          ],//          "emoji": "🇺🇸",//          "emojiU": "U+1F1FA U+1F1F8"//        },//        "language": {//          "name": "English",//          "native": "English"//        },//        "rfc5646": "en-US"//      },//      {//        "region": {//          "name": "France",//          "native": "France",//          "phone": "33",//          "continent": "EU",//          "capital": "Paris",//          "currency": "EUR",//          "languages": [//            "fr"//          ],//          "emoji": "🇫🇷",//          "emojiU": "U+1F1EB U+1F1F7"//        },//        "language": {//          "name": "French",//          "native": "Français"//        },//        "rfc5646": "fr-FR"//      },//      {//        "region": {//          "name": "China",//          "native": "中国",//          "phone": "86",//          "continent": "AS",//          "capital": "Beijing",//          "currency": "CNY",//          "languages": [//            "zh"//          ],//          "emoji": "🇨🇳",//          "emojiU": "U+1F1E8 U+1F1F3"//        },//        "language": {//          "name": "Chinese",//          "native": "中文"//        },//        "rfc5646": "zh-CN"//      }//    ]const jsonata = require('jsonata-extended');const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { $languageInfo($v) }) )');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = [
+//      {
+//         "region": {
+//          "name": "United States",
+//          "native": "United States",
+//          "phone": "1",
+//          "continent": "NA",
+//          "capital": "Washington D.C.",
+//          "currency": "USD,USN,USS",
+//          "languages": [
+//            "en"
+//          ],
+//          "emoji": "🇺🇸",
+//          "emojiU": "U+1F1FA U+1F1F8"
+//        },
+//        "language": {
+//          "name": "English",
+//          "native": "English"
+//        },
+//        "rfc5646": "en-US"
+//      },
+//      {
+//        "region": {
+//          "name": "France",
+//          "native": "France",
+//          "phone": "33",
+//          "continent": "EU",
+//          "capital": "Paris",
+//          "currency": "EUR",
+//          "languages": [
+//            "fr"
+//          ],
+//          "emoji": "🇫🇷",
+//          "emojiU": "U+1F1EB U+1F1F7"
+//        },
+//        "language": {
+//          "name": "French",
+//          "native": "Français"
+//        },
+//        "rfc5646": "fr-FR"
+//      },
+//      {
+//        "region": {
+//          "name": "China",
+//          "native": "中国",
+//          "phone": "86",
+//          "continent": "AS",
+//          "capital": "Beijing",
+//          "currency": "CNY",
+//          "languages": [
+//            "zh"
+//          ],
+//          "emoji": "🇨🇳",
+//          "emojiU": "U+1F1E8 U+1F1F3"
+//        },
+//        "language": {
+//          "name": "Chinese",
+//          "native": "中文"
+//        },
+//        "rfc5646": "zh-CN"
+//      }
+//    ]
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { $languageInfo($v) }) )');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform to get a new object with the RFC5646 tag, and a string 'region (language)' representing the native locale for three locales</p>
     
-    <pre class="prettyprint"><code>// returns// result = [//        {//        "rfc5646": "en-US",//        "locale": "United States (English)"//        },//        {//        "rfc5646": "fr-FR",//        "locale": "France (Français)"//        },//        {//        "rfc5646": "zh-CN",//        "locale": "中国 (中文)"//        }//      ]const jsonata = require('jsonata-extended');const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { ( $lang := $languageInfo($v); { "rfc5646": $lang.rfc5646, "locale" : $lang.region.native &amp; " (" &amp; $lang.language.native &amp;")" })}) )');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = [
+//        {
+//        "rfc5646": "en-US",
+//        "locale": "United States (English)"
+//        },
+//        {
+//        "rfc5646": "fr-FR",
+//        "locale": "France (Français)"
+//        },
+//        {
+//        "rfc5646": "zh-CN",
+//        "locale": "中国 (中文)"
+//        }
+//      ]
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { ( $lang := $languageInfo($v); { "rfc5646": $lang.rfc5646, "locale" : $lang.region.native &amp; " (" &amp; $lang.language.native &amp;")" })}) )');
+const result = expr.evaluate();</code></pre>
 
 
 
@@ -1550,11 +1652,19 @@
     
         <p class="code-caption">Example usage within a JSONata transform to get the year of a ISO8601 string</p>
     
-    <pre class="prettyprint"><code>// returns// result = "2017"const jsonata = require('jsonata-extended');const expr = jsonata('$moment("2017-02-02T15:49:06Z").year()');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = "2017"
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$moment("2017-02-02T15:49:06Z").year()');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform to get the localised Italian month name for a date</p>
     
-    <pre class="prettyprint"><code>// returns// result = "dicembre"const jsonata = require('jsonata-extended');const expr = jsonata('$.( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\")))');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = "dicembre"
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$.( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\")))');
+const result = expr.evaluate();</code></pre>
 
 
 
@@ -1740,11 +1850,19 @@
     
         <p class="code-caption">Example usage within a JSONata transform to get the total seconds of an ISO8601 duration string</p>
     
-    <pre class="prettyprint"><code>// returns// result = 3730const jsonata = require('jsonata-extended');const expr = jsonata('$momentDuration(\"PT1H2M10S\").asSeconds()');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = 3730
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$momentDuration(\"PT1H2M10S\").asSeconds()');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform to convert ISO8601 duration string to hh:mm:ss</p>
     
-    <pre class="prettyprint"><code>// returns// result = "74:02:10"const jsonata = require('jsonata-extended');const expr = jsonata('$.( $duration := $momentDuration(\"P3DT2H2M10S\"); $formatNumber($floor($duration.asHours()),\"#00\") &amp; \":\" &amp; $formatNumber($floor($duration.minutes()),\"00\") &amp; \":\" &amp; $formatNumber($floor($duration.seconds()),\"00\") )');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = "74:02:10"
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$.( $duration := $momentDuration(\"P3DT2H2M10S\"); $formatNumber($floor($duration.asHours()),\"#00\") &amp; \":\" &amp; $formatNumber($floor($duration.minutes()),\"00\") &amp; \":\" &amp; $formatNumber($floor($duration.seconds()),\"00\") )');
+const result = expr.evaluate();</code></pre>
 
 
 
@@ -1928,11 +2046,19 @@
     
         <p class="code-caption">Example usage within a JSONata transform for converting object</p>
     
-    <pre class="prettyprint"><code>// returns// result = 'Martin Holden is a Learner'const jsonata = require('jsonata-extended');const expr = jsonata('$mustache( { "name" : "Martin Holden" , "role" : "Learner"}, \"{{name}} is a {{role}}\")');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = 'Martin Holden is a Learner'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$mustache( { "name" : "Martin Holden" , "role" : "Learner"}, \"{{name}} is a {{role}}\")');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform for converting more complex object</p>
     
-    <pre class="prettyprint"><code>// returns// result = '&lt;h1>Nincompoopery: Why Your Customers Hate You--And How to Fix It&lt;/h1>&lt;h2>Authors:&lt;/h2>&lt;ul>&lt;li>John R. Brandt&lt;/li>&lt;/ul>&lt;p>HarperCollins Leadership&amp;copy;2019&lt;/p>'const jsonata = require('jsonata-extended');const expr = jsonata('$mustache({ "title" : "Nincompoopery: Why Your Customers Hate You--And How to Fix It", "publication" : { "copyrightYear": 2019, "isbn": "9781400213672", "publisher": "HarperCollins Leadership" } , "authors" : ["John R. Brandt"]}, "&lt;h1>{{title}}&lt;/h1>{{#authors.length}}&lt;h2>Authors:&lt;/h2>&lt;ul>{{#authors}}&lt;li>{{.}}&lt;/li>{{/authors}}&lt;/ul>{{/authors.length}}{{#publication}}&lt;p>{{publisher}}&amp;copy;{{copyrightYear}}&lt;/p>{{/publication}}")');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = '&lt;h1>Nincompoopery: Why Your Customers Hate You--And How to Fix It&lt;/h1>&lt;h2>Authors:&lt;/h2>&lt;ul>&lt;li>John R. Brandt&lt;/li>&lt;/ul>&lt;p>HarperCollins Leadership&amp;copy;2019&lt;/p>'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$mustache({ "title" : "Nincompoopery: Why Your Customers Hate You--And How to Fix It", "publication" : { "copyrightYear": 2019, "isbn": "9781400213672", "publisher": "HarperCollins Leadership" } , "authors" : ["John R. Brandt"]}, "&lt;h1>{{title}}&lt;/h1>{{#authors.length}}&lt;h2>Authors:&lt;/h2>&lt;ul>{{#authors}}&lt;li>{{.}}&lt;/li>{{/authors}}&lt;/ul>{{/authors.length}}{{#publication}}&lt;p>{{publisher}}&amp;copy;{{copyrightYear}}&lt;/p>{{/publication}}")');
+const result = expr.evaluate();</code></pre>
 
 
 
@@ -2152,11 +2278,26 @@
     
         <p class="code-caption">Example usage within a JSONata transform</p>
     
-    <pre class="prettyprint"><code>// returnsresult = {   "base": "page.html",   "dir": "/p/a/t",   "ext": ".html",   "name": "page",   "root": "/"}const jsonata = require('jsonata-extended');const expr = jsonata('$parsePath("/p/a/t/page.html")');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+result = {
+   "base": "page.html",
+   "dir": "/p/a/t",
+   "ext": ".html",
+   "name": "page",
+   "root": "/"
+}
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$parsePath("/p/a/t/page.html")');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform to get the file extension</p>
     
-    <pre class="prettyprint"><code>// returnsresult = ".html"const jsonata = require('jsonata-extended');const expr = jsonata('$parsePath("/p/a/t/page.html").ext');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+result = ".html"
+
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$parsePath("/p/a/t/page.html").ext');
+const result = expr.evaluate();</code></pre>
 
 
 
@@ -2343,11 +2484,37 @@
     
         <p class="code-caption">Example usage within a JSONata transform</p>
     
-    <pre class="prettyprint"><code>// returnsresult = {   "slashes": true,   "protocol": "http:",   "hash": "#hash",   "query": {     "param1": "string",     "param2": "true"   },   "pathname": "/p/a/t/page.html",   "auth": "user:pass",   "host": "host.com:8080",   "port": "8080",   "hostname": "host.com",   "password": "pass",   "username": "user",   "origin": "http://host.com:8080",   "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash" }const jsonata = require('jsonata-extended');const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash")');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+result = {
+   "slashes": true,
+   "protocol": "http:",
+   "hash": "#hash",
+   "query": {
+     "param1": "string",
+     "param2": "true"
+   },
+   "pathname": "/p/a/t/page.html",
+   "auth": "user:pass",
+   "host": "host.com:8080",
+   "port": "8080",
+   "hostname": "host.com",
+   "password": "pass",
+   "username": "user",
+   "origin": "http://host.com:8080",
+   "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash"
+ }
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash")');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform to get the hostname</p>
     
-    <pre class="prettyprint"><code>// returnsresult = "host.com"const jsonata = require('jsonata-extended');const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash").hostname');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+result = "host.com"
+
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash").hostname');
+const result = expr.evaluate();</code></pre>
 
 
 
@@ -2534,7 +2701,12 @@
     
         <p class="code-caption">Example usage to add the functions in this library to a JSONata expression object, and utilise them</p>
     
-    <pre class="prettyprint"><code>const jsonata = require('jsonata');const jsonataFunctions = require('jsonata-functions');const expression = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');jsonataFunctions.registerWithJSONATA(expression);const result = expression.evaluate();</code></pre>
+    <pre class="prettyprint"><code>const jsonata = require('jsonata');
+const jsonataFunctions = require('jsonata-functions');
+
+const expression = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');
+jsonataFunctions.registerWithJSONATA(expression);
+const result = expression.evaluate();</code></pre>
 
 
 
@@ -2713,7 +2885,11 @@
     
         <p class="code-caption">Example usage within a JSONata transform</p>
     
-    <pre class="prettyprint"><code>// returns// result = '1m5otdkthiyq143crwujacdqg'const jsonata = require('jsonata-extended');const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688")');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = '1m5otdkthiyq143crwujacdqg'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688")');
+const result = expr.evaluate();</code></pre>
 
 
 
@@ -2893,15 +3069,27 @@
     
         <p class="code-caption">Example usage within a JSONata transform for length of 13</p>
     
-    <pre class="prettyprint"><code>// returns// result = '1234567890...'const jsonata = require('jsonata-extended');const expr = jsonata('$truncate("1234567890123456789012345678901234567890", {"length": 13, "omission": "..."})');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = '1234567890...'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$truncate("1234567890123456789012345678901234567890", {"length": 13, "omission": "..."})');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform for length of 20, and with a list of wordbreaks (these will be trimmed from end if present)</p>
     
-    <pre class="prettyprint"><code>// returns// result = '1234567890123456....'const jsonata = require('jsonata-extended');const expr = jsonata('$truncate('1234567890123456 , 789012345678901234567890', { 'length': 20 , 'omission': '...', 'wordbreakregex': '[\\\\s\\\\.%,:;\\\\?_]'})');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = '1234567890123456....'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$truncate('1234567890123456 , 789012345678901234567890', { 'length': 20 , 'omission': '...', 'wordbreakregex': '[\\\\s\\\\.%,:;\\\\?_]'})');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform for length of 20, and with a single wordbreak (this will be trimmed from end if present)</p>
     
-    <pre class="prettyprint"><code>// returns// result = '1234567890123456....'const jsonata = require('jsonata-extended');const expr = jsonata('$truncate('1234567890123456 , 789012345678901234567890', { 'length': 20 , 'omission': '...', 'wordbreak': ' ' })');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = '1234567890123456....'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$truncate('1234567890123456 , 789012345678901234567890', { 'length': 20 , 'omission': '...', 'wordbreak': ' ' })');
+const result = expr.evaluate();</code></pre>
 
 
 
@@ -3302,7 +3490,8 @@
 
 
 <div class="description usertext">
-    Convert UNICODE String to ASCIIConverts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the "Basic Latin" Unicode block) into their ASCII equivalents.
+    Convert UNICODE String to ASCII
+Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the "Basic Latin" Unicode block) into their ASCII equivalents.
 </div>
 
 
@@ -3317,15 +3506,27 @@
     
         <p class="code-caption">Example usage within a JSONata transform</p>
     
-    <pre class="prettyprint"><code>// returns// result = 'Lorem 🤧 eripuit'const jsonata = require('jsonata-extended');const expr = jsonata('$unicodeToASCII("Lörem 🤧 ëripuît")');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = 'Lorem 🤧 eripuit'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$unicodeToASCII("Lörem 🤧 ëripuît")');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform with replacement of Unknown characters</p>
     
-    <pre class="prettyprint"><code>// returns// result = 'Lorem  eripuit'const jsonata = require('jsonata-extended');const expr = jsonata('$unicodeToASCII("Lörem 🤧 ëripuît", { "replacement": ""})');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = 'Lorem  eripuit'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$unicodeToASCII("Lörem 🤧 ëripuît", { "replacement": ""})');
+const result = expr.evaluate();</code></pre>
 
         <p class="code-caption">Example usage within a JSONata transform with replacement of Unknown characters, most UNICODE characters are 2 bytes long the UTF8 Encoding for this emoji is 0xF0 0x9F 0xA4 0xA7</p>
     
-    <pre class="prettyprint"><code>// returns// result = 'Lorem XX eripuit'const jsonata = require('jsonata-extended');const expr = jsonata('$unicodeToASCII("Lörem 🤧 ëripuît", { "replacement": "X"})');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// returns
+// result = 'Lorem XX eripuit'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$unicodeToASCII("Lörem 🤧 ëripuît", { "replacement": "X"})');
+const result = expr.evaluate();</code></pre>
 
 
 

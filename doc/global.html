@@ -200,7 +200,10 @@
     
         <p class="code-caption">Example using the extended JSONata as a dropin replacement for the standard <a href="https://www.npmjs.com/package/jsonata">JSONata NPM</a></p>
     
-    <pre class="prettyprint"><code>// const jsonata = require('jsonata');const jsonata = require('./lib/jsonata/jsonata-extended');const expr = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');const result = expr.evaluate();</code></pre>
+    <pre class="prettyprint"><code>// const jsonata = require('jsonata');
+const jsonata = require('./lib/jsonata/jsonata-extended');
+const expr = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');
+const result = expr.evaluate();</code></pre>
 
 
 
