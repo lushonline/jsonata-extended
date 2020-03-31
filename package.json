@@ -48,6 +48,7 @@
 		"auto-changelog": "^1.16.1",
 		"babel-eslint": "^10.1.0",
 		"browserify": "^16.5.0",
+		"browserify-shim": "^3.8.14",
 		"chai": "^4.2.0",
 		"coveralls": "^3.0.11",
 		"docdash": "^1.2.0",
@@ -61,9 +62,20 @@
 		"mocha": "^6.2.2",
 		"nyc": "^14.1.1",
 		"prettier": "^1.19.1",
-		"request": "^2.88.0",
 		"regenerator": "^0.14.2",
+		"request": "^2.88.0",
 		"rimraf": "^3.0.2",
 		"uglify-es": "^3.3.9"
+	},
+	"browserify": {
+		"transform": [
+			"browserify-shim"
+		]
+	},
+	"browser": {
+		"jsonata": "./node_modules/jsonata/jsonata.js"
+	},
+	"browserify-shim": {
+		"jsonata": "global:jsonata"
 	}
 }
