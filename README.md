@@ -4,6 +4,8 @@ Extended JSONata object with custom functions
 
 This can be used to add extended functions to the standard [JSONata](https://www.npmjs.com/package/jsonata)
 
+It has the same signature as the standard and so can be used as a dropin replacement.
+
 It is NOT published to NPMJS and so install from this repo
 
 ## Installation
@@ -15,10 +17,9 @@ npm install https://github.com/martinholden-skillsoft/jsonata-extended
 ## Example - Node
 
 ```javascript
-const jsonataOriginal = require('jsonata');
-const jsonataExtended = require('jsonata-extended');
-const expr = jsonataExtended(
-  jsonataOriginal,
+// const jsonata = require('jsonata');
+const jsonata = require('jsonata-extended');
+const expr = jsonata(
   '$htmltotext("<p>Leadership has a dark side; a &#34;leadership shadow&#34; that often creates an unknown; lurking fear.</p>")'
 );
 const result = expr.evaluate();
@@ -38,7 +39,7 @@ const result = expr.evaluate();
       function runTransform() {
         var json = JSON.parse(document.getElementById('json').value);
         var transform = document.getElementById('transform').value;
-        var resultJSONataExtended = jsonataExtended(jsonata,transform).evaluate(json);
+        var resultJSONataExtended = jsonataExtended(transform).evaluate(json);
         document.getElementById('results').innerHTML = JSON.stringify(resultJSONataExtended);
       }
     </script>

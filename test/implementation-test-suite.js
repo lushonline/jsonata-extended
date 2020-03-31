@@ -5,7 +5,7 @@
 const chai = require('chai');
 
 const { describe, it } = require('mocha');
-const jsonata = require('jsonata');
+const jsonataOriginal = require('jsonata');
 const jsonataFunctions = require('../src/lib/jsonata-functions');
 
 // This is the start of the set of tests associated with the test cases
@@ -15,7 +15,7 @@ describe('Implementation Test Suite', () => {
     let expr;
     // Start by trying to compile the expression associated with this test case
     try {
-      expr = jsonata('$exists($languageInfo)');
+      expr = jsonataOriginal('$exists($languageInfo)');
       jsonataFunctions.registerWithJSONATA(expr);
     } catch (e) {
       throw new Error(`Got an unexpected exception: ${e.message}`);
