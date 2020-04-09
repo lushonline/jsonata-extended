@@ -1,6 +1,6 @@
 {
 	"name": "jsonata-extended",
-	"version": "0.3.1",
+	"version": "0.3.2",
 	"description": "Extended JSONata object with custom functions",
 	"repository": {
 		"type": "git",
@@ -33,7 +33,7 @@
 		"countries-list": "^2.5.4",
 		"fold-to-ascii": "^5.0.0",
 		"html-to-text": "^5.1.1",
-		"jsonata": "^1.8.2",		
+		"jsonata": "^1.8.2",
 		"lodash": "^4.17.15",
 		"moment": "^2.24.0",
 		"mustache": "^4.0.1",
