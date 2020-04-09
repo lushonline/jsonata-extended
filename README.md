@@ -1,4 +1,5 @@
 # jsonata-extended
+[![Build Status](https://travis-ci.org/martinholden-skillsoft/jsonata-extended.svg?branch=master)](https://travis-ci.org/martinholden-skillsoft/jsonata-extended)
 
 Extended JSONata object with custom functions
 
