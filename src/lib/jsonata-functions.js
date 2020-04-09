@@ -61,7 +61,7 @@ const htmltotext = (value, options) => {
   // Default options for https://www.npmjs.com/package/html-to-text
   const defaultOptions = {
     noLinkBrackets: false,
-    wordwrap: null
+    wordwrap: null,
   };
 
   const localOptions = { ...defaultOptions, ...options };
@@ -86,7 +86,7 @@ const htmltotext = (value, options) => {
  *
  * @see {@link https://www.npmjs.com/package/uuid-encoder | uuid-encoder NPM}
  */
-const shortenUuid = value => {
+const shortenUuid = (value) => {
   if (typeof value === 'undefined') {
     return undefined;
   }
@@ -219,7 +219,7 @@ const shortenUuid = value => {
  * @see {@link https://www.npmjs.com/package/rfc5646 | rfc5646 NPM}
  * @see {@link https://www.npmjs.com/package/countries-list | countries-list NPM}
  */
-const languageInfo = value => {
+const languageInfo = (value) => {
   if (typeof value === 'undefined') {
     return undefined;
   }
@@ -281,7 +281,7 @@ const languageInfo = value => {
  *
  * @see {@link https://www.npmjs.com/package/url-parse | url-parse NPM}
  */
-const parseUrl = value => {
+const parseUrl = (value) => {
   if (typeof value === 'undefined') {
     return undefined;
   }
@@ -325,7 +325,7 @@ const parseUrl = value => {
  *
  * @see {@link https://nodejs.org/api/path.html | Node Path}
  */
-const parsePath = value => {
+const parsePath = (value) => {
   if (typeof value === 'undefined') {
     return undefined;
   }
@@ -610,7 +610,7 @@ const truncate = (value, options) => {
  *
  * @see {@link https://www.npmjs.com/package/jsonata | JSONata NPM}
  */
-const registerWithJSONATA = expression => {
+const registerWithJSONATA = (expression) => {
   if (typeof expression === 'undefined' || typeof expression.registerFunction === 'undefined') {
     throw new TypeError('Invalid JSONata Expression');
   }
@@ -620,15 +620,15 @@ const registerWithJSONATA = expression => {
     '<s?o?:s>'
   );
 
-  expression.registerFunction('shortenUuid', value => shortenUuid(value), '<s?:s>');
+  expression.registerFunction('shortenUuid', (value) => shortenUuid(value), '<s?:s>');
 
   expression.registerFunction('truncate', (value, options) => truncate(value, options), '<s?o?:s>');
 
-  expression.registerFunction('languageInfo', value => languageInfo(value), '<s?:o>');
+  expression.registerFunction('languageInfo', (value) => languageInfo(value), '<s?:o>');
 
-  expression.registerFunction('parseUrl', value => parseUrl(value), '<s?:o>');
+  expression.registerFunction('parseUrl', (value) => parseUrl(value), '<s?:o>');
 
-  expression.registerFunction('parsePath', value => parsePath(value), '<s?:o>');
+  expression.registerFunction('parsePath', (value) => parsePath(value), '<s?:o>');
   // Bind momentjs - signatures we need to support - from https://momentjs.com/docs/#/parsing/
   // moment(String, String);
   // moment(String, String, String);
@@ -660,5 +660,5 @@ const registerWithJSONATA = expression => {
 };
 
 module.exports = {
-  registerWithJSONATA
+  registerWithJSONATA,
 };

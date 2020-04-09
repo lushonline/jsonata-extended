@@ -1623,10 +1623,6 @@ if (typeof define === "function" && define.amd) {
 
 var base64 = require('base64-js')
 var ieee754 = require('ieee754')
-var customInspectSymbol =
-  (typeof Symbol === 'function' && typeof Symbol.for === 'function')
-    ? Symbol.for('nodejs.util.inspect.custom')
-    : null
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -1663,9 +1659,7 @@ function typedArraySupport () {
   // Can typed array instances can be augmented?
   try {
     var arr = new Uint8Array(1)
-    var proto = { foo: function () { return 42 } }
-    Object.setPrototypeOf(proto, Uint8Array.prototype)
-    Object.setPrototypeOf(arr, proto)
+    arr.__proto__ = { __proto__: Uint8Array.prototype, foo: function () { return 42 } }
     return arr.foo() === 42
   } catch (e) {
     return false
@@ -1694,7 +1688,7 @@ function createBuffer (length) {
   }
   // Return an augmented `Uint8Array` instance
   var buf = new Uint8Array(length)
-  Object.setPrototypeOf(buf, Buffer.prototype)
+  buf.__proto__ = Buffer.prototype
   return buf
 }
 
@@ -1744,7 +1738,7 @@ function from (value, encodingOrOffset, length) {
   }
 
   if (value == null) {
-    throw new TypeError(
+    throw TypeError(
       'The first argument must be one of type string, Buffer, ArrayBuffer, Array, ' +
       'or Array-like Object. Received type ' + (typeof value)
     )
@@ -1752,12 +1746,6 @@ function from (value, encodingOrOffset, length) {
 
   if (isInstance(value, ArrayBuffer) ||
       (value && isInstance(value.buffer, ArrayBuffer))) {
-    return fromArrayBuffer(value, encodingOrOffset, length)
-  }
-
-  if (typeof SharedArrayBuffer !== 'undefined' &&
-      (isInstance(value, SharedArrayBuffer) ||
-      (value && isInstance(value.buffer, SharedArrayBuffer)))) {
     return fromArrayBuffer(value, encodingOrOffset, length)
   }
 
@@ -1802,8 +1790,8 @@ Buffer.from = function (value, encodingOrOffset, length) {
 
 // Note: Change prototype *after* Buffer.from is defined to workaround Chrome bug:
 // https://github.com/feross/buffer/pull/148
-Object.setPrototypeOf(Buffer.prototype, Uint8Array.prototype)
-Object.setPrototypeOf(Buffer, Uint8Array)
+Buffer.prototype.__proto__ = Uint8Array.prototype
+Buffer.__proto__ = Uint8Array
 
 function assertSize (size) {
   if (typeof size !== 'number') {
@@ -1907,8 +1895,7 @@ function fromArrayBuffer (array, byteOffset, length) {
   }
 
   // Return an augmented `Uint8Array` instance
-  Object.setPrototypeOf(buf, Buffer.prototype)
-
+  buf.__proto__ = Buffer.prototype
   return buf
 }
 
@@ -2230,9 +2217,6 @@ Buffer.prototype.inspect = function inspect () {
   if (this.length > max) str += ' ... '
   return '<Buffer ' + str + '>'
 }
-if (customInspectSymbol) {
-  Buffer.prototype[customInspectSymbol] = Buffer.prototype.inspect
-}
 
 Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
   if (isInstance(target, Uint8Array)) {
@@ -2358,7 +2342,7 @@ function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
         return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
       }
     }
-    return arrayIndexOf(buffer, [val], byteOffset, encoding, dir)
+    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
   }
 
   throw new TypeError('val must be string, number or Buffer')
@@ -2687,7 +2671,7 @@ function hexSlice (buf, start, end) {
 
   var out = ''
   for (var i = start; i < end; ++i) {
-    out += hexSliceLookupTable[buf[i]]
+    out += toHex(buf[i])
   }
   return out
 }
@@ -2724,8 +2708,7 @@ Buffer.prototype.slice = function slice (start, end) {
 
   var newBuf = this.subarray(start, end)
   // Return an augmented `Uint8Array` instance
-  Object.setPrototypeOf(newBuf, Buffer.prototype)
-
+  newBuf.__proto__ = Buffer.prototype
   return newBuf
 }
 
@@ -3214,8 +3197,6 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
     }
   } else if (typeof val === 'number') {
     val = val & 255
-  } else if (typeof val === 'boolean') {
-    val = Number(val)
   }
 
   // Invalid ranges are not set to a default, so can range check early.
@@ -3271,6 +3252,11 @@ function base64clean (str) {
     str = str + '='
   }
   return str
+}
+
+function toHex (n) {
+  if (n < 16) return '0' + n.toString(16)
+  return n.toString(16)
 }
 
 function utf8ToBytes (string, units) {
@@ -3402,20 +3388,6 @@ function numberIsNaN (obj) {
   // For IE11 support
   return obj !== obj // eslint-disable-line no-self-compare
 }
-
-// Create lookup table for `toString('hex')`
-// See: https://github.com/feross/buffer/issues/219
-var hexSliceLookupTable = (function () {
-  var alphabet = '0123456789abcdef'
-  var table = new Array(256)
-  for (var i = 0; i < 16; ++i) {
-    var i16 = i * 16
-    for (var j = 0; j < 16; ++j) {
-      table[i16 + j] = alphabet[i] + alphabet[j]
-    }
-  }
-  return table
-})()
 
 }).call(this,require("buffer").Buffer)
 },{"base64-js":1,"buffer":4,"ieee754":48}],5:[function(require,module,exports){
@@ -33571,23 +33543,17 @@ module.exports = zip;
 })));
 
 },{}],138:[function(require,module,exports){
-/*!
- * mustache.js - Logic-less {{mustache}} templates with JavaScript
- * http://github.com/janl/mustache.js
- */
+// This file has been generated from mustache.mjs
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = global || self, global.Mustache = factory());
+}(this, (function () { 'use strict';
 
-/*global define: false Mustache: true*/
-
-(function defineMustache (global, factory) {
-  if (typeof exports === 'object' && exports && typeof exports.nodeName !== 'string') {
-    factory(exports); // CommonJS
-  } else if (typeof define === 'function' && define.amd) {
-    define(['exports'], factory); // AMD
-  } else {
-    global.Mustache = {};
-    factory(global.Mustache); // script, wsh, asp
-  }
-}(this, function mustacheFactory (mustache) {
+  /*!
+   * mustache.js - Logic-less {{mustache}} templates with JavaScript
+   * http://github.com/janl/mustache.js
+   */
 
   var objectToString = Object.prototype.toString;
   var isArray = Array.isArray || function isArrayPolyfill (object) {
@@ -34065,14 +34031,27 @@ module.exports = zip;
    * avoid the need to parse the same template twice.
    */
   function Writer () {
-    this.cache = {};
+    this.templateCache = {
+      _cache: {},
+      set: function set (key, value) {
+        this._cache[key] = value;
+      },
+      get: function get (key) {
+        return this._cache[key];
+      },
+      clear: function clear () {
+        this._cache = {};
+      }
+    };
   }
 
   /**
    * Clears all cached templates in this writer.
    */
   Writer.prototype.clearCache = function clearCache () {
-    this.cache = {};
+    if (typeof this.templateCache !== 'undefined') {
+      this.templateCache.clear();
+    }
   };
 
   /**
@@ -34081,13 +34060,15 @@ module.exports = zip;
    * that is generated from the parse.
    */
   Writer.prototype.parse = function parse (template, tags) {
-    var cache = this.cache;
+    var cache = this.templateCache;
     var cacheKey = template + ':' + (tags || mustache.tags).join(':');
-    var tokens = cache[cacheKey];
+    var isCacheEnabled = typeof cache !== 'undefined';
+    var tokens = isCacheEnabled ? cache.get(cacheKey) : undefined;
 
-    if (tokens == null)
-      tokens = cache[cacheKey] = parseTemplate(template, tags);
-
+    if (tokens == undefined) {
+      tokens = parseTemplate(template, tags);
+      isCacheEnabled && cache.set(cacheKey, tokens);
+    }
     return tokens;
   };
 
@@ -34106,7 +34087,7 @@ module.exports = zip;
    */
   Writer.prototype.render = function render (template, view, partials, tags) {
     var tokens = this.parse(template, tags);
-    var context = (view instanceof Context) ? view : new Context(view);
+    var context = (view instanceof Context) ? view : new Context(view, undefined);
     return this.renderTokens(tokens, context, partials, template, tags);
   };
 
@@ -34208,7 +34189,7 @@ module.exports = zip;
       if (tagIndex == 0 && indentation) {
         indentedValue = this.indentPartial(value, indentation, lineHasNonSpace);
       }
-      return this.renderTokens(this.parse(indentedValue, tags), context, partials, indentedValue);
+      return this.renderTokens(this.parse(indentedValue, tags), context, partials, indentedValue, tags);
     }
   };
 
@@ -34228,9 +34209,32 @@ module.exports = zip;
     return token[1];
   };
 
-  mustache.name = 'mustache.js';
-  mustache.version = '3.1.0';
-  mustache.tags = [ '{{', '}}' ];
+  var mustache = {
+    name: 'mustache.js',
+    version: '4.0.1',
+    tags: [ '{{', '}}' ],
+    clearCache: undefined,
+    escape: undefined,
+    parse: undefined,
+    render: undefined,
+    Scanner: undefined,
+    Context: undefined,
+    Writer: undefined,
+    /**
+     * Allows a user to override the default caching strategy, by providing an
+     * object with set, get and clear methods. This can also be used to disable
+     * the cache by setting it to the literal `undefined`.
+     */
+    set templateCache (cache) {
+      defaultWriter.templateCache = cache;
+    },
+    /**
+     * Gets the default or overridden caching object from the default writer.
+     */
+    get templateCache () {
+      return defaultWriter.templateCache;
+    }
+  };
 
   // All high-level mustache.* functions use this writer.
   var defaultWriter = new Writer();
@@ -34267,20 +34271,6 @@ module.exports = zip;
     return defaultWriter.render(template, view, partials, tags);
   };
 
-  // This is here for backwards compatibility with 0.4.x.,
-  /*eslint-disable */ // eslint wants camel cased function name
-  mustache.to_html = function to_html (template, view, partials, send) {
-    /*eslint-enable*/
-
-    var result = mustache.render(template, view, partials);
-
-    if (isFunction(send)) {
-      send(result);
-    } else {
-      return result;
-    }
-  };
-
   // Export the escaping function so that the user may override it.
   // See https://github.com/janl/mustache.js/issues/244
   mustache.escape = escapeHtml;
@@ -34291,7 +34281,8 @@ module.exports = zip;
   mustache.Writer = Writer;
 
   return mustache;
-}));
+
+})));
 
 },{}],139:[function(require,module,exports){
 (function (process){
@@ -36994,8 +36985,8 @@ var extractVersion = module.exports.version = function (uuid) {
     return uuid.charAt(14)|0;
 };
 
-}).call(this,{"isBuffer":require("../insert-module-globals/node_modules/is-buffer/index.js")})
-},{"../insert-module-globals/node_modules/is-buffer/index.js":50}],152:[function(require,module,exports){
+}).call(this,{"isBuffer":require("../is-buffer/index.js")})
+},{"../is-buffer/index.js":50}],152:[function(require,module,exports){
 module.exports = require('./lib/jsonata-extended');
 
 },{"./lib/jsonata-extended":153}],153:[function(require,module,exports){
@@ -37090,7 +37081,7 @@ const htmltotext = (value, options) => {
   // Default options for https://www.npmjs.com/package/html-to-text
   const defaultOptions = {
     noLinkBrackets: false,
-    wordwrap: null
+    wordwrap: null,
   };
 
   const localOptions = { ...defaultOptions, ...options };
@@ -37115,7 +37106,7 @@ const htmltotext = (value, options) => {
  *
  * @see {@link https://www.npmjs.com/package/uuid-encoder | uuid-encoder NPM}
  */
-const shortenUuid = value => {
+const shortenUuid = (value) => {
   if (typeof value === 'undefined') {
     return undefined;
   }
@@ -37248,7 +37239,7 @@ const shortenUuid = value => {
  * @see {@link https://www.npmjs.com/package/rfc5646 | rfc5646 NPM}
  * @see {@link https://www.npmjs.com/package/countries-list | countries-list NPM}
  */
-const languageInfo = value => {
+const languageInfo = (value) => {
   if (typeof value === 'undefined') {
     return undefined;
   }
@@ -37310,7 +37301,7 @@ const languageInfo = value => {
  *
  * @see {@link https://www.npmjs.com/package/url-parse | url-parse NPM}
  */
-const parseUrl = value => {
+const parseUrl = (value) => {
   if (typeof value === 'undefined') {
     return undefined;
   }
@@ -37354,7 +37345,7 @@ const parseUrl = value => {
  *
  * @see {@link https://nodejs.org/api/path.html | Node Path}
  */
-const parsePath = value => {
+const parsePath = (value) => {
   if (typeof value === 'undefined') {
     return undefined;
   }
@@ -37639,7 +37630,7 @@ const truncate = (value, options) => {
  *
  * @see {@link https://www.npmjs.com/package/jsonata | JSONata NPM}
  */
-const registerWithJSONATA = expression => {
+const registerWithJSONATA = (expression) => {
   if (typeof expression === 'undefined' || typeof expression.registerFunction === 'undefined') {
     throw new TypeError('Invalid JSONata Expression');
   }
@@ -37649,15 +37640,15 @@ const registerWithJSONATA = expression => {
     '<s?o?:s>'
   );
 
-  expression.registerFunction('shortenUuid', value => shortenUuid(value), '<s?:s>');
+  expression.registerFunction('shortenUuid', (value) => shortenUuid(value), '<s?:s>');
 
   expression.registerFunction('truncate', (value, options) => truncate(value, options), '<s?o?:s>');
 
-  expression.registerFunction('languageInfo', value => languageInfo(value), '<s?:o>');
+  expression.registerFunction('languageInfo', (value) => languageInfo(value), '<s?:o>');
 
-  expression.registerFunction('parseUrl', value => parseUrl(value), '<s?:o>');
+  expression.registerFunction('parseUrl', (value) => parseUrl(value), '<s?:o>');
 
-  expression.registerFunction('parsePath', value => parsePath(value), '<s?:o>');
+  expression.registerFunction('parsePath', (value) => parsePath(value), '<s?:o>');
   // Bind momentjs - signatures we need to support - from https://momentjs.com/docs/#/parsing/
   // moment(String, String);
   // moment(String, String, String);
@@ -37689,7 +37680,7 @@ const registerWithJSONATA = expression => {
 };
 
 module.exports = {
-  registerWithJSONATA
+  registerWithJSONATA,
 };
 
 },{"countries-list":5,"fold-to-ascii":34,"html-to-text":36,"lodash":123,"moment":137,"mustache":138,"path":139,"rfc5646":143,"url-parse":146,"uuid-encoder":150,"uuid-validate":151}]},{},[152])(152)
