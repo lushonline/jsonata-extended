@@ -1291,7 +1291,7 @@ const result = expr.evaluate();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line222">line 222</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line239">line 239</a>
     </li></ul></dd>
     
 
@@ -1590,7 +1590,7 @@ const result = expr.evaluate();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line360">line 360</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line377">line 377</a>
     </li></ul></dd>
     
 
@@ -1786,7 +1786,7 @@ const result = expr.evaluate();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line388">line 388</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line405">line 405</a>
     </li></ul></dd>
     
 
@@ -1984,7 +1984,7 @@ const result = expr.evaluate();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line416">line 416</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line433">line 433</a>
     </li></ul></dd>
     
 
@@ -2216,7 +2216,7 @@ const result = expr.evaluate();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line328">line 328</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line345">line 345</a>
     </li></ul></dd>
     
 
@@ -2422,7 +2422,7 @@ const result = expr.evaluate();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line284">line 284</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line301">line 301</a>
     </li></ul></dd>
     
 
@@ -2639,7 +2639,7 @@ const result = expr.evaluate();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line613">line 613</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line630">line 630</a>
     </li></ul></dd>
     
 
@@ -2811,7 +2811,7 @@ const result = expression.evaluate();</code></pre>
 
     
 
-    <h4 class="name" id="~shortenUuid"><span class="type-signature">(private, inner) </span>shortenUuid<span class="signature">(value)</span><span class="type-signature"> &rarr; {String|Void}</span></h4>
+    <h4 class="name" id="~shortenUuid"><span class="type-signature">(private, inner) </span>shortenUuid<span class="signature">(value, basex<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String|Void}</span></h4>
 
     
 
@@ -2823,7 +2823,7 @@ const result = expression.evaluate();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line89">line 89</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line90">line 90</a>
     </li></ul></dd>
     
 
@@ -2907,7 +2907,11 @@ const result = expr.evaluate();</code></pre>
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -2932,10 +2936,61 @@ const result = expr.evaluate();</code></pre>
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last">Properly formatted UUID</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>basex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'base36'</code>
+                
+                </td>
+            
+
+            <td class="description last">A valid base to use for the process</td>
         </tr>
 
     
@@ -3014,7 +3069,7 @@ const result = expr.evaluate();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line510">line 510</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line527">line 527</a>
     </li></ul></dd>
     
 
@@ -3443,7 +3498,7 @@ const result = expr.evaluate();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line462">line 462</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line479">line 479</a>
     </li></ul></dd>
     
 
