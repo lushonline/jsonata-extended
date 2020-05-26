@@ -73,6 +73,7 @@ const htmltotext = (value, options) => {
  * Shorten the supplied UUID
  * @access private
  * @param {String} value - Properly formatted UUID
+ * @param {String} [basex='base36'] - A valid base to use for the process
  *
  * @example <caption>Example usage within a JSONata transform</caption>
  * // returns
@@ -86,7 +87,7 @@ const htmltotext = (value, options) => {
  *
  * @see {@link https://www.npmjs.com/package/uuid-encoder | uuid-encoder NPM}
  */
-const shortenUuid = (value) => {
+const shortenUuid = (value, basex = 'base36') => {
   if (typeof value === 'undefined') {
     return undefined;
   }
@@ -95,7 +96,23 @@ const shortenUuid = (value) => {
     throw new Error('Invalid UUID');
   }
 
-  return new UuidEncoder('base36').encode(value);
+  const validBases = [
+    'base2',
+    'base10',
+    'base16',
+    'base32',
+    'base36',
+    'base58',
+    'base62',
+    'base64',
+    'base64url',
+  ];
+
+  if (!validBases.includes(basex.toLowerCase())) {
+    throw new Error(`Invalid basex. Valid values: ${validBases.join(',')}`);
+  }
+
+  return new UuidEncoder(basex).encode(value);
 };
 
 /**
@@ -620,7 +637,11 @@ const registerWithJSONATA = (expression) => {
     '<s?o?:s>'
   );
 
-  expression.registerFunction('shortenUuid', (value) => shortenUuid(value), '<s?:s>');
+  expression.registerFunction(
+    'shortenUuid',
+    (value, basex) => shortenUuid(value, basex),
+    '<s?s?:s>'
+  );
 
   expression.registerFunction('truncate', (value, options) => truncate(value, options), '<s?o?:s>');
 

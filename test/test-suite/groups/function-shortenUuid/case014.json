@@ -1,7 +1,9 @@
 {
-  "description": "Confirm success",
-  "expr": "$shortenUuid(id)",
-  "dataset": "metadata",
+  "description": "Confirm error thrown when more than two parameter",
+  "expr": "$shortenUuid(\"1\",\"2\",1)",
+  "dataset": "empty",
   "bindings": {},
-  "result": "1m5otdkthiyq143crwujacdqg"
+  "error": {
+    "message": "Argument 3 of function \"shortenUuid\" does not match function signature"
+  }
 }

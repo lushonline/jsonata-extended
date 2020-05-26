@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success - explicitly state base16",
+  "expr": "$shortenUuid(id,\"base16\")",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "1b49aa30e71911e69835f723b46a2688"
+}

@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success - explicitly state base32",
+  "expr": "$shortenUuid(id,\"base32\")",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "v96n31srs27k9gdfq4et6m9m8"
+}

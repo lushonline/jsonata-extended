@@ -80,7 +80,7 @@ const timeboxExpression = (expr, timeout, maxDepth) => {
 
 const groups = fs
   .readdirSync(path.join(__dirname, 'test-suite', 'groups'))
-  .filter(name => !name.endsWith('.json'));
+  .filter((name) => !name.endsWith('.json'));
 
 /**
  * Simple function to read in JSON
@@ -99,7 +99,7 @@ function readJSON(dir, file) {
 const datasets = {};
 const datasetnames = fs.readdirSync(path.join(__dirname, 'test-suite', 'datasets'));
 
-datasetnames.forEach(name => {
+datasetnames.forEach((name) => {
   datasets[name.replace('.json', '')] = readJSON(path.join('test-suite', 'datasets'), name);
 });
 
@@ -107,16 +107,16 @@ datasetnames.forEach(name => {
 // found in the test-suite directory.
 describe('Functions Test Suite', () => {
   // Iterate over all groups of tests
-  groups.forEach(group => {
+  groups.forEach((group) => {
     const filenames = fs
       .readdirSync(path.join(__dirname, 'test-suite', 'groups', group))
-      .filter(name => name.endsWith('.json'));
+      .filter((name) => name.endsWith('.json'));
     // Read JSON file containing all cases for this group
     let cases = [];
-    filenames.forEach(name => {
+    filenames.forEach((name) => {
       const spec = readJSON(path.join('test-suite', 'groups', group), name);
       if (Array.isArray(spec)) {
-        spec.forEach(item => {
+        spec.forEach((item) => {
           if (!item.description) {
             item.description = name;
           } else {

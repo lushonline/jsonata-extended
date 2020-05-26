@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success - explicitly state base64url",
+  "expr": "$shortenUuid(id,\"base64url\")",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "RIQemvnaHvfWrzoEqQYQ8"
+}

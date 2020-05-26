@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success - default base36",
+  "expr": "$shortenUuid(id)",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "1m5otdkthiyq143crwujacdqg"
+}

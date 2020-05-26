@@ -1,5 +1,5 @@
 {
-  "description": "Confirm error thrown when more than one parameter",
+  "description": "Confirm error thrown when parameter 2 is not a string",
   "expr": "$shortenUuid(\"1\",2)",
   "dataset": "empty",
   "bindings": {},
