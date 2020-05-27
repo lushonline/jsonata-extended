@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error - check base is case sensitive",
+  "expr": "$shortenUuid(id,\"BASE64URL\")",
+  "dataset": "metadata",
+  "bindings": {},
+  "error": {
+    "message": "Invalid basex. Valid values: base2,base10,base16,base32,base36,base58,base62,base64,base64url"
+  }
+}
