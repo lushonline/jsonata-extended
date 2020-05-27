@@ -65,7 +65,7 @@ const ASCIIFolder = require('fold-to-ascii');
  * Convert HTML to plain text
  * @access private
  * @param {String} value The HTML string to convert
- * @param {Object} [options={}] The options object. For more information see the {@link https://www.npmjs.com/package/html-to-text | html-to-text NPM}
+ * @param {Object} [options={}] The options object. For more information see the {@link https://www.npmjs.com/package/html-to-text|html-to-text NPM}
  * @param {String[]|String|Boolean} [options.tables=[]] allows to select certain tables by the 'class' or 'id' attribute from the HTML document. This is necessary because the majority of HTML E-Mails uses a table based layout. Prefix your table selectors with an '.' for the 'class' and with a '#' for the 'id' attribute. All other tables are ignored. You can assign 'true' to this attribute to select all tables.
  * @param {Number} [options.wordwrap=80] defines after how many chars a line break should follow in 'p' elements. Set to 'null' or 'false' to disable word-wrapping.
  * @param {String} [options.linkHrefBaseUrl=null] allows you to specify the server host for href attributes, where the links start at the root ('/'). For example, 'linkHrefBaseUrl = 'http://asdf.com'' and '&lt;a href='/dir/subdir'>...&lt;/a>' the link in the text will be 'http://asdf.com/dir/subdir'. Keep in mind that 'linkHrefBaseUrl' shouldn't end with a '/'.
@@ -82,7 +82,7 @@ const ASCIIFolder = require('fold-to-ascii');
  * @param {Object} [options.longWordSplit={}] describes how to wrap long words
  * @param {String[]} [options.longWordSplit.wrapCharacters=[]] is an array containing the characters that may be wrapped on, these are used in order
  * @param {Boolean} [options.longWordSplit.forceWrapOnLimit=false] defines whether to break long words on the limit if 'true'
- * @param {Object} [options.decodeOptions={}] defines the text decoding options given to 'he.decode'. For more informations see the {@link https://www.npmjs.com/package/he | HE NPM}.
+ * @param {Object} [options.decodeOptions={}] defines the text decoding options given to 'he.decode'. For more informations see the {@link https://www.npmjs.com/package/he|HE NPM}.
  * @param {Boolean} [options.decodeOptions.isAttributeValue=false] false means that decode() will decode the string as if it were used in a text context in an HTML document. HTML has different rules for parsing character references in attribute values — set this option to true to treat the input string as if it were used as an attribute value.
  * @param {Boolean} [options.decodeOptions.strict=false] false means that decode() will decode any HTML text content you feed it, even if it contains any entities that cause parse errors. To throw an error when such invalid HTML is encountered, set the strict option to true. This option makes it possible to use he as part of HTML parsers and HTML validators.
  * @param {Object} [options.format={}}] pass an object to enable custom formatting for specific elements. By using the format option, you can specify formatting for these elements: text, image, lineBreak, paragraph, anchor, heading, table, orderedList, unorderedList, listItem, horizontalLine. Each key must be a function which eventually receive elem (the current elem), fn (the next formatting function) and options (the options passed to html-to-text).
@@ -96,8 +96,8 @@ const ASCIIFolder = require('fold-to-ascii');
  *
  * @returns {String|Void} Returns a string of the plain text, or undefined for undefined input
  *
- * @see {@link https://www.npmjs.com/package/html-to-text | html-to-text NPM}
- * @see {@link https://www.npmjs.com/package/he | HE NPM}
+ * @see {@link https://www.npmjs.com/package/html-to-text|html-to-text NPM}
+ * @see {@link https://www.npmjs.com/package/he|HE NPM}
  */
 const htmltotext = (value, options) => {
   if (typeof value === 'undefined') {
@@ -119,21 +119,22 @@ const htmltotext = (value, options) => {
  * Shorten the supplied UUID
  * @access private
  * @param {String} value - Properly formatted UUID
- * @param {String} [basex='base36'] - A valid base to use for the process
+ * @param {('base2'|'base10'|'base16'|'base32'|'base36'|'base58'|'base62'|'base64'|'base64url')} [base='base36'] - A valid base to use for the process, case sensitive {@link https://www.npmjs.com/package/uuid-encoder#encoding|Encoding Options}
  *
  * @example &lt;caption>Example usage within a JSONata transform&lt;/caption>
  * // returns
  * // result = '1m5otdkthiyq143crwujacdqg'
  * const jsonata = require('jsonata-extended');
- * const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688")');
+ * const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688"), "base36"');
  * const result = expr.evaluate();
  *
  * @throws Will throw an error if the value is not a valid uuid
+ * @throws Will throw an error if the base is not a valid option
  * @returns {String|Void} Returns a string containing the encoded version of the uuid, or undefined for undefined input
  *
- * @see {@link https://www.npmjs.com/package/uuid-encoder | uuid-encoder NPM}
+ * @see {@link https://www.npmjs.com/package/uuid-encoder|uuid-encoder NPM}
  */
-const shortenUuid = (value, basex = 'base36') => {
+const shortenUuid = (value, base = 'base36') => {
   if (typeof value === 'undefined') {
     return undefined;
   }
@@ -142,7 +143,7 @@ const shortenUuid = (value, basex = 'base36') => {
     throw new Error('Invalid UUID');
   }
 
-  const validBases = [
+  const validBasex = [
     'base2',
     'base10',
     'base16',
@@ -154,11 +155,11 @@ const shortenUuid = (value, basex = 'base36') => {
     'base64url',
   ];
 
-  if (!validBases.includes(basex.toLowerCase())) {
-    throw new Error(`Invalid basex. Valid values: ${validBases.join(',')}`);
+  if (!validBasex.includes(base)) {
+    throw new Error(`Invalid basex. Valid values: ${validBasex.join(',')}`);
   }
 
-  return new UuidEncoder(basex).encode(value);
+  return new UuidEncoder(base).encode(value);
 };
 
 /**
@@ -279,8 +280,8 @@ const shortenUuid = (value, basex = 'base36') => {
  * @throws Will throw an error if the value is not a valid RFC5646 language tag
  * @returns {Object[]|Void} object contain details on the region and language, region is null if language only passed. Returns undefined for undefined input
  *
- * @see {@link https://www.npmjs.com/package/rfc5646 | rfc5646 NPM}
- * @see {@link https://www.npmjs.com/package/countries-list | countries-list NPM}
+ * @see {@link https://www.npmjs.com/package/rfc5646|rfc5646 NPM}
+ * @see {@link https://www.npmjs.com/package/countries-list|countries-list NPM}
  */
 const languageInfo = (value) => {
   if (typeof value === 'undefined') {
@@ -342,7 +343,7 @@ const languageInfo = (value) => {
  * @throws Will throw an error if the value is not a valid url
  * @returns {Object|Void} Returns an object containing the parsed components of the URL, or undefined for undefined input
  *
- * @see {@link https://www.npmjs.com/package/url-parse | url-parse NPM}
+ * @see {@link https://www.npmjs.com/package/url-parse|url-parse NPM}
  */
 const parseUrl = (value) => {
   if (typeof value === 'undefined') {
@@ -386,7 +387,7 @@ const parseUrl = (value) => {
  * @throws Will throw an error if the value is not a valid url
  * @returns {Object|Void} Returns an object containing the parsed components of the path, or undefined for undefined input
  *
- * @see {@link https://nodejs.org/api/path.html | Node Path}
+ * @see {@link https://nodejs.org/api/path.html|Node Path}
  */
 const parsePath = (value) => {
   if (typeof value === 'undefined') {
@@ -398,7 +399,7 @@ const parsePath = (value) => {
 };
 
 /**
- * Wrapper around MomentJS {@link https://www.npmjs.com/package/moment | Moment NPM}
+ * Wrapper around MomentJS {@link https://www.npmjs.com/package/moment|Moment NPM}
  * @access private
  * @param {*} args The moment parse argument options
  *
@@ -418,14 +419,14 @@ const parsePath = (value) => {
  *
  * @returns {Object} A moment object
  *
- * @see {@link https://www.npmjs.com/package/moment | Moment NPM}
+ * @see {@link https://www.npmjs.com/package/moment|Moment NPM}
  */
 const moment = (...args) => {
   return momentjs(...args);
 };
 
 /**
- * Wrapper around MomentJS Duration {@link https://www.npmjs.com/package/moment | Moment NPM}
+ * Wrapper around MomentJS Duration {@link https://www.npmjs.com/package/moment|Moment NPM}
  * @access private
  * @param {*} args The moment.duration argument options
  *
@@ -445,8 +446,8 @@ const moment = (...args) => {
  *
  * @returns {Object} A moment duration object
  *
- * @see {@link https://www.npmjs.com/package/moment | Moment NPM}
- * @see {@link https://momentjs.com/docs/#/durations/ | Moment Durations}
+ * @see {@link https://www.npmjs.com/package/moment|Moment NPM}
+ * @see {@link https://momentjs.com/docs/#/durations/|Moment Durations}
  */
 const momentDuration = (...args) => {
   return momentjs.duration(...args);
@@ -456,7 +457,7 @@ const momentDuration = (...args) => {
  * Render a mustache template
  * @access private
  * @param {Object} [value=] The object to use with the template
- * @param {String} [template=] The template object. For more information see the {@link https://www.npmjs.com/package/mustache | mustache NPM}
+ * @param {String} [template=] The template object. For more information see the {@link https://www.npmjs.com/package/mustache|mustache NPM}
  *
  * @example &lt;caption>Example usage within a JSONata transform for converting object&lt;/caption>
  * // returns
@@ -474,7 +475,7 @@ const momentDuration = (...args) => {
  *
  * @returns {String|Void} Returns the resulting string, or undefined for undefined value or value for undefined template
  *
- * @see {@link https://www.npmjs.com/package/mustache | Mustache NPM}
+ * @see {@link https://www.npmjs.com/package/mustache|Mustache NPM}
  */
 const mustache = (value, template) => {
   if (typeof value === 'undefined') {
@@ -520,7 +521,7 @@ const mustache = (value, template) => {
  *
  * @returns {String|Void} Returns the truncated string, or undefined for undefined input
  *
- * @see {@link https://www.npmjs.com/package/fold-to-ascii | fold-to-ascii NPM}
+ * @see {@link https://www.npmjs.com/package/fold-to-ascii|fold-to-ascii NPM}
  */
 const unicodeToASCII = (value, options) => {
   if (typeof value === 'undefined') {
@@ -659,7 +660,7 @@ const truncate = (value, options) => {
 /**
  * Register the functions in this library to the JSONata expression
  * @access public
- * @param {Object} expression - The JSONata Expression Object {@link https://www.npmjs.com/package/jsonata | JSONata NPM}
+ * @param {Object} expression - The JSONata Expression Object {@link https://www.npmjs.com/package/jsonata|JSONata NPM}
  *
  * @example &lt;caption>Example usage to add the functions in this library to a JSONata expression object, and utilise them&lt;/caption>
  * const jsonata = require('jsonata');
@@ -671,7 +672,7 @@ const truncate = (value, options) => {
  *
  * @throws {TypeError} expression must be a JSONata expression object
  *
- * @see {@link https://www.npmjs.com/package/jsonata | JSONata NPM}
+ * @see {@link https://www.npmjs.com/package/jsonata|JSONata NPM}
  */
 const registerWithJSONATA = (expression) => {
   if (typeof expression === 'undefined' || typeof expression.registerFunction === 'undefined') {
