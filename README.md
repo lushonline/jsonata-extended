@@ -12,7 +12,7 @@ It is NOT published to NPMJS and so install from this repo
 ## Installation
 
 ```bash
-npm install https://github.com/martinholden-skillsoft/jsonata-extended
+npm install jsonata-extended
 ```
 
 ## Example - Node
@@ -35,7 +35,7 @@ const result = expr.evaluate();
     <meta charset="UTF-8">
     <title>JSONata Extended Test</title>
     <script src="https://cdn.jsdelivr.net/npm/jsonata/jsonata.min.js"></script>
-    <script src="jsonata-extended.js"></script>
+    <script src="node_modules/jsonata-extended/dist/jsonata-extended.min.js"></script>
     <script>
       function runTransform() {
         var json = JSON.parse(document.getElementById('json').value);
