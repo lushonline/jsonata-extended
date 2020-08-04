@@ -7,8 +7,6 @@ This can be used to add extended functions to the standard [JSONata](https://www
 
 It has the same signature as the standard and so can be used as a dropin replacement.
 
-It is NOT published to NPMJS and so install from this repo
-
 ## Installation
 
 ```bash
