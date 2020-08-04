@@ -7,27 +7,36 @@
 		"url": "git+ssh://git@github.com/martinholden-skillsoft/jsonata-extended.git"
 	},
 	"main": "src/index.js",
+	"directories": {
+		"doc": "./doc"
+	},
 	"scripts": {
 		"lint": "eslint src/**/*.js",
 		"mocha": "node ./node_modules/mocha/bin/mocha \"test/**/*.js\"",
-		"doc": "rimraf doc/* && jsdoc --readme README.md --configure jsdoc.json .",
+		"predoc": "npm run clean-doc",
+		"doc": "jsdoc --readme README.md --configure jsdoc.json .",
 		"pretest": "npm run lint",
 		"test": "npm run mocha",
-		"posttest": "npm run doc && npm run browserify && npm run minify",
+		"posttest": "npm run build",
 		"preversion": "npm run test",
 		"postversion": "git push && git push --tags && npm run changelog && git push ",
 		"changelog": "rimraf CHANGELOG.md && auto-changelog --template keepachangelog && git add . && git commit . -m changelog && git push",
-		"coverage": "nyc --reporter=lcov --reporter=text-summary npm run test",
-		"check-coverage": "istanbul check-coverage -statement 100 -branch 100 -function 100 -line 100",
-		"browserify": "browserify src/index.js --outfile jsonata-extended.js --standalone jsonata-extended",
-		"mkdir-dist": "mkdirp ./dist",
-		"regenerator": "babel src --out-dir dist --presets=@babel/env",
-		"minify": "uglifyjs jsonata-extended.js -o jsonata-extended.min.js --compress --mangle"
+		"coverage": "nyc --reporter=lcov --reporter=text-summary npm run mocha",
+		"browserify": "browserify src/index.js --outfile dist/jsonata-extended.js --standalone jsonata-extended",
+		"minify": "uglifyjs dist/jsonata-extended.js -o dist/jsonata-extended.min.js --compress --mangle",
+		"clean-dist": "rimraf ./dist && mkdirp ./dist",
+		"clean-doc": "rimraf ./doc && mkdirp ./doc",
+		"prebuild": "npm run clean-dist",
+		"build": "npm run browserify && npm run minify",
+		"postbuild": "npm run doc"
 	},
 	"keywords": [
 		"JSONata"
 	],
-	"author": "Martin Holden &lt;martin.holden@skillsoft.com&gt;",
+	"author": {
+		"name": "Martin Holden",
+		"email": "martin.holden@skillsoft.com"
+	},
 	"license": "MIT",
 	"dependencies": {
 		"countries-list": "^2.5.6",
@@ -43,12 +52,9 @@
 		"uuid-validate": "0.0.3"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.10.5",
-		"@babel/core": "^7.11.0",
-		"@babel/preset-env": "^7.11.0",
 		"auto-changelog": "^2.2.0",
 		"babel-eslint": "^10.1.0",
-		"browserify": "^16.5.1",
+		"browserify": "^16.5.2",
 		"browserify-shim": "^3.8.14",
 		"chai": "^4.2.0",
 		"coveralls": "^3.1.0",
@@ -62,8 +68,6 @@
 		"mocha": "^8.1.0",
 		"nyc": "^15.1.0",
 		"prettier": "^2.0.5",
-		"regenerator": "^0.14.7",
-		"request": "^2.88.0",
 		"rimraf": "^3.0.2",
 		"uglify-es": "^3.3.9"
 	},
