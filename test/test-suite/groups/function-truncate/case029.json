@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success using UNICODE, where length <= length of UNICODE",
+  "expr": "$truncate('Iñtërnâtiônàlizætiøn☃ 💩 are bad.', { 'length': 100 })",
+  "dataset": "empty",
+  "bindings": {},
+  "result": "Iñtërnâtiônàlizætiøn☃ 💩 are bad."
+}

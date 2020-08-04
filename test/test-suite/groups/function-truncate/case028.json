@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when options.wordbreakregex is an invalid regex",
+  "expr": "$truncate('1234567890123456789012345678901234567890', { 'wordbreakregex' : '([A-Z)'} )",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Error Processing workdbreakregex."
+  }
+}
