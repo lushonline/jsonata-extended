@@ -7,10 +7,7 @@
     ]
   },
   "source": {
-    "exclude": [
-      "jsonata-extended.js",
-      "jsonata-extended.min.js"
-    ],
+    "exclude": [ "dist" ],
     "includePattern": ".+\\.js(doc)?$",
     "excludePattern": "(^|\\/|\\\\)_|node_modules|doc|coverage|test|dist"
   },
