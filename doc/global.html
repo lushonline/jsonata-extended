@@ -14,6 +14,8 @@
     <link type="text/css" rel="stylesheet" href="styles/prettify.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
     <script src="scripts/nav.js" defer></script>
+    <script src="https://embed.runkit.com"></script>
+    <style>.embedrunkit { overflow: visible; }</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -200,10 +202,15 @@
     
         <p class="code-caption">Example using the extended JSONata as a dropin replacement for the standard <a href="https://www.npmjs.com/package/jsonata">JSONata NPM</a></p>
     
-    <pre class="prettyprint"><code>// const jsonata = require('jsonata');
+    <pre class="prettyprint source lang-javascript"><code>// const jsonata = require('jsonata');
 const jsonata = require('./lib/jsonata/jsonata-extended');
 const expr = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');
 const result = expr.evaluate();</code></pre>
+    <h5>Try on RUNKIT</h5>
+    <pre class="embedrunkit">// const jsonata = require('jsonata');
+const jsonata = require('./lib/jsonata/jsonata-extended');
+const expr = jsonata('$htmltotext("&lt;p>Leadership has a dark side; a &amp;#34;leadership shadow&amp;#34; that often creates an unknown; lurking fear.&lt;/p>")');
+const result = expr.evaluate();</pre>
 
 
 
@@ -332,7 +339,7 @@ const result = expr.evaluate();</code></pre>
 
 
 
-    
+
     
 </div>
 
@@ -352,5 +359,17 @@ const result = expr.evaluate();</code></pre>
 <script src="scripts/collapse.js" defer></script>
 
 
+<script>
+const elements = [...document.getElementsByClassName('embedrunkit')]
+const notebooks = elements.reduce((notebooks, element) => {
+    const innerText = element.firstChild
+    const currentCell = window.RunKit.createNotebook({
+        element,
+        source: innerText.textContent,
+        // Remove the text content of the pre tag after the embed has loaded
+        onLoad: () => innerText.remove()
+    })
+  return notebooks
+}, [])</script>
 </body>
 </html>

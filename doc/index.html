@@ -14,6 +14,8 @@
     <link type="text/css" rel="stylesheet" href="styles/prettify.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
     <script src="scripts/nav.js" defer></script>
+    <script src="https://embed.runkit.com"></script>
+    <style>.embedrunkit { overflow: visible; }</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -64,7 +66,6 @@
 <p>Extended JSONata object with custom functions</p>
 <p>This can be used to add extended functions to the standard <a href="https://www.npmjs.com/package/jsonata">JSONata</a></p>
 <p>It has the same signature as the standard and so can be used as a dropin replacement.</p>
-<p>It is NOT published to NPMJS and so install from this repo</p>
 <h2>Installation</h2>
 <pre class="prettyprint source lang-bash"><code>npm install jsonata-extended
 </code></pre>
@@ -112,7 +113,7 @@ const result = expr.evaluate();
 
 
 
-    
+
     
 </div>
 
@@ -132,5 +133,17 @@ const result = expr.evaluate();
 <script src="scripts/collapse.js" defer></script>
 
 
+<script>
+const elements = [...document.getElementsByClassName('embedrunkit')]
+const notebooks = elements.reduce((notebooks, element) => {
+    const innerText = element.firstChild
+    const currentCell = window.RunKit.createNotebook({
+        element,
+        source: innerText.textContent,
+        // Remove the text content of the pre tag after the embed has loaded
+        onLoad: () => innerText.remove()
+    })
+  return notebooks
+}, [])</script>
 </body>
 </html>

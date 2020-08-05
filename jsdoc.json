@@ -7,7 +7,9 @@
     ]
   },
   "source": {
-    "exclude": [ "dist" ],
+    "exclude": [
+      "dist"
+    ],
     "includePattern": ".+\\.js(doc)?$",
     "excludePattern": "(^|\\/|\\\\)_|node_modules|doc|coverage|test|dist"
   },
@@ -20,7 +22,7 @@
     }
   },
   "opts": {
-    "template": "node_modules/docdash",
+    "template": "./docdash2",
     "encoding": "utf8",
     "destination": "doc",
     "recurse": true,
@@ -41,6 +43,7 @@
         "class": "menu-item",
         "id": "repository"
       }
-    }
+    },
+    "scripts": []
   }
 }

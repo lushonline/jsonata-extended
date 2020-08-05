@@ -14,6 +14,8 @@
     <link type="text/css" rel="stylesheet" href="styles/prettify.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
     <script src="scripts/nav.js" defer></script>
+    <script src="https://embed.runkit.com"></script>
+    <style>.embedrunkit { overflow: visible; }</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -75,7 +77,7 @@ module.exports = jsonataExtended;
 
 
 
-    
+
     
 </div>
 
@@ -95,5 +97,17 @@ module.exports = jsonataExtended;
 <script src="scripts/collapse.js" defer></script>
 
 
+<script>
+const elements = [...document.getElementsByClassName('embedrunkit')]
+const notebooks = elements.reduce((notebooks, element) => {
+    const innerText = element.firstChild
+    const currentCell = window.RunKit.createNotebook({
+        element,
+        source: innerText.textContent,
+        // Remove the text content of the pre tag after the embed has loaded
+        onLoad: () => innerText.remove()
+    })
+  return notebooks
+}, [])</script>
 </body>
 </html>
