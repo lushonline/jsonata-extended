@@ -3,7 +3,7 @@
  * @module jsonata-functions
  * @exports registerWithJSONATA
  */
-const htmlToText = require('html-to-text');
+const { convert } = require('html-to-text');
 const uuidvalidate = require('uuid-validate');
 const UuidEncoder = require('uuid-encoder');
 const _ = require('lodash');
@@ -40,6 +40,7 @@ const ASCIIFolder = require('fold-to-ascii');
  * @param {Boolean} [options.decodeOptions.isAttributeValue=false] false means that decode() will decode the string as if it were used in a text context in an HTML document. HTML has different rules for parsing character references in attribute values — set this option to true to treat the input string as if it were used as an attribute value.
  * @param {Boolean} [options.decodeOptions.strict=false] false means that decode() will decode any HTML text content you feed it, even if it contains any entities that cause parse errors. To throw an error when such invalid HTML is encountered, set the strict option to true. This option makes it possible to use he as part of HTML parsers and HTML validators.
  * @param {Object} [options.format={}}] pass an object to enable custom formatting for specific elements. By using the format option, you can specify formatting for these elements: text, image, lineBreak, paragraph, anchor, heading, table, orderedList, unorderedList, listItem, horizontalLine. Each key must be a function which eventually receive elem (the current elem), fn (the next formatting function) and options (the options passed to html-to-text).
+ * @param {String} [options.whitespaceCharacters=' \t\r\n\f\u200b\u00a0'] A string of characters that are recognized as HTML whitespace.
  *
  * @example <caption>Example usage within a JSONata transform. The &lt;p&gt; tags and the HTML entities are converted</caption>
  * // returns
@@ -62,11 +63,12 @@ const htmltotext = (value, options) => {
   const defaultOptions = {
     noLinkBrackets: false,
     wordwrap: null,
+    whitespaceCharacters: ' \t\r\n\f\u200b\u00a0',
   };
 
   const localOptions = { ...defaultOptions, ...options };
 
-  return htmlToText.fromString(value.trim(), localOptions);
+  return convert(value.trim(), localOptions);
 };
 
 /**
