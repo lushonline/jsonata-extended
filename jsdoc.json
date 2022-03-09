@@ -11,9 +11,12 @@
       "dist"
     ],
     "includePattern": ".+\\.js(doc)?$",
-    "excludePattern": "(^|\\/|\\\\)_|node_modules|doc|coverage|test|dist"
+    "excludePattern": "(^|\\/|\\\\)_|node_modules|doc|coverage|test|dist|plugins"
   },
-  "plugins": [],
+  "plugins": [
+    "./jsdoc-plugins/tag-signature",
+    "./jsdoc-plugins/test-processingcomplete"
+  ],
   "templates": {
     "cleverLinks": false,
     "monospaceLinks": false,

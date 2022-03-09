@@ -1,5 +1,5 @@
-/* eslint no-param-reassign: ["error", 
-      { "props": true, 
+/* eslint no-param-reassign: ["error",
+      { "props": true,
         "ignorePropertyModificationsFor": ["item"] }
 ] */
 
@@ -196,6 +196,10 @@ describe('Functions Test Suite', () => {
               // we do a deep equality check against the expected result.
               const result = expr.evaluate(dataset, testcase.bindings);
               chai.expect(result).to.deep.equal(testcase.result);
+            } else if ('type' in testcase) {
+              // Check the type returned
+              const result = expr.evaluate(dataset, testcase.bindings);
+              chai.expect(result).to.be.a(testcase.type);
             } else if ('error' in testcase) {
               // If an error was expected,
               // we do a deep equality check against the expected error structure.

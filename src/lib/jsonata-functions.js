@@ -14,6 +14,7 @@ const urlParse = require('url-parse');
 const path = require('path');
 const Mustache = require('mustache');
 const ASCIIFolder = require('fold-to-ascii');
+const fakerjs = require('faker');
 
 /**
  * Convert HTML to plain text
@@ -81,7 +82,7 @@ const htmltotext = (value, options) => {
  * // returns
  * // result = '1m5otdkthiyq143crwujacdqg'
  * const jsonata = require('jsonata-extended');
- * const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688"), "base36"');
+ * const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688", "base36")');
  * const result = expr.evaluate();
  *
  * @throws Will throw an error if the value is not a valid uuid
@@ -89,6 +90,7 @@ const htmltotext = (value, options) => {
  * @returns {String|Void} Returns a string containing the encoded version of the uuid, or undefined for undefined input
  *
  * @see {@link https://www.npmjs.com/package/uuid-encoder|uuid-encoder NPM}
+ * @signature $shortenUuid(value [, string='base36'])
  */
 const shortenUuid = (value, base = 'base36') => {
   if (typeof value === 'undefined') {
@@ -614,6 +616,26 @@ const truncate = (value, options) => {
 };
 
 /**
+ * Wrapper around FakerJS {@link https://www.npmjs.com/package/faker|Faker NPM}
+ * @access private
+ *
+ *
+ * @example <caption>Example usage within a JSONata transform to get a fake firstname</caption>
+ * // returns
+ * // result = "dicembre"
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$.( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\")))');
+ * const result = expr.evaluate();
+ *
+ * @returns {Object} A faker object
+ *
+ * @see {@link https://www.npmjs.com/package/faker|Faker NPM}
+ */
+const faker = () => {
+  return fakerjs;
+};
+
+/**
  * Register the functions in this library to the JSONata expression
  * @access public
  * @param {Object} expression - The JSONata Expression Object {@link https://www.npmjs.com/package/jsonata|JSONata NPM}
@@ -681,6 +703,10 @@ const registerWithJSONATA = (expression) => {
     (value, options) => unicodeToASCII(value, options),
     '<s?o?:s>'
   );
+
+  // Bind fakerjs - signatures we need to support - from https://github.com/Marak/Faker.js
+  // faker();
+  expression.assign('faker', faker);
 };
 
 module.exports = {

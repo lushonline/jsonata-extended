@@ -40,6 +40,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"countries-list": "^2.6.1",
+		"faker": "^5.5.3",
 		"fold-to-ascii": "^5.0.0",
 		"html-to-text": "^8.0.0",
 		"jsonata": "^1.8.4",

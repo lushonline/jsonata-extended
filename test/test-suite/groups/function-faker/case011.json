@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success - a firstname string is returned",
+  "expr": "$faker().name.firstName()",
+  "dataset": "empty",
+  "bindings": {},
+  "type": "String"
+}

@@ -1,0 +1,7 @@
+{
+  "description": "Confirm function available in jsonata",
+  "expr": "$exists($faker)",
+  "dataset": "empty",
+  "bindings": {},
+  "result": true
+}

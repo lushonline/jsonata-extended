@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success - name is an object",
+  "expr": "$faker().name",
+  "dataset": "empty",
+  "bindings": {},
+  "type": "Object"
+}
