@@ -4,6 +4,7 @@
 coverage/*
 doc/*
 dist/*
+docsash2/*
 jsonata.js
 jsonata-es5.js
 *.min.js
