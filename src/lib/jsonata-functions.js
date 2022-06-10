@@ -119,6 +119,29 @@ const shortenUuid = (value, base = 'base36') => {
 };
 
 /**
+ * Encode the supplied UUID
+ * @access private
+ * @param {String} value - Properly formatted UUID
+ * @param {('base2'|'base10'|'base16'|'base32'|'base36'|'base58'|'base62'|'base64'|'base64url')} [base='base36'] - A valid base to use for the process, case sensitive {@link https://www.npmjs.com/package/uuid-encoder#encoding|Encoding Options}
+ *
+ * @example <caption>Example usage within a JSONata transform</caption>
+ * // returns
+ * // result = '1m5otdkthiyq143crwujacdqg'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$encodeUuid("1b49aa30-e719-11e6-9835-f723b46a2688", "base36")');
+ * const result = expr.evaluate();
+ *
+ * @throws Will throw an error if the value is not a valid uuid
+ * @throws Will throw an error if the base is not a valid option
+ * @returns {String|Void} Returns a string containing the encoded version of the uuid, or undefined for undefined input
+ *
+ * @see {@link https://www.npmjs.com/package/uuid-encoder|uuid-encoder NPM}
+ */
+const encodeUuid = (value, base = 'base36') => {
+  return shortenUuid(value, base);
+};
+
+/**
  * UnShorten the supplied shortened UUID
  * @access private
  * @param {String} value - Shortened UUID
@@ -161,6 +184,29 @@ const unshortenUuid = (value, base = 'base36') => {
   const result = new UuidEncoder(base).decode(value);
 
   return result;
+};
+
+/**
+ * Decode the supplied shortened UUID
+ * @access private
+ * @param {String} value - Shortened UUID
+ * @param {('base2'|'base10'|'base16'|'base32'|'base36'|'base58'|'base62'|'base64'|'base64url')} [base='base36'] - A valid base to use for the process, case sensitive {@link https://www.npmjs.com/package/uuid-encoder#encoding|Encoding Options}
+ *
+ * @example <caption>Example usage within a JSONata transform</caption>
+ * // returns
+ * // result = '1b49aa30-e719-11e6-9835-f723b46a2688'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$decodeUuid("1m5otdkthiyq143crwujacdqg", "base36")');
+ * const result = expr.evaluate();
+ *
+ * @throws Will throw an error if the value is not a valid uuid
+ * @throws Will throw an error if the base is not a valid option
+ * @returns {String|Void} Returns a string containing the encoded version of the uuid, or undefined for undefined input
+ *
+ * @see {@link https://www.npmjs.com/package/uuid-encoder|uuid-encoder NPM}
+ */
+const decodeUuid = (value, base = 'base36') => {
+  return unshortenUuid(value, base);
 };
 
 /**
@@ -696,6 +742,10 @@ const registerWithJSONATA = (expression) => {
     (value, basex) => unshortenUuid(value, basex),
     '<s?s?:s>'
   );
+
+  expression.registerFunction('encodeUuid', (value, basex) => encodeUuid(value, basex), '<s?s?:s>');
+
+  expression.registerFunction('decodeUuid', (value, basex) => decodeUuid(value, basex), '<s?s?:s>');
 
   expression.registerFunction('truncate', (value, options) => truncate(value, options), '<s?o?:s>');
 
