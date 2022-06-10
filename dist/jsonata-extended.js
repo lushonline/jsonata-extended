@@ -120,7 +120,7 @@ function amap(items, mapper) {
 
 exports.hp2Builder = hp2Builder;
 
-},{"domhandler":11,"selderee":68}],2:[function(require,module,exports){
+},{"domhandler":11,"selderee":71}],2:[function(require,module,exports){
 (function (global){(function (){
 'use strict';
 
@@ -138,10 +138,12 @@ var possibleNames = [
 	'Uint8ClampedArray'
 ];
 
+var g = typeof globalThis === 'undefined' ? global : globalThis;
+
 module.exports = function availableTypedArrays() {
 	var out = [];
 	for (var i = 0; i < possibleNames.length; i++) {
-		if (typeof global[possibleNames[i]] === 'function') {
+		if (typeof g[possibleNames[i]] === 'function') {
 			out[out.length] = possibleNames[i];
 		}
 	}
@@ -1330,10 +1332,10 @@ var bigInt = (function (undefined) {
         var digits = toBase(range, BASE).value;
         var result = [], restricted = true;
         for (var i = 0; i < digits.length; i++) {
-            var top = restricted ? digits[i] : BASE;
+            var top = restricted ? digits[i] + (i + 1 < digits.length ? digits[i + 1] / BASE : 0) : BASE;
             var digit = truncate(usedRNG() * top);
             result.push(digit);
-            if (digit < top) restricted = false;
+            if (digit < digits[i]) restricted = false;
         }
         return low.add(Integer.fromArray(result, BASE, false));
     }
@@ -1599,7 +1601,7 @@ if (typeof module !== "undefined" && module.hasOwnProperty("exports")) {
 
 //amd check
 if (typeof define === "function" && define.amd) {
-    define("big-integer", [], function () {
+    define( function () {
         return bigInt;
     });
 }
@@ -1621,7 +1623,7 @@ module.exports = function callBoundIntrinsic(name, allowMissing) {
 	return intrinsic;
 };
 
-},{"./":5,"get-intrinsic":33}],5:[function(require,module,exports){
+},{"./":5,"get-intrinsic":34}],5:[function(require,module,exports){
 'use strict';
 
 var bind = require('function-bind');
@@ -1670,7 +1672,7 @@ if ($defineProperty) {
 	module.exports.apply = applyBind;
 }
 
-},{"function-bind":32,"get-intrinsic":33}],6:[function(require,module,exports){
+},{"function-bind":33,"get-intrinsic":34}],6:[function(require,module,exports){
 /*! countries-list v2.6.1 by Annexare | MIT */
 !function(n,a){"object"==typeof exports&&"undefined"!=typeof module?module.exports=a():"function"==typeof define&&define.amd?define("Countries",a):(n="undefined"!=typeof globalThis?globalThis:n||self).Countries=a()}(this,(function(){"use strict";var n={AF:"Africa",AN:"Antarctica",AS:"Asia",EU:"Europe",NA:"North America",OC:"Oceania",SA:"South America"},a={AD:{name:"Andorra",native:"Andorra",phone:"376",continent:"EU",capital:"Andorra la Vella",currency:"EUR",languages:["ca"],emoji:"🇦🇩",emojiU:"U+1F1E6 U+1F1E9"},AE:{name:"United Arab Emirates",native:"دولة الإمارات العربية المتحدة",phone:"971",continent:"AS",capital:"Abu Dhabi",currency:"AED",languages:["ar"],emoji:"🇦🇪",emojiU:"U+1F1E6 U+1F1EA"},AF:{name:"Afghanistan",native:"افغانستان",phone:"93",continent:"AS",capital:"Kabul",currency:"AFN",languages:["ps","uz","tk"],emoji:"🇦🇫",emojiU:"U+1F1E6 U+1F1EB"},AG:{name:"Antigua and Barbuda",native:"Antigua and Barbuda",phone:"1268",continent:"NA",capital:"Saint John's",currency:"XCD",languages:["en"],emoji:"🇦🇬",emojiU:"U+1F1E6 U+1F1EC"},AI:{name:"Anguilla",native:"Anguilla",phone:"1264",continent:"NA",capital:"The Valley",currency:"XCD",languages:["en"],emoji:"🇦🇮",emojiU:"U+1F1E6 U+1F1EE"},AL:{name:"Albania",native:"Shqipëria",phone:"355",continent:"EU",capital:"Tirana",currency:"ALL",languages:["sq"],emoji:"🇦🇱",emojiU:"U+1F1E6 U+1F1F1"},AM:{name:"Armenia",native:"Հայաստան",phone:"374",continent:"AS",capital:"Yerevan",currency:"AMD",languages:["hy","ru"],emoji:"🇦🇲",emojiU:"U+1F1E6 U+1F1F2"},AO:{name:"Angola",native:"Angola",phone:"244",continent:"AF",capital:"Luanda",currency:"AOA",languages:["pt"],emoji:"🇦🇴",emojiU:"U+1F1E6 U+1F1F4"},AQ:{name:"Antarctica",native:"Antarctica",phone:"672",continent:"AN",capital:"",currency:"",languages:[],emoji:"🇦🇶",emojiU:"U+1F1E6 U+1F1F6"},AR:{name:"Argentina",native:"Argentina",phone:"54",continent:"SA",capital:"Buenos Aires",currency:"ARS",languages:["es","gn"],emoji:"🇦🇷",emojiU:"U+1F1E6 U+1F1F7"},AS:{name:"American Samoa",native:"American Samoa",phone:"1684",continent:"OC",capital:"Pago Pago",currency:"USD",languages:["en","sm"],emoji:"🇦🇸",emojiU:"U+1F1E6 U+1F1F8"},AT:{name:"Austria",native:"Österreich",phone:"43",continent:"EU",capital:"Vienna",currency:"EUR",languages:["de"],emoji:"🇦🇹",emojiU:"U+1F1E6 U+1F1F9"},AU:{name:"Australia",native:"Australia",phone:"61",continent:"OC",capital:"Canberra",currency:"AUD",languages:["en"],emoji:"🇦🇺",emojiU:"U+1F1E6 U+1F1FA"},AW:{name:"Aruba",native:"Aruba",phone:"297",continent:"NA",capital:"Oranjestad",currency:"AWG",languages:["nl","pa"],emoji:"🇦🇼",emojiU:"U+1F1E6 U+1F1FC"},AX:{name:"Åland",native:"Åland",phone:"358",continent:"EU",capital:"Mariehamn",currency:"EUR",languages:["sv"],emoji:"🇦🇽",emojiU:"U+1F1E6 U+1F1FD"},AZ:{name:"Azerbaijan",native:"Azərbaycan",phone:"994",continent:"AS",capital:"Baku",currency:"AZN",languages:["az"],emoji:"🇦🇿",emojiU:"U+1F1E6 U+1F1FF"},BA:{name:"Bosnia and Herzegovina",native:"Bosna i Hercegovina",phone:"387",continent:"EU",capital:"Sarajevo",currency:"BAM",languages:["bs","hr","sr"],emoji:"🇧🇦",emojiU:"U+1F1E7 U+1F1E6"},BB:{name:"Barbados",native:"Barbados",phone:"1246",continent:"NA",capital:"Bridgetown",currency:"BBD",languages:["en"],emoji:"🇧🇧",emojiU:"U+1F1E7 U+1F1E7"},BD:{name:"Bangladesh",native:"Bangladesh",phone:"880",continent:"AS",capital:"Dhaka",currency:"BDT",languages:["bn"],emoji:"🇧🇩",emojiU:"U+1F1E7 U+1F1E9"},BE:{name:"Belgium",native:"België",phone:"32",continent:"EU",capital:"Brussels",currency:"EUR",languages:["nl","fr","de"],emoji:"🇧🇪",emojiU:"U+1F1E7 U+1F1EA"},BF:{name:"Burkina Faso",native:"Burkina Faso",phone:"226",continent:"AF",capital:"Ouagadougou",currency:"XOF",languages:["fr","ff"],emoji:"🇧🇫",emojiU:"U+1F1E7 U+1F1EB"},BG:{name:"Bulgaria",native:"България",phone:"359",continent:"EU",capital:"Sofia",currency:"BGN",languages:["bg"],emoji:"🇧🇬",emojiU:"U+1F1E7 U+1F1EC"},BH:{name:"Bahrain",native:"‏البحرين",phone:"973",continent:"AS",capital:"Manama",currency:"BHD",languages:["ar"],emoji:"🇧🇭",emojiU:"U+1F1E7 U+1F1ED"},BI:{name:"Burundi",native:"Burundi",phone:"257",continent:"AF",capital:"Bujumbura",currency:"BIF",languages:["fr","rn"],emoji:"🇧🇮",emojiU:"U+1F1E7 U+1F1EE"},BJ:{name:"Benin",native:"Bénin",phone:"229",continent:"AF",capital:"Porto-Novo",currency:"XOF",languages:["fr"],emoji:"🇧🇯",emojiU:"U+1F1E7 U+1F1EF"},BL:{name:"Saint Barthélemy",native:"Saint-Barthélemy",phone:"590",continent:"NA",capital:"Gustavia",currency:"EUR",languages:["fr"],emoji:"🇧🇱",emojiU:"U+1F1E7 U+1F1F1"},BM:{name:"Bermuda",native:"Bermuda",phone:"1441",continent:"NA",capital:"Hamilton",currency:"BMD",languages:["en"],emoji:"🇧🇲",emojiU:"U+1F1E7 U+1F1F2"},BN:{name:"Brunei",native:"Negara Brunei Darussalam",phone:"673",continent:"AS",capital:"Bandar Seri Begawan",currency:"BND",languages:["ms"],emoji:"🇧🇳",emojiU:"U+1F1E7 U+1F1F3"},BO:{name:"Bolivia",native:"Bolivia",phone:"591",continent:"SA",capital:"Sucre",currency:"BOB,BOV",languages:["es","ay","qu"],emoji:"🇧🇴",emojiU:"U+1F1E7 U+1F1F4"},BQ:{name:"Bonaire",native:"Bonaire",phone:"5997",continent:"NA",capital:"Kralendijk",currency:"USD",languages:["nl"],emoji:"🇧🇶",emojiU:"U+1F1E7 U+1F1F6"},BR:{name:"Brazil",native:"Brasil",phone:"55",continent:"SA",capital:"Brasília",currency:"BRL",languages:["pt"],emoji:"🇧🇷",emojiU:"U+1F1E7 U+1F1F7"},BS:{name:"Bahamas",native:"Bahamas",phone:"1242",continent:"NA",capital:"Nassau",currency:"BSD",languages:["en"],emoji:"🇧🇸",emojiU:"U+1F1E7 U+1F1F8"},BT:{name:"Bhutan",native:"ʼbrug-yul",phone:"975",continent:"AS",capital:"Thimphu",currency:"BTN,INR",languages:["dz"],emoji:"🇧🇹",emojiU:"U+1F1E7 U+1F1F9"},BV:{name:"Bouvet Island",native:"Bouvetøya",phone:"47",continent:"AN",capital:"",currency:"NOK",languages:["no","nb","nn"],emoji:"🇧🇻",emojiU:"U+1F1E7 U+1F1FB"},BW:{name:"Botswana",native:"Botswana",phone:"267",continent:"AF",capital:"Gaborone",currency:"BWP",languages:["en","tn"],emoji:"🇧🇼",emojiU:"U+1F1E7 U+1F1FC"},BY:{name:"Belarus",native:"Белару́сь",phone:"375",continent:"EU",capital:"Minsk",currency:"BYN",languages:["be","ru"],emoji:"🇧🇾",emojiU:"U+1F1E7 U+1F1FE"},BZ:{name:"Belize",native:"Belize",phone:"501",continent:"NA",capital:"Belmopan",currency:"BZD",languages:["en","es"],emoji:"🇧🇿",emojiU:"U+1F1E7 U+1F1FF"},CA:{name:"Canada",native:"Canada",phone:"1",continent:"NA",capital:"Ottawa",currency:"CAD",languages:["en","fr"],emoji:"🇨🇦",emojiU:"U+1F1E8 U+1F1E6"},CC:{name:"Cocos [Keeling] Islands",native:"Cocos (Keeling) Islands",phone:"61",continent:"AS",capital:"West Island",currency:"AUD",languages:["en"],emoji:"🇨🇨",emojiU:"U+1F1E8 U+1F1E8"},CD:{name:"Democratic Republic of the Congo",native:"République démocratique du Congo",phone:"243",continent:"AF",capital:"Kinshasa",currency:"CDF",languages:["fr","ln","kg","sw","lu"],emoji:"🇨🇩",emojiU:"U+1F1E8 U+1F1E9"},CF:{name:"Central African Republic",native:"Ködörösêse tî Bêafrîka",phone:"236",continent:"AF",capital:"Bangui",currency:"XAF",languages:["fr","sg"],emoji:"🇨🇫",emojiU:"U+1F1E8 U+1F1EB"},CG:{name:"Republic of the Congo",native:"République du Congo",phone:"242",continent:"AF",capital:"Brazzaville",currency:"XAF",languages:["fr","ln"],emoji:"🇨🇬",emojiU:"U+1F1E8 U+1F1EC"},CH:{name:"Switzerland",native:"Schweiz",phone:"41",continent:"EU",capital:"Bern",currency:"CHE,CHF,CHW",languages:["de","fr","it"],emoji:"🇨🇭",emojiU:"U+1F1E8 U+1F1ED"},CI:{name:"Ivory Coast",native:"Côte d'Ivoire",phone:"225",continent:"AF",capital:"Yamoussoukro",currency:"XOF",languages:["fr"],emoji:"🇨🇮",emojiU:"U+1F1E8 U+1F1EE"},CK:{name:"Cook Islands",native:"Cook Islands",phone:"682",continent:"OC",capital:"Avarua",currency:"NZD",languages:["en"],emoji:"🇨🇰",emojiU:"U+1F1E8 U+1F1F0"},CL:{name:"Chile",native:"Chile",phone:"56",continent:"SA",capital:"Santiago",currency:"CLF,CLP",languages:["es"],emoji:"🇨🇱",emojiU:"U+1F1E8 U+1F1F1"},CM:{name:"Cameroon",native:"Cameroon",phone:"237",continent:"AF",capital:"Yaoundé",currency:"XAF",languages:["en","fr"],emoji:"🇨🇲",emojiU:"U+1F1E8 U+1F1F2"},CN:{name:"China",native:"中国",phone:"86",continent:"AS",capital:"Beijing",currency:"CNY",languages:["zh"],emoji:"🇨🇳",emojiU:"U+1F1E8 U+1F1F3"},CO:{name:"Colombia",native:"Colombia",phone:"57",continent:"SA",capital:"Bogotá",currency:"COP",languages:["es"],emoji:"🇨🇴",emojiU:"U+1F1E8 U+1F1F4"},CR:{name:"Costa Rica",native:"Costa Rica",phone:"506",continent:"NA",capital:"San José",currency:"CRC",languages:["es"],emoji:"🇨🇷",emojiU:"U+1F1E8 U+1F1F7"},CU:{name:"Cuba",native:"Cuba",phone:"53",continent:"NA",capital:"Havana",currency:"CUC,CUP",languages:["es"],emoji:"🇨🇺",emojiU:"U+1F1E8 U+1F1FA"},CV:{name:"Cape Verde",native:"Cabo Verde",phone:"238",continent:"AF",capital:"Praia",currency:"CVE",languages:["pt"],emoji:"🇨🇻",emojiU:"U+1F1E8 U+1F1FB"},CW:{name:"Curacao",native:"Curaçao",phone:"5999",continent:"NA",capital:"Willemstad",currency:"ANG",languages:["nl","pa","en"],emoji:"🇨🇼",emojiU:"U+1F1E8 U+1F1FC"},CX:{name:"Christmas Island",native:"Christmas Island",phone:"61",continent:"AS",capital:"Flying Fish Cove",currency:"AUD",languages:["en"],emoji:"🇨🇽",emojiU:"U+1F1E8 U+1F1FD"},CY:{name:"Cyprus",native:"Κύπρος",phone:"357",continent:"EU",capital:"Nicosia",currency:"EUR",languages:["el","tr","hy"],emoji:"🇨🇾",emojiU:"U+1F1E8 U+1F1FE"},CZ:{name:"Czech Republic",native:"Česká republika",phone:"420",continent:"EU",capital:"Prague",currency:"CZK",languages:["cs","sk"],emoji:"🇨🇿",emojiU:"U+1F1E8 U+1F1FF"},DE:{name:"Germany",native:"Deutschland",phone:"49",continent:"EU",capital:"Berlin",currency:"EUR",languages:["de"],emoji:"🇩🇪",emojiU:"U+1F1E9 U+1F1EA"},DJ:{name:"Djibouti",native:"Djibouti",phone:"253",continent:"AF",capital:"Djibouti",currency:"DJF",languages:["fr","ar"],emoji:"🇩🇯",emojiU:"U+1F1E9 U+1F1EF"},DK:{name:"Denmark",native:"Danmark",phone:"45",continent:"EU",capital:"Copenhagen",currency:"DKK",languages:["da"],emoji:"🇩🇰",emojiU:"U+1F1E9 U+1F1F0"},DM:{name:"Dominica",native:"Dominica",phone:"1767",continent:"NA",capital:"Roseau",currency:"XCD",languages:["en"],emoji:"🇩🇲",emojiU:"U+1F1E9 U+1F1F2"},DO:{name:"Dominican Republic",native:"República Dominicana",phone:"1809,1829,1849",continent:"NA",capital:"Santo Domingo",currency:"DOP",languages:["es"],emoji:"🇩🇴",emojiU:"U+1F1E9 U+1F1F4"},DZ:{name:"Algeria",native:"الجزائر",phone:"213",continent:"AF",capital:"Algiers",currency:"DZD",languages:["ar"],emoji:"🇩🇿",emojiU:"U+1F1E9 U+1F1FF"},EC:{name:"Ecuador",native:"Ecuador",phone:"593",continent:"SA",capital:"Quito",currency:"USD",languages:["es"],emoji:"🇪🇨",emojiU:"U+1F1EA U+1F1E8"},EE:{name:"Estonia",native:"Eesti",phone:"372",continent:"EU",capital:"Tallinn",currency:"EUR",languages:["et"],emoji:"🇪🇪",emojiU:"U+1F1EA U+1F1EA"},EG:{name:"Egypt",native:"مصر‎",phone:"20",continent:"AF",capital:"Cairo",currency:"EGP",languages:["ar"],emoji:"🇪🇬",emojiU:"U+1F1EA U+1F1EC"},EH:{name:"Western Sahara",native:"الصحراء الغربية",phone:"212",continent:"AF",capital:"El Aaiún",currency:"MAD,DZD,MRU",languages:["es"],emoji:"🇪🇭",emojiU:"U+1F1EA U+1F1ED"},ER:{name:"Eritrea",native:"ኤርትራ",phone:"291",continent:"AF",capital:"Asmara",currency:"ERN",languages:["ti","ar","en"],emoji:"🇪🇷",emojiU:"U+1F1EA U+1F1F7"},ES:{name:"Spain",native:"España",phone:"34",continent:"EU",capital:"Madrid",currency:"EUR",languages:["es","eu","ca","gl","oc"],emoji:"🇪🇸",emojiU:"U+1F1EA U+1F1F8"},ET:{name:"Ethiopia",native:"ኢትዮጵያ",phone:"251",continent:"AF",capital:"Addis Ababa",currency:"ETB",languages:["am"],emoji:"🇪🇹",emojiU:"U+1F1EA U+1F1F9"},FI:{name:"Finland",native:"Suomi",phone:"358",continent:"EU",capital:"Helsinki",currency:"EUR",languages:["fi","sv"],emoji:"🇫🇮",emojiU:"U+1F1EB U+1F1EE"},FJ:{name:"Fiji",native:"Fiji",phone:"679",continent:"OC",capital:"Suva",currency:"FJD",languages:["en","fj","hi","ur"],emoji:"🇫🇯",emojiU:"U+1F1EB U+1F1EF"},FK:{name:"Falkland Islands",native:"Falkland Islands",phone:"500",continent:"SA",capital:"Stanley",currency:"FKP",languages:["en"],emoji:"🇫🇰",emojiU:"U+1F1EB U+1F1F0"},FM:{name:"Micronesia",native:"Micronesia",phone:"691",continent:"OC",capital:"Palikir",currency:"USD",languages:["en"],emoji:"🇫🇲",emojiU:"U+1F1EB U+1F1F2"},FO:{name:"Faroe Islands",native:"Føroyar",phone:"298",continent:"EU",capital:"Tórshavn",currency:"DKK",languages:["fo"],emoji:"🇫🇴",emojiU:"U+1F1EB U+1F1F4"},FR:{name:"France",native:"France",phone:"33",continent:"EU",capital:"Paris",currency:"EUR",languages:["fr"],emoji:"🇫🇷",emojiU:"U+1F1EB U+1F1F7"},GA:{name:"Gabon",native:"Gabon",phone:"241",continent:"AF",capital:"Libreville",currency:"XAF",languages:["fr"],emoji:"🇬🇦",emojiU:"U+1F1EC U+1F1E6"},GB:{name:"United Kingdom",native:"United Kingdom",phone:"44",continent:"EU",capital:"London",currency:"GBP",languages:["en"],emoji:"🇬🇧",emojiU:"U+1F1EC U+1F1E7"},GD:{name:"Grenada",native:"Grenada",phone:"1473",continent:"NA",capital:"St. George's",currency:"XCD",languages:["en"],emoji:"🇬🇩",emojiU:"U+1F1EC U+1F1E9"},GE:{name:"Georgia",native:"საქართველო",phone:"995",continent:"AS",capital:"Tbilisi",currency:"GEL",languages:["ka"],emoji:"🇬🇪",emojiU:"U+1F1EC U+1F1EA"},GF:{name:"French Guiana",native:"Guyane française",phone:"594",continent:"SA",capital:"Cayenne",currency:"EUR",languages:["fr"],emoji:"🇬🇫",emojiU:"U+1F1EC U+1F1EB"},GG:{name:"Guernsey",native:"Guernsey",phone:"44",continent:"EU",capital:"St. Peter Port",currency:"GBP",languages:["en","fr"],emoji:"🇬🇬",emojiU:"U+1F1EC U+1F1EC"},GH:{name:"Ghana",native:"Ghana",phone:"233",continent:"AF",capital:"Accra",currency:"GHS",languages:["en"],emoji:"🇬🇭",emojiU:"U+1F1EC U+1F1ED"},GI:{name:"Gibraltar",native:"Gibraltar",phone:"350",continent:"EU",capital:"Gibraltar",currency:"GIP",languages:["en"],emoji:"🇬🇮",emojiU:"U+1F1EC U+1F1EE"},GL:{name:"Greenland",native:"Kalaallit Nunaat",phone:"299",continent:"NA",capital:"Nuuk",currency:"DKK",languages:["kl"],emoji:"🇬🇱",emojiU:"U+1F1EC U+1F1F1"},GM:{name:"Gambia",native:"Gambia",phone:"220",continent:"AF",capital:"Banjul",currency:"GMD",languages:["en"],emoji:"🇬🇲",emojiU:"U+1F1EC U+1F1F2"},GN:{name:"Guinea",native:"Guinée",phone:"224",continent:"AF",capital:"Conakry",currency:"GNF",languages:["fr","ff"],emoji:"🇬🇳",emojiU:"U+1F1EC U+1F1F3"},GP:{name:"Guadeloupe",native:"Guadeloupe",phone:"590",continent:"NA",capital:"Basse-Terre",currency:"EUR",languages:["fr"],emoji:"🇬🇵",emojiU:"U+1F1EC U+1F1F5"},GQ:{name:"Equatorial Guinea",native:"Guinea Ecuatorial",phone:"240",continent:"AF",capital:"Malabo",currency:"XAF",languages:["es","fr"],emoji:"🇬🇶",emojiU:"U+1F1EC U+1F1F6"},GR:{name:"Greece",native:"Ελλάδα",phone:"30",continent:"EU",capital:"Athens",currency:"EUR",languages:["el"],emoji:"🇬🇷",emojiU:"U+1F1EC U+1F1F7"},GS:{name:"South Georgia and the South Sandwich Islands",native:"South Georgia",phone:"500",continent:"AN",capital:"King Edward Point",currency:"GBP",languages:["en"],emoji:"🇬🇸",emojiU:"U+1F1EC U+1F1F8"},GT:{name:"Guatemala",native:"Guatemala",phone:"502",continent:"NA",capital:"Guatemala City",currency:"GTQ",languages:["es"],emoji:"🇬🇹",emojiU:"U+1F1EC U+1F1F9"},GU:{name:"Guam",native:"Guam",phone:"1671",continent:"OC",capital:"Hagåtña",currency:"USD",languages:["en","ch","es"],emoji:"🇬🇺",emojiU:"U+1F1EC U+1F1FA"},GW:{name:"Guinea-Bissau",native:"Guiné-Bissau",phone:"245",continent:"AF",capital:"Bissau",currency:"XOF",languages:["pt"],emoji:"🇬🇼",emojiU:"U+1F1EC U+1F1FC"},GY:{name:"Guyana",native:"Guyana",phone:"592",continent:"SA",capital:"Georgetown",currency:"GYD",languages:["en"],emoji:"🇬🇾",emojiU:"U+1F1EC U+1F1FE"},HK:{name:"Hong Kong",native:"香港",phone:"852",continent:"AS",capital:"City of Victoria",currency:"HKD",languages:["zh","en"],emoji:"🇭🇰",emojiU:"U+1F1ED U+1F1F0"},HM:{name:"Heard Island and McDonald Islands",native:"Heard Island and McDonald Islands",phone:"61",continent:"AN",capital:"",currency:"AUD",languages:["en"],emoji:"🇭🇲",emojiU:"U+1F1ED U+1F1F2"},HN:{name:"Honduras",native:"Honduras",phone:"504",continent:"NA",capital:"Tegucigalpa",currency:"HNL",languages:["es"],emoji:"🇭🇳",emojiU:"U+1F1ED U+1F1F3"},HR:{name:"Croatia",native:"Hrvatska",phone:"385",continent:"EU",capital:"Zagreb",currency:"HRK",languages:["hr"],emoji:"🇭🇷",emojiU:"U+1F1ED U+1F1F7"},HT:{name:"Haiti",native:"Haïti",phone:"509",continent:"NA",capital:"Port-au-Prince",currency:"HTG,USD",languages:["fr","ht"],emoji:"🇭🇹",emojiU:"U+1F1ED U+1F1F9"},HU:{name:"Hungary",native:"Magyarország",phone:"36",continent:"EU",capital:"Budapest",currency:"HUF",languages:["hu"],emoji:"🇭🇺",emojiU:"U+1F1ED U+1F1FA"},ID:{name:"Indonesia",native:"Indonesia",phone:"62",continent:"AS",capital:"Jakarta",currency:"IDR",languages:["id"],emoji:"🇮🇩",emojiU:"U+1F1EE U+1F1E9"},IE:{name:"Ireland",native:"Éire",phone:"353",continent:"EU",capital:"Dublin",currency:"EUR",languages:["ga","en"],emoji:"🇮🇪",emojiU:"U+1F1EE U+1F1EA"},IL:{name:"Israel",native:"יִשְׂרָאֵל",phone:"972",continent:"AS",capital:"Jerusalem",currency:"ILS",languages:["he","ar"],emoji:"🇮🇱",emojiU:"U+1F1EE U+1F1F1"},IM:{name:"Isle of Man",native:"Isle of Man",phone:"44",continent:"EU",capital:"Douglas",currency:"GBP",languages:["en","gv"],emoji:"🇮🇲",emojiU:"U+1F1EE U+1F1F2"},IN:{name:"India",native:"भारत",phone:"91",continent:"AS",capital:"New Delhi",currency:"INR",languages:["hi","en"],emoji:"🇮🇳",emojiU:"U+1F1EE U+1F1F3"},IO:{name:"British Indian Ocean Territory",native:"British Indian Ocean Territory",phone:"246",continent:"AS",capital:"Diego Garcia",currency:"USD",languages:["en"],emoji:"🇮🇴",emojiU:"U+1F1EE U+1F1F4"},IQ:{name:"Iraq",native:"العراق",phone:"964",continent:"AS",capital:"Baghdad",currency:"IQD",languages:["ar","ku"],emoji:"🇮🇶",emojiU:"U+1F1EE U+1F1F6"},IR:{name:"Iran",native:"ایران",phone:"98",continent:"AS",capital:"Tehran",currency:"IRR",languages:["fa"],emoji:"🇮🇷",emojiU:"U+1F1EE U+1F1F7"},IS:{name:"Iceland",native:"Ísland",phone:"354",continent:"EU",capital:"Reykjavik",currency:"ISK",languages:["is"],emoji:"🇮🇸",emojiU:"U+1F1EE U+1F1F8"},IT:{name:"Italy",native:"Italia",phone:"39",continent:"EU",capital:"Rome",currency:"EUR",languages:["it"],emoji:"🇮🇹",emojiU:"U+1F1EE U+1F1F9"},JE:{name:"Jersey",native:"Jersey",phone:"44",continent:"EU",capital:"Saint Helier",currency:"GBP",languages:["en","fr"],emoji:"🇯🇪",emojiU:"U+1F1EF U+1F1EA"},JM:{name:"Jamaica",native:"Jamaica",phone:"1876",continent:"NA",capital:"Kingston",currency:"JMD",languages:["en"],emoji:"🇯🇲",emojiU:"U+1F1EF U+1F1F2"},JO:{name:"Jordan",native:"الأردن",phone:"962",continent:"AS",capital:"Amman",currency:"JOD",languages:["ar"],emoji:"🇯🇴",emojiU:"U+1F1EF U+1F1F4"},JP:{name:"Japan",native:"日本",phone:"81",continent:"AS",capital:"Tokyo",currency:"JPY",languages:["ja"],emoji:"🇯🇵",emojiU:"U+1F1EF U+1F1F5"},KE:{name:"Kenya",native:"Kenya",phone:"254",continent:"AF",capital:"Nairobi",currency:"KES",languages:["en","sw"],emoji:"🇰🇪",emojiU:"U+1F1F0 U+1F1EA"},KG:{name:"Kyrgyzstan",native:"Кыргызстан",phone:"996",continent:"AS",capital:"Bishkek",currency:"KGS",languages:["ky","ru"],emoji:"🇰🇬",emojiU:"U+1F1F0 U+1F1EC"},KH:{name:"Cambodia",native:"Kâmpŭchéa",phone:"855",continent:"AS",capital:"Phnom Penh",currency:"KHR",languages:["km"],emoji:"🇰🇭",emojiU:"U+1F1F0 U+1F1ED"},KI:{name:"Kiribati",native:"Kiribati",phone:"686",continent:"OC",capital:"South Tarawa",currency:"AUD",languages:["en"],emoji:"🇰🇮",emojiU:"U+1F1F0 U+1F1EE"},KM:{name:"Comoros",native:"Komori",phone:"269",continent:"AF",capital:"Moroni",currency:"KMF",languages:["ar","fr"],emoji:"🇰🇲",emojiU:"U+1F1F0 U+1F1F2"},KN:{name:"Saint Kitts and Nevis",native:"Saint Kitts and Nevis",phone:"1869",continent:"NA",capital:"Basseterre",currency:"XCD",languages:["en"],emoji:"🇰🇳",emojiU:"U+1F1F0 U+1F1F3"},KP:{name:"North Korea",native:"북한",phone:"850",continent:"AS",capital:"Pyongyang",currency:"KPW",languages:["ko"],emoji:"🇰🇵",emojiU:"U+1F1F0 U+1F1F5"},KR:{name:"South Korea",native:"대한민국",phone:"82",continent:"AS",capital:"Seoul",currency:"KRW",languages:["ko"],emoji:"🇰🇷",emojiU:"U+1F1F0 U+1F1F7"},KW:{name:"Kuwait",native:"الكويت",phone:"965",continent:"AS",capital:"Kuwait City",currency:"KWD",languages:["ar"],emoji:"🇰🇼",emojiU:"U+1F1F0 U+1F1FC"},KY:{name:"Cayman Islands",native:"Cayman Islands",phone:"1345",continent:"NA",capital:"George Town",currency:"KYD",languages:["en"],emoji:"🇰🇾",emojiU:"U+1F1F0 U+1F1FE"},KZ:{name:"Kazakhstan",native:"Қазақстан",phone:"76,77",continent:"AS",capital:"Astana",currency:"KZT",languages:["kk","ru"],emoji:"🇰🇿",emojiU:"U+1F1F0 U+1F1FF"},LA:{name:"Laos",native:"ສປປລາວ",phone:"856",continent:"AS",capital:"Vientiane",currency:"LAK",languages:["lo"],emoji:"🇱🇦",emojiU:"U+1F1F1 U+1F1E6"},LB:{name:"Lebanon",native:"لبنان",phone:"961",continent:"AS",capital:"Beirut",currency:"LBP",languages:["ar","fr"],emoji:"🇱🇧",emojiU:"U+1F1F1 U+1F1E7"},LC:{name:"Saint Lucia",native:"Saint Lucia",phone:"1758",continent:"NA",capital:"Castries",currency:"XCD",languages:["en"],emoji:"🇱🇨",emojiU:"U+1F1F1 U+1F1E8"},LI:{name:"Liechtenstein",native:"Liechtenstein",phone:"423",continent:"EU",capital:"Vaduz",currency:"CHF",languages:["de"],emoji:"🇱🇮",emojiU:"U+1F1F1 U+1F1EE"},LK:{name:"Sri Lanka",native:"śrī laṃkāva",phone:"94",continent:"AS",capital:"Colombo",currency:"LKR",languages:["si","ta"],emoji:"🇱🇰",emojiU:"U+1F1F1 U+1F1F0"},LR:{name:"Liberia",native:"Liberia",phone:"231",continent:"AF",capital:"Monrovia",currency:"LRD",languages:["en"],emoji:"🇱🇷",emojiU:"U+1F1F1 U+1F1F7"},LS:{name:"Lesotho",native:"Lesotho",phone:"266",continent:"AF",capital:"Maseru",currency:"LSL,ZAR",languages:["en","st"],emoji:"🇱🇸",emojiU:"U+1F1F1 U+1F1F8"},LT:{name:"Lithuania",native:"Lietuva",phone:"370",continent:"EU",capital:"Vilnius",currency:"EUR",languages:["lt"],emoji:"🇱🇹",emojiU:"U+1F1F1 U+1F1F9"},LU:{name:"Luxembourg",native:"Luxembourg",phone:"352",continent:"EU",capital:"Luxembourg",currency:"EUR",languages:["fr","de","lb"],emoji:"🇱🇺",emojiU:"U+1F1F1 U+1F1FA"},LV:{name:"Latvia",native:"Latvija",phone:"371",continent:"EU",capital:"Riga",currency:"EUR",languages:["lv"],emoji:"🇱🇻",emojiU:"U+1F1F1 U+1F1FB"},LY:{name:"Libya",native:"‏ليبيا",phone:"218",continent:"AF",capital:"Tripoli",currency:"LYD",languages:["ar"],emoji:"🇱🇾",emojiU:"U+1F1F1 U+1F1FE"},MA:{name:"Morocco",native:"المغرب",phone:"212",continent:"AF",capital:"Rabat",currency:"MAD",languages:["ar"],emoji:"🇲🇦",emojiU:"U+1F1F2 U+1F1E6"},MC:{name:"Monaco",native:"Monaco",phone:"377",continent:"EU",capital:"Monaco",currency:"EUR",languages:["fr"],emoji:"🇲🇨",emojiU:"U+1F1F2 U+1F1E8"},MD:{name:"Moldova",native:"Moldova",phone:"373",continent:"EU",capital:"Chișinău",currency:"MDL",languages:["ro"],emoji:"🇲🇩",emojiU:"U+1F1F2 U+1F1E9"},ME:{name:"Montenegro",native:"Црна Гора",phone:"382",continent:"EU",capital:"Podgorica",currency:"EUR",languages:["sr","bs","sq","hr"],emoji:"🇲🇪",emojiU:"U+1F1F2 U+1F1EA"},MF:{name:"Saint Martin",native:"Saint-Martin",phone:"590",continent:"NA",capital:"Marigot",currency:"EUR",languages:["en","fr","nl"],emoji:"🇲🇫",emojiU:"U+1F1F2 U+1F1EB"},MG:{name:"Madagascar",native:"Madagasikara",phone:"261",continent:"AF",capital:"Antananarivo",currency:"MGA",languages:["fr","mg"],emoji:"🇲🇬",emojiU:"U+1F1F2 U+1F1EC"},MH:{name:"Marshall Islands",native:"M̧ajeļ",phone:"692",continent:"OC",capital:"Majuro",currency:"USD",languages:["en","mh"],emoji:"🇲🇭",emojiU:"U+1F1F2 U+1F1ED"},MK:{name:"North Macedonia",native:"Северна Македонија",phone:"389",continent:"EU",capital:"Skopje",currency:"MKD",languages:["mk"],emoji:"🇲🇰",emojiU:"U+1F1F2 U+1F1F0"},ML:{name:"Mali",native:"Mali",phone:"223",continent:"AF",capital:"Bamako",currency:"XOF",languages:["fr"],emoji:"🇲🇱",emojiU:"U+1F1F2 U+1F1F1"},MM:{name:"Myanmar [Burma]",native:"မြန်မာ",phone:"95",continent:"AS",capital:"Naypyidaw",currency:"MMK",languages:["my"],emoji:"🇲🇲",emojiU:"U+1F1F2 U+1F1F2"},MN:{name:"Mongolia",native:"Монгол улс",phone:"976",continent:"AS",capital:"Ulan Bator",currency:"MNT",languages:["mn"],emoji:"🇲🇳",emojiU:"U+1F1F2 U+1F1F3"},MO:{name:"Macao",native:"澳門",phone:"853",continent:"AS",capital:"",currency:"MOP",languages:["zh","pt"],emoji:"🇲🇴",emojiU:"U+1F1F2 U+1F1F4"},MP:{name:"Northern Mariana Islands",native:"Northern Mariana Islands",phone:"1670",continent:"OC",capital:"Saipan",currency:"USD",languages:["en","ch"],emoji:"🇲🇵",emojiU:"U+1F1F2 U+1F1F5"},MQ:{name:"Martinique",native:"Martinique",phone:"596",continent:"NA",capital:"Fort-de-France",currency:"EUR",languages:["fr"],emoji:"🇲🇶",emojiU:"U+1F1F2 U+1F1F6"},MR:{name:"Mauritania",native:"موريتانيا",phone:"222",continent:"AF",capital:"Nouakchott",currency:"MRU",languages:["ar"],emoji:"🇲🇷",emojiU:"U+1F1F2 U+1F1F7"},MS:{name:"Montserrat",native:"Montserrat",phone:"1664",continent:"NA",capital:"Plymouth",currency:"XCD",languages:["en"],emoji:"🇲🇸",emojiU:"U+1F1F2 U+1F1F8"},MT:{name:"Malta",native:"Malta",phone:"356",continent:"EU",capital:"Valletta",currency:"EUR",languages:["mt","en"],emoji:"🇲🇹",emojiU:"U+1F1F2 U+1F1F9"},MU:{name:"Mauritius",native:"Maurice",phone:"230",continent:"AF",capital:"Port Louis",currency:"MUR",languages:["en"],emoji:"🇲🇺",emojiU:"U+1F1F2 U+1F1FA"},MV:{name:"Maldives",native:"Maldives",phone:"960",continent:"AS",capital:"Malé",currency:"MVR",languages:["dv"],emoji:"🇲🇻",emojiU:"U+1F1F2 U+1F1FB"},MW:{name:"Malawi",native:"Malawi",phone:"265",continent:"AF",capital:"Lilongwe",currency:"MWK",languages:["en","ny"],emoji:"🇲🇼",emojiU:"U+1F1F2 U+1F1FC"},MX:{name:"Mexico",native:"México",phone:"52",continent:"NA",capital:"Mexico City",currency:"MXN",languages:["es"],emoji:"🇲🇽",emojiU:"U+1F1F2 U+1F1FD"},MY:{name:"Malaysia",native:"Malaysia",phone:"60",continent:"AS",capital:"Kuala Lumpur",currency:"MYR",languages:["ms"],emoji:"🇲🇾",emojiU:"U+1F1F2 U+1F1FE"},MZ:{name:"Mozambique",native:"Moçambique",phone:"258",continent:"AF",capital:"Maputo",currency:"MZN",languages:["pt"],emoji:"🇲🇿",emojiU:"U+1F1F2 U+1F1FF"},NA:{name:"Namibia",native:"Namibia",phone:"264",continent:"AF",capital:"Windhoek",currency:"NAD,ZAR",languages:["en","af"],emoji:"🇳🇦",emojiU:"U+1F1F3 U+1F1E6"},NC:{name:"New Caledonia",native:"Nouvelle-Calédonie",phone:"687",continent:"OC",capital:"Nouméa",currency:"XPF",languages:["fr"],emoji:"🇳🇨",emojiU:"U+1F1F3 U+1F1E8"},NE:{name:"Niger",native:"Niger",phone:"227",continent:"AF",capital:"Niamey",currency:"XOF",languages:["fr"],emoji:"🇳🇪",emojiU:"U+1F1F3 U+1F1EA"},NF:{name:"Norfolk Island",native:"Norfolk Island",phone:"672",continent:"OC",capital:"Kingston",currency:"AUD",languages:["en"],emoji:"🇳🇫",emojiU:"U+1F1F3 U+1F1EB"},NG:{name:"Nigeria",native:"Nigeria",phone:"234",continent:"AF",capital:"Abuja",currency:"NGN",languages:["en"],emoji:"🇳🇬",emojiU:"U+1F1F3 U+1F1EC"},NI:{name:"Nicaragua",native:"Nicaragua",phone:"505",continent:"NA",capital:"Managua",currency:"NIO",languages:["es"],emoji:"🇳🇮",emojiU:"U+1F1F3 U+1F1EE"},NL:{name:"Netherlands",native:"Nederland",phone:"31",continent:"EU",capital:"Amsterdam",currency:"EUR",languages:["nl"],emoji:"🇳🇱",emojiU:"U+1F1F3 U+1F1F1"},NO:{name:"Norway",native:"Norge",phone:"47",continent:"EU",capital:"Oslo",currency:"NOK",languages:["no","nb","nn"],emoji:"🇳🇴",emojiU:"U+1F1F3 U+1F1F4"},NP:{name:"Nepal",native:"नपल",phone:"977",continent:"AS",capital:"Kathmandu",currency:"NPR",languages:["ne"],emoji:"🇳🇵",emojiU:"U+1F1F3 U+1F1F5"},NR:{name:"Nauru",native:"Nauru",phone:"674",continent:"OC",capital:"Yaren",currency:"AUD",languages:["en","na"],emoji:"🇳🇷",emojiU:"U+1F1F3 U+1F1F7"},NU:{name:"Niue",native:"Niuē",phone:"683",continent:"OC",capital:"Alofi",currency:"NZD",languages:["en"],emoji:"🇳🇺",emojiU:"U+1F1F3 U+1F1FA"},NZ:{name:"New Zealand",native:"New Zealand",phone:"64",continent:"OC",capital:"Wellington",currency:"NZD",languages:["en","mi"],emoji:"🇳🇿",emojiU:"U+1F1F3 U+1F1FF"},OM:{name:"Oman",native:"عمان",phone:"968",continent:"AS",capital:"Muscat",currency:"OMR",languages:["ar"],emoji:"🇴🇲",emojiU:"U+1F1F4 U+1F1F2"},PA:{name:"Panama",native:"Panamá",phone:"507",continent:"NA",capital:"Panama City",currency:"PAB,USD",languages:["es"],emoji:"🇵🇦",emojiU:"U+1F1F5 U+1F1E6"},PE:{name:"Peru",native:"Perú",phone:"51",continent:"SA",capital:"Lima",currency:"PEN",languages:["es"],emoji:"🇵🇪",emojiU:"U+1F1F5 U+1F1EA"},PF:{name:"French Polynesia",native:"Polynésie française",phone:"689",continent:"OC",capital:"Papeetē",currency:"XPF",languages:["fr"],emoji:"🇵🇫",emojiU:"U+1F1F5 U+1F1EB"},PG:{name:"Papua New Guinea",native:"Papua Niugini",phone:"675",continent:"OC",capital:"Port Moresby",currency:"PGK",languages:["en"],emoji:"🇵🇬",emojiU:"U+1F1F5 U+1F1EC"},PH:{name:"Philippines",native:"Pilipinas",phone:"63",continent:"AS",capital:"Manila",currency:"PHP",languages:["en"],emoji:"🇵🇭",emojiU:"U+1F1F5 U+1F1ED"},PK:{name:"Pakistan",native:"Pakistan",phone:"92",continent:"AS",capital:"Islamabad",currency:"PKR",languages:["en","ur"],emoji:"🇵🇰",emojiU:"U+1F1F5 U+1F1F0"},PL:{name:"Poland",native:"Polska",phone:"48",continent:"EU",capital:"Warsaw",currency:"PLN",languages:["pl"],emoji:"🇵🇱",emojiU:"U+1F1F5 U+1F1F1"},PM:{name:"Saint Pierre and Miquelon",native:"Saint-Pierre-et-Miquelon",phone:"508",continent:"NA",capital:"Saint-Pierre",currency:"EUR",languages:["fr"],emoji:"🇵🇲",emojiU:"U+1F1F5 U+1F1F2"},PN:{name:"Pitcairn Islands",native:"Pitcairn Islands",phone:"64",continent:"OC",capital:"Adamstown",currency:"NZD",languages:["en"],emoji:"🇵🇳",emojiU:"U+1F1F5 U+1F1F3"},PR:{name:"Puerto Rico",native:"Puerto Rico",phone:"1787,1939",continent:"NA",capital:"San Juan",currency:"USD",languages:["es","en"],emoji:"🇵🇷",emojiU:"U+1F1F5 U+1F1F7"},PS:{name:"Palestine",native:"فلسطين",phone:"970",continent:"AS",capital:"Ramallah",currency:"ILS",languages:["ar"],emoji:"🇵🇸",emojiU:"U+1F1F5 U+1F1F8"},PT:{name:"Portugal",native:"Portugal",phone:"351",continent:"EU",capital:"Lisbon",currency:"EUR",languages:["pt"],emoji:"🇵🇹",emojiU:"U+1F1F5 U+1F1F9"},PW:{name:"Palau",native:"Palau",phone:"680",continent:"OC",capital:"Ngerulmud",currency:"USD",languages:["en"],emoji:"🇵🇼",emojiU:"U+1F1F5 U+1F1FC"},PY:{name:"Paraguay",native:"Paraguay",phone:"595",continent:"SA",capital:"Asunción",currency:"PYG",languages:["es","gn"],emoji:"🇵🇾",emojiU:"U+1F1F5 U+1F1FE"},QA:{name:"Qatar",native:"قطر",phone:"974",continent:"AS",capital:"Doha",currency:"QAR",languages:["ar"],emoji:"🇶🇦",emojiU:"U+1F1F6 U+1F1E6"},RE:{name:"Réunion",native:"La Réunion",phone:"262",continent:"AF",capital:"Saint-Denis",currency:"EUR",languages:["fr"],emoji:"🇷🇪",emojiU:"U+1F1F7 U+1F1EA"},RO:{name:"Romania",native:"România",phone:"40",continent:"EU",capital:"Bucharest",currency:"RON",languages:["ro"],emoji:"🇷🇴",emojiU:"U+1F1F7 U+1F1F4"},RS:{name:"Serbia",native:"Србија",phone:"381",continent:"EU",capital:"Belgrade",currency:"RSD",languages:["sr"],emoji:"🇷🇸",emojiU:"U+1F1F7 U+1F1F8"},RU:{name:"Russia",native:"Россия",phone:"7",continent:"EU",capital:"Moscow",currency:"RUB",languages:["ru"],emoji:"🇷🇺",emojiU:"U+1F1F7 U+1F1FA"},RW:{name:"Rwanda",native:"Rwanda",phone:"250",continent:"AF",capital:"Kigali",currency:"RWF",languages:["rw","en","fr"],emoji:"🇷🇼",emojiU:"U+1F1F7 U+1F1FC"},SA:{name:"Saudi Arabia",native:"العربية السعودية",phone:"966",continent:"AS",capital:"Riyadh",currency:"SAR",languages:["ar"],emoji:"🇸🇦",emojiU:"U+1F1F8 U+1F1E6"},SB:{name:"Solomon Islands",native:"Solomon Islands",phone:"677",continent:"OC",capital:"Honiara",currency:"SBD",languages:["en"],emoji:"🇸🇧",emojiU:"U+1F1F8 U+1F1E7"},SC:{name:"Seychelles",native:"Seychelles",phone:"248",continent:"AF",capital:"Victoria",currency:"SCR",languages:["fr","en"],emoji:"🇸🇨",emojiU:"U+1F1F8 U+1F1E8"},SD:{name:"Sudan",native:"السودان",phone:"249",continent:"AF",capital:"Khartoum",currency:"SDG",languages:["ar","en"],emoji:"🇸🇩",emojiU:"U+1F1F8 U+1F1E9"},SE:{name:"Sweden",native:"Sverige",phone:"46",continent:"EU",capital:"Stockholm",currency:"SEK",languages:["sv"],emoji:"🇸🇪",emojiU:"U+1F1F8 U+1F1EA"},SG:{name:"Singapore",native:"Singapore",phone:"65",continent:"AS",capital:"Singapore",currency:"SGD",languages:["en","ms","ta","zh"],emoji:"🇸🇬",emojiU:"U+1F1F8 U+1F1EC"},SH:{name:"Saint Helena",native:"Saint Helena",phone:"290",continent:"AF",capital:"Jamestown",currency:"SHP",languages:["en"],emoji:"🇸🇭",emojiU:"U+1F1F8 U+1F1ED"},SI:{name:"Slovenia",native:"Slovenija",phone:"386",continent:"EU",capital:"Ljubljana",currency:"EUR",languages:["sl"],emoji:"🇸🇮",emojiU:"U+1F1F8 U+1F1EE"},SJ:{name:"Svalbard and Jan Mayen",native:"Svalbard og Jan Mayen",phone:"4779",continent:"EU",capital:"Longyearbyen",currency:"NOK",languages:["no"],emoji:"🇸🇯",emojiU:"U+1F1F8 U+1F1EF"},SK:{name:"Slovakia",native:"Slovensko",phone:"421",continent:"EU",capital:"Bratislava",currency:"EUR",languages:["sk"],emoji:"🇸🇰",emojiU:"U+1F1F8 U+1F1F0"},SL:{name:"Sierra Leone",native:"Sierra Leone",phone:"232",continent:"AF",capital:"Freetown",currency:"SLL",languages:["en"],emoji:"🇸🇱",emojiU:"U+1F1F8 U+1F1F1"},SM:{name:"San Marino",native:"San Marino",phone:"378",continent:"EU",capital:"City of San Marino",currency:"EUR",languages:["it"],emoji:"🇸🇲",emojiU:"U+1F1F8 U+1F1F2"},SN:{name:"Senegal",native:"Sénégal",phone:"221",continent:"AF",capital:"Dakar",currency:"XOF",languages:["fr"],emoji:"🇸🇳",emojiU:"U+1F1F8 U+1F1F3"},SO:{name:"Somalia",native:"Soomaaliya",phone:"252",continent:"AF",capital:"Mogadishu",currency:"SOS",languages:["so","ar"],emoji:"🇸🇴",emojiU:"U+1F1F8 U+1F1F4"},SR:{name:"Suriname",native:"Suriname",phone:"597",continent:"SA",capital:"Paramaribo",currency:"SRD",languages:["nl"],emoji:"🇸🇷",emojiU:"U+1F1F8 U+1F1F7"},SS:{name:"South Sudan",native:"South Sudan",phone:"211",continent:"AF",capital:"Juba",currency:"SSP",languages:["en"],emoji:"🇸🇸",emojiU:"U+1F1F8 U+1F1F8"},ST:{name:"São Tomé and Príncipe",native:"São Tomé e Príncipe",phone:"239",continent:"AF",capital:"São Tomé",currency:"STN",languages:["pt"],emoji:"🇸🇹",emojiU:"U+1F1F8 U+1F1F9"},SV:{name:"El Salvador",native:"El Salvador",phone:"503",continent:"NA",capital:"San Salvador",currency:"SVC,USD",languages:["es"],emoji:"🇸🇻",emojiU:"U+1F1F8 U+1F1FB"},SX:{name:"Sint Maarten",native:"Sint Maarten",phone:"1721",continent:"NA",capital:"Philipsburg",currency:"ANG",languages:["nl","en"],emoji:"🇸🇽",emojiU:"U+1F1F8 U+1F1FD"},SY:{name:"Syria",native:"سوريا",phone:"963",continent:"AS",capital:"Damascus",currency:"SYP",languages:["ar"],emoji:"🇸🇾",emojiU:"U+1F1F8 U+1F1FE"},SZ:{name:"Swaziland",native:"Swaziland",phone:"268",continent:"AF",capital:"Lobamba",currency:"SZL",languages:["en","ss"],emoji:"🇸🇿",emojiU:"U+1F1F8 U+1F1FF"},TC:{name:"Turks and Caicos Islands",native:"Turks and Caicos Islands",phone:"1649",continent:"NA",capital:"Cockburn Town",currency:"USD",languages:["en"],emoji:"🇹🇨",emojiU:"U+1F1F9 U+1F1E8"},TD:{name:"Chad",native:"Tchad",phone:"235",continent:"AF",capital:"N'Djamena",currency:"XAF",languages:["fr","ar"],emoji:"🇹🇩",emojiU:"U+1F1F9 U+1F1E9"},TF:{name:"French Southern Territories",native:"Territoire des Terres australes et antarctiques fr",phone:"262",continent:"AN",capital:"Port-aux-Français",currency:"EUR",languages:["fr"],emoji:"🇹🇫",emojiU:"U+1F1F9 U+1F1EB"},TG:{name:"Togo",native:"Togo",phone:"228",continent:"AF",capital:"Lomé",currency:"XOF",languages:["fr"],emoji:"🇹🇬",emojiU:"U+1F1F9 U+1F1EC"},TH:{name:"Thailand",native:"ประเทศไทย",phone:"66",continent:"AS",capital:"Bangkok",currency:"THB",languages:["th"],emoji:"🇹🇭",emojiU:"U+1F1F9 U+1F1ED"},TJ:{name:"Tajikistan",native:"Тоҷикистон",phone:"992",continent:"AS",capital:"Dushanbe",currency:"TJS",languages:["tg","ru"],emoji:"🇹🇯",emojiU:"U+1F1F9 U+1F1EF"},TK:{name:"Tokelau",native:"Tokelau",phone:"690",continent:"OC",capital:"Fakaofo",currency:"NZD",languages:["en"],emoji:"🇹🇰",emojiU:"U+1F1F9 U+1F1F0"},TL:{name:"East Timor",native:"Timor-Leste",phone:"670",continent:"OC",capital:"Dili",currency:"USD",languages:["pt"],emoji:"🇹🇱",emojiU:"U+1F1F9 U+1F1F1"},TM:{name:"Turkmenistan",native:"Türkmenistan",phone:"993",continent:"AS",capital:"Ashgabat",currency:"TMT",languages:["tk","ru"],emoji:"🇹🇲",emojiU:"U+1F1F9 U+1F1F2"},TN:{name:"Tunisia",native:"تونس",phone:"216",continent:"AF",capital:"Tunis",currency:"TND",languages:["ar"],emoji:"🇹🇳",emojiU:"U+1F1F9 U+1F1F3"},TO:{name:"Tonga",native:"Tonga",phone:"676",continent:"OC",capital:"Nuku'alofa",currency:"TOP",languages:["en","to"],emoji:"🇹🇴",emojiU:"U+1F1F9 U+1F1F4"},TR:{name:"Turkey",native:"Türkiye",phone:"90",continent:"AS",capital:"Ankara",currency:"TRY",languages:["tr"],emoji:"🇹🇷",emojiU:"U+1F1F9 U+1F1F7"},TT:{name:"Trinidad and Tobago",native:"Trinidad and Tobago",phone:"1868",continent:"NA",capital:"Port of Spain",currency:"TTD",languages:["en"],emoji:"🇹🇹",emojiU:"U+1F1F9 U+1F1F9"},TV:{name:"Tuvalu",native:"Tuvalu",phone:"688",continent:"OC",capital:"Funafuti",currency:"AUD",languages:["en"],emoji:"🇹🇻",emojiU:"U+1F1F9 U+1F1FB"},TW:{name:"Taiwan",native:"臺灣",phone:"886",continent:"AS",capital:"Taipei",currency:"TWD",languages:["zh"],emoji:"🇹🇼",emojiU:"U+1F1F9 U+1F1FC"},TZ:{name:"Tanzania",native:"Tanzania",phone:"255",continent:"AF",capital:"Dodoma",currency:"TZS",languages:["sw","en"],emoji:"🇹🇿",emojiU:"U+1F1F9 U+1F1FF"},UA:{name:"Ukraine",native:"Україна",phone:"380",continent:"EU",capital:"Kyiv",currency:"UAH",languages:["uk"],emoji:"🇺🇦",emojiU:"U+1F1FA U+1F1E6"},UG:{name:"Uganda",native:"Uganda",phone:"256",continent:"AF",capital:"Kampala",currency:"UGX",languages:["en","sw"],emoji:"🇺🇬",emojiU:"U+1F1FA U+1F1EC"},UM:{name:"U.S. Minor Outlying Islands",native:"United States Minor Outlying Islands",phone:"1",continent:"OC",capital:"",currency:"USD",languages:["en"],emoji:"🇺🇲",emojiU:"U+1F1FA U+1F1F2"},US:{name:"United States",native:"United States",phone:"1",continent:"NA",capital:"Washington D.C.",currency:"USD,USN,USS",languages:["en"],emoji:"🇺🇸",emojiU:"U+1F1FA U+1F1F8"},UY:{name:"Uruguay",native:"Uruguay",phone:"598",continent:"SA",capital:"Montevideo",currency:"UYI,UYU",languages:["es"],emoji:"🇺🇾",emojiU:"U+1F1FA U+1F1FE"},UZ:{name:"Uzbekistan",native:"O‘zbekiston",phone:"998",continent:"AS",capital:"Tashkent",currency:"UZS",languages:["uz","ru"],emoji:"🇺🇿",emojiU:"U+1F1FA U+1F1FF"},VA:{name:"Vatican City",native:"Vaticano",phone:"379",continent:"EU",capital:"Vatican City",currency:"EUR",languages:["it","la"],emoji:"🇻🇦",emojiU:"U+1F1FB U+1F1E6"},VC:{name:"Saint Vincent and the Grenadines",native:"Saint Vincent and the Grenadines",phone:"1784",continent:"NA",capital:"Kingstown",currency:"XCD",languages:["en"],emoji:"🇻🇨",emojiU:"U+1F1FB U+1F1E8"},VE:{name:"Venezuela",native:"Venezuela",phone:"58",continent:"SA",capital:"Caracas",currency:"VES",languages:["es"],emoji:"🇻🇪",emojiU:"U+1F1FB U+1F1EA"},VG:{name:"British Virgin Islands",native:"British Virgin Islands",phone:"1284",continent:"NA",capital:"Road Town",currency:"USD",languages:["en"],emoji:"🇻🇬",emojiU:"U+1F1FB U+1F1EC"},VI:{name:"U.S. Virgin Islands",native:"United States Virgin Islands",phone:"1340",continent:"NA",capital:"Charlotte Amalie",currency:"USD",languages:["en"],emoji:"🇻🇮",emojiU:"U+1F1FB U+1F1EE"},VN:{name:"Vietnam",native:"Việt Nam",phone:"84",continent:"AS",capital:"Hanoi",currency:"VND",languages:["vi"],emoji:"🇻🇳",emojiU:"U+1F1FB U+1F1F3"},VU:{name:"Vanuatu",native:"Vanuatu",phone:"678",continent:"OC",capital:"Port Vila",currency:"VUV",languages:["bi","en","fr"],emoji:"🇻🇺",emojiU:"U+1F1FB U+1F1FA"},WF:{name:"Wallis and Futuna",native:"Wallis et Futuna",phone:"681",continent:"OC",capital:"Mata-Utu",currency:"XPF",languages:["fr"],emoji:"🇼🇫",emojiU:"U+1F1FC U+1F1EB"},WS:{name:"Samoa",native:"Samoa",phone:"685",continent:"OC",capital:"Apia",currency:"WST",languages:["sm","en"],emoji:"🇼🇸",emojiU:"U+1F1FC U+1F1F8"},XK:{name:"Kosovo",native:"Republika e Kosovës",phone:"377,381,383,386",continent:"EU",capital:"Pristina",currency:"EUR",languages:["sq","sr"],emoji:"🇽🇰",emojiU:"U+1F1FD U+1F1F0"},YE:{name:"Yemen",native:"اليَمَن",phone:"967",continent:"AS",capital:"Sana'a",currency:"YER",languages:["ar"],emoji:"🇾🇪",emojiU:"U+1F1FE U+1F1EA"},YT:{name:"Mayotte",native:"Mayotte",phone:"262",continent:"AF",capital:"Mamoudzou",currency:"EUR",languages:["fr"],emoji:"🇾🇹",emojiU:"U+1F1FE U+1F1F9"},ZA:{name:"South Africa",native:"South Africa",phone:"27",continent:"AF",capital:"Pretoria",currency:"ZAR",languages:["af","en","nr","st","ss","tn","ts","ve","xh","zu"],emoji:"🇿🇦",emojiU:"U+1F1FF U+1F1E6"},ZM:{name:"Zambia",native:"Zambia",phone:"260",continent:"AF",capital:"Lusaka",currency:"ZMW",languages:["en"],emoji:"🇿🇲",emojiU:"U+1F1FF U+1F1F2"},ZW:{name:"Zimbabwe",native:"Zimbabwe",phone:"263",continent:"AF",capital:"Harare",currency:"USD,ZAR,BWP,GBP,AUD,CNY,INR,JPY",languages:["en","sn","nd"],emoji:"🇿🇼",emojiU:"U+1F1FF U+1F1FC"}},e={af:{name:"Afrikaans",native:"Afrikaans"},am:{name:"Amharic",native:"አማርኛ"},ar:{name:"Arabic",native:"العربية",rtl:1},ay:{name:"Aymara",native:"Aymar"},az:{name:"Azerbaijani",native:"Azərbaycanca / آذربايجان"},be:{name:"Belarusian",native:"Беларуская"},bg:{name:"Bulgarian",native:"Български"},bi:{name:"Bislama",native:"Bislama"},bn:{name:"Bengali",native:"বাংলা"},bs:{name:"Bosnian",native:"Bosanski"},ca:{name:"Catalan",native:"Català"},ch:{name:"Chamorro",native:"Chamoru"},cs:{name:"Czech",native:"Čeština"},da:{name:"Danish",native:"Dansk"},de:{name:"German",native:"Deutsch"},dv:{name:"Divehi",native:"ދިވެހިބަސް",rtl:1},dz:{name:"Dzongkha",native:"ཇོང་ཁ"},el:{name:"Greek",native:"Ελληνικά"},en:{name:"English",native:"English"},es:{name:"Spanish",native:"Español"},et:{name:"Estonian",native:"Eesti"},eu:{name:"Basque",native:"Euskara"},fa:{name:"Persian",native:"فارسی",rtl:1},ff:{name:"Peul",native:"Fulfulde"},fi:{name:"Finnish",native:"Suomi"},fj:{name:"Fijian",native:"Na Vosa Vakaviti"},fo:{name:"Faroese",native:"Føroyskt"},fr:{name:"French",native:"Français"},ga:{name:"Irish",native:"Gaeilge"},gl:{name:"Galician",native:"Galego"},gn:{name:"Guarani",native:"Avañe'ẽ"},gv:{name:"Manx",native:"Gaelg"},he:{name:"Hebrew",native:"עברית",rtl:1},hi:{name:"Hindi",native:"हिन्दी"},hr:{name:"Croatian",native:"Hrvatski"},ht:{name:"Haitian",native:"Krèyol ayisyen"},hu:{name:"Hungarian",native:"Magyar"},hy:{name:"Armenian",native:"Հայերեն"},id:{name:"Indonesian",native:"Bahasa Indonesia"},is:{name:"Icelandic",native:"Íslenska"},it:{name:"Italian",native:"Italiano"},ja:{name:"Japanese",native:"日本語"},ka:{name:"Georgian",native:"ქართული"},kg:{name:"Kongo",native:"KiKongo"},kk:{name:"Kazakh",native:"Қазақша"},kl:{name:"Greenlandic",native:"Kalaallisut"},km:{name:"Cambodian",native:"ភាសាខ្មែរ"},ko:{name:"Korean",native:"한국어"},ku:{name:"Kurdish",native:"Kurdî / كوردی",rtl:1},ky:{name:"Kyrgyz",native:"Кыргызча"},la:{name:"Latin",native:"Latina"},lb:{name:"Luxembourgish",native:"Lëtzebuergesch"},ln:{name:"Lingala",native:"Lingála"},lo:{name:"Laotian",native:"ລາວ / Pha xa lao"},lt:{name:"Lithuanian",native:"Lietuvių"},lu:{name:"Luba-Katanga",native:"Tshiluba"},lv:{name:"Latvian",native:"Latviešu"},mg:{name:"Malagasy",native:"Malagasy"},mh:{name:"Marshallese",native:"Kajin Majel / Ebon"},mi:{name:"Maori",native:"Māori"},mk:{name:"Macedonian",native:"Македонски"},mn:{name:"Mongolian",native:"Монгол"},ms:{name:"Malay",native:"Bahasa Melayu"},mt:{name:"Maltese",native:"bil-Malti"},my:{name:"Burmese",native:"မြန်မာစာ"},na:{name:"Nauruan",native:"Dorerin Naoero"},nb:{name:"Norwegian Bokmål",native:"Norsk bokmål"},nd:{name:"North Ndebele",native:"Sindebele"},ne:{name:"Nepali",native:"नेपाली"},nl:{name:"Dutch",native:"Nederlands"},nn:{name:"Norwegian Nynorsk",native:"Norsk nynorsk"},no:{name:"Norwegian",native:"Norsk"},nr:{name:"South Ndebele",native:"isiNdebele"},ny:{name:"Chichewa",native:"Chi-Chewa"},oc:{name:"Occitan",native:"Occitan"},pa:{name:"Panjabi / Punjabi",native:"ਪੰਜਾਬੀ / पंजाबी / پنجابي"},pl:{name:"Polish",native:"Polski"},ps:{name:"Pashto",native:"پښتو",rtl:1},pt:{name:"Portuguese",native:"Português"},qu:{name:"Quechua",native:"Runa Simi"},rn:{name:"Kirundi",native:"Kirundi"},ro:{name:"Romanian",native:"Română"},ru:{name:"Russian",native:"Русский"},rw:{name:"Rwandi",native:"Kinyarwandi"},sg:{name:"Sango",native:"Sängö"},si:{name:"Sinhalese",native:"සිංහල"},sk:{name:"Slovak",native:"Slovenčina"},sl:{name:"Slovenian",native:"Slovenščina"},sm:{name:"Samoan",native:"Gagana Samoa"},sn:{name:"Shona",native:"chiShona"},so:{name:"Somalia",native:"Soomaaliga"},sq:{name:"Albanian",native:"Shqip"},sr:{name:"Serbian",native:"Српски"},ss:{name:"Swati",native:"SiSwati"},st:{name:"Southern Sotho",native:"Sesotho"},sv:{name:"Swedish",native:"Svenska"},sw:{name:"Swahili",native:"Kiswahili"},ta:{name:"Tamil",native:"தமிழ்"},tg:{name:"Tajik",native:"Тоҷикӣ"},th:{name:"Thai",native:"ไทย / Phasa Thai"},ti:{name:"Tigrinya",native:"ትግርኛ"},tk:{name:"Turkmen",native:"Туркмен / تركمن"},tn:{name:"Tswana",native:"Setswana"},to:{name:"Tonga",native:"Lea Faka-Tonga"},tr:{name:"Turkish",native:"Türkçe"},ts:{name:"Tsonga",native:"Xitsonga"},uk:{name:"Ukrainian",native:"Українська"},ur:{name:"Urdu",native:"اردو",rtl:1},uz:{name:"Uzbek",native:"Ўзбек"},ve:{name:"Venda",native:"Tshivenḓa"},vi:{name:"Vietnamese",native:"Tiếng Việt"},xh:{name:"Xhosa",native:"isiXhosa"},zh:{name:"Chinese",native:"中文"},zu:{name:"Zulu",native:"isiZulu"}},i={aa:{name:"Afar",native:"Afar"},ab:{name:"Abkhazian",native:"Аҧсуа"},af:{name:"Afrikaans",native:"Afrikaans"},ak:{name:"Akan",native:"Akana"},am:{name:"Amharic",native:"አማርኛ"},an:{name:"Aragonese",native:"Aragonés"},ar:{name:"Arabic",native:"العربية",rtl:1},as:{name:"Assamese",native:"অসমীয়া"},av:{name:"Avar",native:"Авар"},ay:{name:"Aymara",native:"Aymar"},az:{name:"Azerbaijani",native:"Azərbaycanca / آذربايجان"},ba:{name:"Bashkir",native:"Башҡорт"},be:{name:"Belarusian",native:"Беларуская"},bg:{name:"Bulgarian",native:"Български"},bh:{name:"Bihari",native:"भोजपुरी"},bi:{name:"Bislama",native:"Bislama"},bm:{name:"Bambara",native:"Bamanankan"},bn:{name:"Bengali",native:"বাংলা"},bo:{name:"Tibetan",native:"བོད་ཡིག / Bod skad"},br:{name:"Breton",native:"Brezhoneg"},bs:{name:"Bosnian",native:"Bosanski"},ca:{name:"Catalan",native:"Català"},ce:{name:"Chechen",native:"Нохчийн"},ch:{name:"Chamorro",native:"Chamoru"},co:{name:"Corsican",native:"Corsu"},cr:{name:"Cree",native:"Nehiyaw"},cs:{name:"Czech",native:"Čeština"},cu:{name:"Old Church Slavonic / Old Bulgarian",native:"словѣньскъ / slověnĭskŭ"},cv:{name:"Chuvash",native:"Чăваш"},cy:{name:"Welsh",native:"Cymraeg"},da:{name:"Danish",native:"Dansk"},de:{name:"German",native:"Deutsch"},dv:{name:"Divehi",native:"ދިވެހިބަސް",rtl:1},dz:{name:"Dzongkha",native:"ཇོང་ཁ"},ee:{name:"Ewe",native:"Ɛʋɛ"},el:{name:"Greek",native:"Ελληνικά"},en:{name:"English",native:"English"},eo:{name:"Esperanto",native:"Esperanto"},es:{name:"Spanish",native:"Español"},et:{name:"Estonian",native:"Eesti"},eu:{name:"Basque",native:"Euskara"},fa:{name:"Persian",native:"فارسی",rtl:1},ff:{name:"Peul",native:"Fulfulde"},fi:{name:"Finnish",native:"Suomi"},fj:{name:"Fijian",native:"Na Vosa Vakaviti"},fo:{name:"Faroese",native:"Føroyskt"},fr:{name:"French",native:"Français"},fy:{name:"West Frisian",native:"Frysk"},ga:{name:"Irish",native:"Gaeilge"},gd:{name:"Scottish Gaelic",native:"Gàidhlig"},gl:{name:"Galician",native:"Galego"},gn:{name:"Guarani",native:"Avañe'ẽ"},gu:{name:"Gujarati",native:"ગુજરાતી"},gv:{name:"Manx",native:"Gaelg"},ha:{name:"Hausa",native:"هَوُسَ",rtl:1},he:{name:"Hebrew",native:"עברית",rtl:1},hi:{name:"Hindi",native:"हिन्दी"},ho:{name:"Hiri Motu",native:"Hiri Motu"},hr:{name:"Croatian",native:"Hrvatski"},ht:{name:"Haitian",native:"Krèyol ayisyen"},hu:{name:"Hungarian",native:"Magyar"},hy:{name:"Armenian",native:"Հայերեն"},hz:{name:"Herero",native:"Otsiherero"},ia:{name:"Interlingua",native:"Interlingua"},id:{name:"Indonesian",native:"Bahasa Indonesia"},ie:{name:"Interlingue",native:"Interlingue"},ig:{name:"Igbo",native:"Igbo"},ii:{name:"Sichuan Yi",native:"ꆇꉙ / 四川彝语"},ik:{name:"Inupiak",native:"Iñupiak"},io:{name:"Ido",native:"Ido"},is:{name:"Icelandic",native:"Íslenska"},it:{name:"Italian",native:"Italiano"},iu:{name:"Inuktitut",native:"ᐃᓄᒃᑎᑐᑦ"},ja:{name:"Japanese",native:"日本語"},jv:{name:"Javanese",native:"Basa Jawa"},ka:{name:"Georgian",native:"ქართული"},kg:{name:"Kongo",native:"KiKongo"},ki:{name:"Kikuyu",native:"Gĩkũyũ"},kj:{name:"Kuanyama",native:"Kuanyama"},kk:{name:"Kazakh",native:"Қазақша"},kl:{name:"Greenlandic",native:"Kalaallisut"},km:{name:"Cambodian",native:"ភាសាខ្មែរ"},kn:{name:"Kannada",native:"ಕನ್ನಡ"},ko:{name:"Korean",native:"한국어"},kr:{name:"Kanuri",native:"Kanuri"},ks:{name:"Kashmiri",native:"कश्मीरी / كشميري",rtl:1},ku:{name:"Kurdish",native:"Kurdî / كوردی",rtl:1},kv:{name:"Komi",native:"Коми"},kw:{name:"Cornish",native:"Kernewek"},ky:{name:"Kyrgyz",native:"Кыргызча"},la:{name:"Latin",native:"Latina"},lb:{name:"Luxembourgish",native:"Lëtzebuergesch"},lg:{name:"Ganda",native:"Luganda"},li:{name:"Limburgian",native:"Limburgs"},ln:{name:"Lingala",native:"Lingála"},lo:{name:"Laotian",native:"ລາວ / Pha xa lao"},lt:{name:"Lithuanian",native:"Lietuvių"},lu:{name:"Luba-Katanga",native:"Tshiluba"},lv:{name:"Latvian",native:"Latviešu"},mg:{name:"Malagasy",native:"Malagasy"},mh:{name:"Marshallese",native:"Kajin Majel / Ebon"},mi:{name:"Maori",native:"Māori"},mk:{name:"Macedonian",native:"Македонски"},ml:{name:"Malayalam",native:"മലയാളം"},mn:{name:"Mongolian",native:"Монгол"},mo:{name:"Moldovan",native:"Moldovenească"},mr:{name:"Marathi",native:"मराठी"},ms:{name:"Malay",native:"Bahasa Melayu"},mt:{name:"Maltese",native:"bil-Malti"},my:{name:"Burmese",native:"မြန်မာစာ"},na:{name:"Nauruan",native:"Dorerin Naoero"},nb:{name:"Norwegian Bokmål",native:"Norsk bokmål"},nd:{name:"North Ndebele",native:"Sindebele"},ne:{name:"Nepali",native:"नेपाली"},ng:{name:"Ndonga",native:"Oshiwambo"},nl:{name:"Dutch",native:"Nederlands"},nn:{name:"Norwegian Nynorsk",native:"Norsk nynorsk"},no:{name:"Norwegian",native:"Norsk"},nr:{name:"South Ndebele",native:"isiNdebele"},nv:{name:"Navajo",native:"Diné bizaad"},ny:{name:"Chichewa",native:"Chi-Chewa"},oc:{name:"Occitan",native:"Occitan"},oj:{name:"Ojibwa",native:"ᐊᓂᔑᓈᐯᒧᐎᓐ / Anishinaabemowin"},om:{name:"Oromo",native:"Oromoo"},or:{name:"Oriya",native:"ଓଡ଼ିଆ"},os:{name:"Ossetian / Ossetic",native:"Иронау"},pa:{name:"Panjabi / Punjabi",native:"ਪੰਜਾਬੀ / पंजाबी / پنجابي"},pi:{name:"Pali",native:"Pāli / पाऴि"},pl:{name:"Polish",native:"Polski"},ps:{name:"Pashto",native:"پښتو",rtl:1},pt:{name:"Portuguese",native:"Português"},qu:{name:"Quechua",native:"Runa Simi"},rm:{name:"Raeto Romance",native:"Rumantsch"},rn:{name:"Kirundi",native:"Kirundi"},ro:{name:"Romanian",native:"Română"},ru:{name:"Russian",native:"Русский"},rw:{name:"Rwandi",native:"Kinyarwandi"},sa:{name:"Sanskrit",native:"संस्कृतम्"},sc:{name:"Sardinian",native:"Sardu"},sd:{name:"Sindhi",native:"सिनधि"},se:{name:"Northern Sami",native:"Sámegiella"},sg:{name:"Sango",native:"Sängö"},sh:{name:"Serbo-Croatian",native:"Srpskohrvatski / Српскохрватски"},si:{name:"Sinhalese",native:"සිංහල"},sk:{name:"Slovak",native:"Slovenčina"},sl:{name:"Slovenian",native:"Slovenščina"},sm:{name:"Samoan",native:"Gagana Samoa"},sn:{name:"Shona",native:"chiShona"},so:{name:"Somalia",native:"Soomaaliga"},sq:{name:"Albanian",native:"Shqip"},sr:{name:"Serbian",native:"Српски"},ss:{name:"Swati",native:"SiSwati"},st:{name:"Southern Sotho",native:"Sesotho"},su:{name:"Sundanese",native:"Basa Sunda"},sv:{name:"Swedish",native:"Svenska"},sw:{name:"Swahili",native:"Kiswahili"},ta:{name:"Tamil",native:"தமிழ்"},te:{name:"Telugu",native:"తెలుగు"},tg:{name:"Tajik",native:"Тоҷикӣ"},th:{name:"Thai",native:"ไทย / Phasa Thai"},ti:{name:"Tigrinya",native:"ትግርኛ"},tk:{name:"Turkmen",native:"Туркмен / تركمن"},tl:{name:"Tagalog / Filipino",native:"Tagalog"},tn:{name:"Tswana",native:"Setswana"},to:{name:"Tonga",native:"Lea Faka-Tonga"},tr:{name:"Turkish",native:"Türkçe"},ts:{name:"Tsonga",native:"Xitsonga"},tt:{name:"Tatar",native:"Tatarça"},tw:{name:"Twi",native:"Twi"},ty:{name:"Tahitian",native:"Reo Mā`ohi"},ug:{name:"Uyghur",native:"Uyƣurqə / ئۇيغۇرچە"},uk:{name:"Ukrainian",native:"Українська"},ur:{name:"Urdu",native:"اردو",rtl:1},uz:{name:"Uzbek",native:"Ўзбек"},ve:{name:"Venda",native:"Tshivenḓa"},vi:{name:"Vietnamese",native:"Tiếng Việt"},vo:{name:"Volapük",native:"Volapük"},wa:{name:"Walloon",native:"Walon"},wo:{name:"Wolof",native:"Wollof"},xh:{name:"Xhosa",native:"isiXhosa"},yi:{name:"Yiddish",native:"ייִדיש",rtl:1},yo:{name:"Yoruba",native:"Yorùbá"},za:{name:"Zhuang",native:"Cuengh / Tôô / 壮语"},zh:{name:"Chinese",native:"中文"},zu:{name:"Zulu",native:"isiZulu"}};const t=2147483647,o=36,m=/^xn--/,r=/[^\0-\x7E]/,c=/[\x2E\u3002\uFF0E\uFF61]/g,l={overflow:"Overflow: input needs wider integers to process","not-basic":"Illegal input >= 0x80 (not a basic code point)","invalid-input":"Invalid input"},u=Math.floor,F=String.fromCharCode;function U(n){throw new RangeError(l[n])}function s(n,a){const e=n.split("@");let i="";e.length>1&&(i=e[0]+"@",n=e[1]);const t=function(n,a){const e=[];let i=n.length;for(;i--;)e[i]=a(n[i]);return e}((n=n.replace(c,".")).split("."),a).join(".");return i+t}function g(n){const a=[];let e=0;const i=n.length;for(;e<i;){const t=n.charCodeAt(e++);if(t>=55296&&t<=56319&&e<i){const i=n.charCodeAt(e++);56320==(64512&i)?a.push(((1023&t)<<10)+(1023&i)+65536):(a.push(t),e--)}else a.push(t)}return a}const v=function(n,a){return n+22+75*(n<26)-((0!=a)<<5)},p=function(n,a,e){let i=0;for(n=e?u(n/700):n>>1,n+=u(n/a);n>455;i+=o)n=u(n/35);return u(i+36*n/(n+38))},h=function(n){const a=[],e=n.length;let i=0,m=128,r=72,c=n.lastIndexOf("-");c<0&&(c=0);for(let e=0;e<c;++e)n.charCodeAt(e)>=128&&U("not-basic"),a.push(n.charCodeAt(e));for(let F=c>0?c+1:0;F<e;){let c=i;for(let a=1,m=o;;m+=o){F>=e&&U("invalid-input");const c=(l=n.charCodeAt(F++))-48<10?l-22:l-65<26?l-65:l-97<26?l-97:o;(c>=o||c>u((t-i)/a))&&U("overflow"),i+=c*a;const s=m<=r?1:m>=r+26?26:m-r;if(c<s)break;const g=o-s;a>u(t/g)&&U("overflow"),a*=g}const s=a.length+1;r=p(i-c,s,0==c),u(i/s)>t-m&&U("overflow"),m+=u(i/s),i%=s,a.splice(i++,0,m)}var l;return String.fromCodePoint(...a)},j=function(n){const a=[];let e=(n=g(n)).length,i=128,m=0,r=72;for(const e of n)e<128&&a.push(F(e));let c=a.length,l=c;for(c&&a.push("-");l<e;){let e=t;for(const a of n)a>=i&&a<e&&(e=a);const s=l+1;e-i>u((t-m)/s)&&U("overflow"),m+=(e-i)*s,i=e;for(const e of n)if(e<i&&++m>t&&U("overflow"),e==i){let n=m;for(let e=o;;e+=o){const i=e<=r?1:e>=r+26?26:e-r;if(n<i)break;const t=n-i,m=o-i;a.push(F(v(i+t%m,0))),n=u(t/m)}a.push(F(v(n,0))),r=p(m,s,l==c),m=0,++l}++m,++i}return a.join("")};var E={version:"2.1.0",ucs2:{decode:g,encode:n=>String.fromCodePoint(...n)},decode:h,encode:j,toASCII:function(n){return s(n,(function(n){return r.test(n)?"xn--"+j(n):n}))},toUnicode:function(n){return s(n,(function(n){return m.test(n)?h(n.slice(4).toLowerCase()):n}))}};const{ucs2:{decode:y,encode:A}}=E,S=127462-"A".charCodeAt(0),d=/^[A-Z]{2}$/;return{continents:n,countries:a,languages:e,languagesAll:i,getEmojiFlag:n=>d.test(n)?A(n.split("").map((n=>S+n.charCodeAt(0)))):"",getUnicode:n=>y(n).map((n=>"U+"+Number(n).toString(16).toUpperCase())).join(" ")}}));
 
@@ -2127,7 +2129,7 @@ function renderComment(elem) {
     return "<!--" + elem.data + "-->";
 }
 
-},{"./foreignNames":8,"domelementtype":10,"entities":23}],10:[function(require,module,exports){
+},{"./foreignNames":8,"domelementtype":10,"entities":24}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Doctype = exports.CDATA = exports.Tag = exports.Style = exports.Script = exports.Comment = exports.Directive = exports.Text = exports.Root = exports.isTag = exports.ElementType = void 0;
@@ -2188,7 +2190,11 @@ exports.Doctype = ElementType.Doctype;
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -2207,6 +2213,7 @@ var defaultOpts = {
     normalizeWhitespace: false,
     withStartIndices: false,
     withEndIndices: false,
+    xmlMode: false,
 };
 var DomHandler = /** @class */ (function () {
     /**
@@ -2245,13 +2252,12 @@ var DomHandler = /** @class */ (function () {
     };
     // Resets the handler back to starting state
     DomHandler.prototype.onreset = function () {
-        var _a;
         this.dom = [];
         this.root = new node_1.Document(this.dom);
         this.done = false;
         this.tagStack = [this.root];
         this.lastNode = null;
-        this.parser = (_a = this.parser) !== null && _a !== void 0 ? _a : null;
+        this.parser = null;
     };
     // Signals the handler that parsing is done
     DomHandler.prototype.onend = function () {
@@ -2288,6 +2294,9 @@ var DomHandler = /** @class */ (function () {
             }
             else {
                 lastNode.data += data;
+            }
+            if (this.options.withEndIndices) {
+                lastNode.endIndex = this.parser.endIndex;
             }
         }
         else {
@@ -2420,6 +2429,10 @@ var Node = /** @class */ (function () {
     }
     Object.defineProperty(Node.prototype, "nodeType", {
         // Read-only aliases
+        /**
+         * [DOM spec](https://dom.spec.whatwg.org/#dom-node-nodetype)-compatible
+         * node {@link type}.
+         */
         get: function () {
             var _a;
             return (_a = nodeTypes.get(this.type)) !== null && _a !== void 0 ? _a : 1;
@@ -2429,6 +2442,10 @@ var Node = /** @class */ (function () {
     });
     Object.defineProperty(Node.prototype, "parentNode", {
         // Read-write aliases for properties
+        /**
+         * Same as {@link parent}.
+         * [DOM spec](https://dom.spec.whatwg.org)-compatible alias.
+         */
         get: function () {
             return this.parent;
         },
@@ -2439,6 +2456,10 @@ var Node = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(Node.prototype, "previousSibling", {
+        /**
+         * Same as {@link prev}.
+         * [DOM spec](https://dom.spec.whatwg.org)-compatible alias.
+         */
         get: function () {
             return this.prev;
         },
@@ -2449,6 +2470,10 @@ var Node = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(Node.prototype, "nextSibling", {
+        /**
+         * Same as {@link next}.
+         * [DOM spec](https://dom.spec.whatwg.org)-compatible alias.
+         */
         get: function () {
             return this.next;
         },
@@ -2471,6 +2496,9 @@ var Node = /** @class */ (function () {
     return Node;
 }());
 exports.Node = Node;
+/**
+ * A node that contains some data.
+ */
 var DataNode = /** @class */ (function (_super) {
     __extends(DataNode, _super);
     /**
@@ -2483,6 +2511,10 @@ var DataNode = /** @class */ (function (_super) {
         return _this;
     }
     Object.defineProperty(DataNode.prototype, "nodeValue", {
+        /**
+         * Same as {@link data}.
+         * [DOM spec](https://dom.spec.whatwg.org)-compatible alias.
+         */
         get: function () {
             return this.data;
         },
@@ -2495,6 +2527,9 @@ var DataNode = /** @class */ (function (_super) {
     return DataNode;
 }(Node));
 exports.DataNode = DataNode;
+/**
+ * Text within the document.
+ */
 var Text = /** @class */ (function (_super) {
     __extends(Text, _super);
     function Text(data) {
@@ -2503,6 +2538,9 @@ var Text = /** @class */ (function (_super) {
     return Text;
 }(DataNode));
 exports.Text = Text;
+/**
+ * Comments within the document.
+ */
 var Comment = /** @class */ (function (_super) {
     __extends(Comment, _super);
     function Comment(data) {
@@ -2511,6 +2549,9 @@ var Comment = /** @class */ (function (_super) {
     return Comment;
 }(DataNode));
 exports.Comment = Comment;
+/**
+ * Processing instructions, including doc types.
+ */
 var ProcessingInstruction = /** @class */ (function (_super) {
     __extends(ProcessingInstruction, _super);
     function ProcessingInstruction(name, data) {
@@ -2537,6 +2578,7 @@ var NodeWithChildren = /** @class */ (function (_super) {
     }
     Object.defineProperty(NodeWithChildren.prototype, "firstChild", {
         // Aliases
+        /** First child of the node. */
         get: function () {
             var _a;
             return (_a = this.children[0]) !== null && _a !== void 0 ? _a : null;
@@ -2545,6 +2587,7 @@ var NodeWithChildren = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(NodeWithChildren.prototype, "lastChild", {
+        /** Last child of the node. */
         get: function () {
             return this.children.length > 0
                 ? this.children[this.children.length - 1]
@@ -2554,6 +2597,10 @@ var NodeWithChildren = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(NodeWithChildren.prototype, "childNodes", {
+        /**
+         * Same as {@link children}.
+         * [DOM spec](https://dom.spec.whatwg.org)-compatible alias.
+         */
         get: function () {
             return this.children;
         },
@@ -2566,6 +2613,9 @@ var NodeWithChildren = /** @class */ (function (_super) {
     return NodeWithChildren;
 }(Node));
 exports.NodeWithChildren = NodeWithChildren;
+/**
+ * The root node of the document.
+ */
 var Document = /** @class */ (function (_super) {
     __extends(Document, _super);
     function Document(children) {
@@ -2574,6 +2624,9 @@ var Document = /** @class */ (function (_super) {
     return Document;
 }(NodeWithChildren));
 exports.Document = Document;
+/**
+ * An element within the DOM.
+ */
 var Element = /** @class */ (function (_super) {
     __extends(Element, _super);
     /**
@@ -2595,6 +2648,10 @@ var Element = /** @class */ (function (_super) {
     }
     Object.defineProperty(Element.prototype, "tagName", {
         // DOM Level 1 aliases
+        /**
+         * Same as {@link name}.
+         * [DOM spec](https://dom.spec.whatwg.org)-compatible alias.
+         */
         get: function () {
             return this.name;
         },
@@ -2628,7 +2685,7 @@ exports.Element = Element;
  * @returns `true` if the node is a `Element`, `false` otherwise.
  */
 function isTag(node) {
-    return domelementtype_1.isTag(node);
+    return (0, domelementtype_1.isTag)(node);
 }
 exports.isTag = isTag;
 /**
@@ -2698,6 +2755,9 @@ function cloneNode(node, recursive) {
         var children = recursive ? cloneChildren(node.children) : [];
         var clone_1 = new Element(node.name, __assign({}, node.attribs), children);
         children.forEach(function (child) { return (child.parent = clone_1); });
+        if (node.namespace != null) {
+            clone_1.namespace = node.namespace;
+        }
         if (node["x-attribsNamespace"]) {
             clone_1["x-attribsNamespace"] = __assign({}, node["x-attribsNamespace"]);
         }
@@ -2731,10 +2791,13 @@ function cloneNode(node, recursive) {
         result = instruction;
     }
     else {
-        throw new Error("Not implemented yet: " + node.type);
+        throw new Error("Not implemented yet: ".concat(node.type));
     }
     result.startIndex = node.startIndex;
     result.endIndex = node.endIndex;
+    if (node.sourceCodeLocation != null) {
+        result.sourceCodeLocation = node.sourceCodeLocation;
+    }
     return result;
 }
 exports.cloneNode = cloneNode;
@@ -2748,6 +2811,198 @@ function cloneChildren(childs) {
 }
 
 },{"domelementtype":10}],13:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getFeed = void 0;
+var stringify_1 = require("./stringify");
+var legacy_1 = require("./legacy");
+/**
+ * Get the feed object from the root of a DOM tree.
+ *
+ * @param doc - The DOM to to extract the feed from.
+ * @returns The feed.
+ */
+function getFeed(doc) {
+    var feedRoot = getOneElement(isValidFeed, doc);
+    return !feedRoot
+        ? null
+        : feedRoot.name === "feed"
+            ? getAtomFeed(feedRoot)
+            : getRssFeed(feedRoot);
+}
+exports.getFeed = getFeed;
+/**
+ * Parse an Atom feed.
+ *
+ * @param feedRoot The root of the feed.
+ * @returns The parsed feed.
+ */
+function getAtomFeed(feedRoot) {
+    var _a;
+    var childs = feedRoot.children;
+    var feed = {
+        type: "atom",
+        items: (0, legacy_1.getElementsByTagName)("entry", childs).map(function (item) {
+            var _a;
+            var children = item.children;
+            var entry = { media: getMediaElements(children) };
+            addConditionally(entry, "id", "id", children);
+            addConditionally(entry, "title", "title", children);
+            var href = (_a = getOneElement("link", children)) === null || _a === void 0 ? void 0 : _a.attribs.href;
+            if (href) {
+                entry.link = href;
+            }
+            var description = fetch("summary", children) || fetch("content", children);
+            if (description) {
+                entry.description = description;
+            }
+            var pubDate = fetch("updated", children);
+            if (pubDate) {
+                entry.pubDate = new Date(pubDate);
+            }
+            return entry;
+        }),
+    };
+    addConditionally(feed, "id", "id", childs);
+    addConditionally(feed, "title", "title", childs);
+    var href = (_a = getOneElement("link", childs)) === null || _a === void 0 ? void 0 : _a.attribs.href;
+    if (href) {
+        feed.link = href;
+    }
+    addConditionally(feed, "description", "subtitle", childs);
+    var updated = fetch("updated", childs);
+    if (updated) {
+        feed.updated = new Date(updated);
+    }
+    addConditionally(feed, "author", "email", childs, true);
+    return feed;
+}
+/**
+ * Parse a RSS feed.
+ *
+ * @param feedRoot The root of the feed.
+ * @returns The parsed feed.
+ */
+function getRssFeed(feedRoot) {
+    var _a, _b;
+    var childs = (_b = (_a = getOneElement("channel", feedRoot.children)) === null || _a === void 0 ? void 0 : _a.children) !== null && _b !== void 0 ? _b : [];
+    var feed = {
+        type: feedRoot.name.substr(0, 3),
+        id: "",
+        items: (0, legacy_1.getElementsByTagName)("item", feedRoot.children).map(function (item) {
+            var children = item.children;
+            var entry = { media: getMediaElements(children) };
+            addConditionally(entry, "id", "guid", children);
+            addConditionally(entry, "title", "title", children);
+            addConditionally(entry, "link", "link", children);
+            addConditionally(entry, "description", "description", children);
+            var pubDate = fetch("pubDate", children);
+            if (pubDate)
+                entry.pubDate = new Date(pubDate);
+            return entry;
+        }),
+    };
+    addConditionally(feed, "title", "title", childs);
+    addConditionally(feed, "link", "link", childs);
+    addConditionally(feed, "description", "description", childs);
+    var updated = fetch("lastBuildDate", childs);
+    if (updated) {
+        feed.updated = new Date(updated);
+    }
+    addConditionally(feed, "author", "managingEditor", childs, true);
+    return feed;
+}
+var MEDIA_KEYS_STRING = ["url", "type", "lang"];
+var MEDIA_KEYS_INT = [
+    "fileSize",
+    "bitrate",
+    "framerate",
+    "samplingrate",
+    "channels",
+    "duration",
+    "height",
+    "width",
+];
+/**
+ * Get all media elements of a feed item.
+ *
+ * @param where Nodes to search in.
+ * @returns Media elements.
+ */
+function getMediaElements(where) {
+    return (0, legacy_1.getElementsByTagName)("media:content", where).map(function (elem) {
+        var attribs = elem.attribs;
+        var media = {
+            medium: attribs.medium,
+            isDefault: !!attribs.isDefault,
+        };
+        for (var _i = 0, MEDIA_KEYS_STRING_1 = MEDIA_KEYS_STRING; _i < MEDIA_KEYS_STRING_1.length; _i++) {
+            var attrib = MEDIA_KEYS_STRING_1[_i];
+            if (attribs[attrib]) {
+                media[attrib] = attribs[attrib];
+            }
+        }
+        for (var _a = 0, MEDIA_KEYS_INT_1 = MEDIA_KEYS_INT; _a < MEDIA_KEYS_INT_1.length; _a++) {
+            var attrib = MEDIA_KEYS_INT_1[_a];
+            if (attribs[attrib]) {
+                media[attrib] = parseInt(attribs[attrib], 10);
+            }
+        }
+        if (attribs.expression) {
+            media.expression =
+                attribs.expression;
+        }
+        return media;
+    });
+}
+/**
+ * Get one element by tag name.
+ *
+ * @param tagName Tag name to look for
+ * @param node Node to search in
+ * @returns The element or null
+ */
+function getOneElement(tagName, node) {
+    return (0, legacy_1.getElementsByTagName)(tagName, node, true, 1)[0];
+}
+/**
+ * Get the text content of an element with a certain tag name.
+ *
+ * @param tagName Tag name to look for.
+ * @param where  Node to search in.
+ * @param recurse Whether to recurse into child nodes.
+ * @returns The text content of the element.
+ */
+function fetch(tagName, where, recurse) {
+    if (recurse === void 0) { recurse = false; }
+    return (0, stringify_1.textContent)((0, legacy_1.getElementsByTagName)(tagName, where, recurse, 1)).trim();
+}
+/**
+ * Adds a property to an object if it has a value.
+ *
+ * @param obj Object to be extended
+ * @param prop Property name
+ * @param tagName Tag name that contains the conditionally added property
+ * @param where Element to search for the property
+ * @param recurse Whether to recurse into child nodes.
+ */
+function addConditionally(obj, prop, tagName, where, recurse) {
+    if (recurse === void 0) { recurse = false; }
+    var val = fetch(tagName, where, recurse);
+    if (val)
+        obj[prop] = val;
+}
+/**
+ * Checks if an element is a feed root node.
+ *
+ * @param value The name of the element to check.
+ * @returns Whether an element is a feed root node.
+ */
+function isValidFeed(value) {
+    return value === "rss" || value === "feed" || value === "rdf:RDF";
+}
+
+},{"./legacy":16,"./stringify":19}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uniqueSort = exports.compareDocumentPosition = exports.removeSubsets = void 0;
@@ -2816,12 +3071,12 @@ function compareDocumentPosition(nodeA, nodeB) {
     if (nodeA === nodeB) {
         return 0;
     }
-    var current = domhandler_1.hasChildren(nodeA) ? nodeA : nodeA.parent;
+    var current = (0, domhandler_1.hasChildren)(nodeA) ? nodeA : nodeA.parent;
     while (current) {
         aParents.unshift(current);
         current = current.parent;
     }
-    current = domhandler_1.hasChildren(nodeB) ? nodeB : nodeB.parent;
+    current = (0, domhandler_1.hasChildren)(nodeB) ? nodeB : nodeB.parent;
     while (current) {
         bParents.unshift(current);
         current = current.parent;
@@ -2874,7 +3129,7 @@ function uniqueSort(nodes) {
 }
 exports.uniqueSort = uniqueSort;
 
-},{"domhandler":11}],14:[function(require,module,exports){
+},{"domhandler":11}],15:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -2894,6 +3149,8 @@ __exportStar(require("./manipulation"), exports);
 __exportStar(require("./querying"), exports);
 __exportStar(require("./legacy"), exports);
 __exportStar(require("./helpers"), exports);
+__exportStar(require("./feeds"), exports);
+/** @deprecated Use these methods from `domhandler` directly. */
 var domhandler_1 = require("domhandler");
 Object.defineProperty(exports, "isTag", { enumerable: true, get: function () { return domhandler_1.isTag; } });
 Object.defineProperty(exports, "isCDATA", { enumerable: true, get: function () { return domhandler_1.isCDATA; } });
@@ -2902,7 +3159,7 @@ Object.defineProperty(exports, "isComment", { enumerable: true, get: function ()
 Object.defineProperty(exports, "isDocument", { enumerable: true, get: function () { return domhandler_1.isDocument; } });
 Object.defineProperty(exports, "hasChildren", { enumerable: true, get: function () { return domhandler_1.hasChildren; } });
 
-},{"./helpers":13,"./legacy":15,"./manipulation":16,"./querying":17,"./stringify":18,"./traversal":19,"domhandler":11}],15:[function(require,module,exports){
+},{"./feeds":13,"./helpers":14,"./legacy":16,"./manipulation":17,"./querying":18,"./stringify":19,"./traversal":20,"domhandler":11}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getElementsByTagType = exports.getElementsByTagName = exports.getElementById = exports.getElements = exports.testElement = void 0;
@@ -2911,12 +3168,12 @@ var querying_1 = require("./querying");
 var Checks = {
     tag_name: function (name) {
         if (typeof name === "function") {
-            return function (elem) { return domhandler_1.isTag(elem) && name(elem.name); };
+            return function (elem) { return (0, domhandler_1.isTag)(elem) && name(elem.name); };
         }
         else if (name === "*") {
             return domhandler_1.isTag;
         }
-        return function (elem) { return domhandler_1.isTag(elem) && elem.name === name; };
+        return function (elem) { return (0, domhandler_1.isTag)(elem) && elem.name === name; };
     },
     tag_type: function (type) {
         if (typeof type === "function") {
@@ -2926,9 +3183,9 @@ var Checks = {
     },
     tag_contains: function (data) {
         if (typeof data === "function") {
-            return function (elem) { return domhandler_1.isText(elem) && data(elem.data); };
+            return function (elem) { return (0, domhandler_1.isText)(elem) && data(elem.data); };
         }
-        return function (elem) { return domhandler_1.isText(elem) && elem.data === data; };
+        return function (elem) { return (0, domhandler_1.isText)(elem) && elem.data === data; };
     },
 };
 /**
@@ -2938,9 +3195,9 @@ var Checks = {
  */
 function getAttribCheck(attrib, value) {
     if (typeof value === "function") {
-        return function (elem) { return domhandler_1.isTag(elem) && value(elem.attribs[attrib]); };
+        return function (elem) { return (0, domhandler_1.isTag)(elem) && value(elem.attribs[attrib]); };
     }
-    return function (elem) { return domhandler_1.isTag(elem) && elem.attribs[attrib] === value; };
+    return function (elem) { return (0, domhandler_1.isTag)(elem) && elem.attribs[attrib] === value; };
 }
 /**
  * @param a First function to combine.
@@ -2959,7 +3216,7 @@ function combineFuncs(a, b) {
 function compileTest(options) {
     var funcs = Object.keys(options).map(function (key) {
         var value = options[key];
-        return key in Checks
+        return Object.prototype.hasOwnProperty.call(Checks, key)
             ? Checks[key](value)
             : getAttribCheck(key, value);
     });
@@ -2985,7 +3242,7 @@ exports.testElement = testElement;
 function getElements(options, nodes, recurse, limit) {
     if (limit === void 0) { limit = Infinity; }
     var test = compileTest(options);
-    return test ? querying_1.filter(test, nodes, recurse, limit) : [];
+    return test ? (0, querying_1.filter)(test, nodes, recurse, limit) : [];
 }
 exports.getElements = getElements;
 /**
@@ -2998,7 +3255,7 @@ function getElementById(id, nodes, recurse) {
     if (recurse === void 0) { recurse = true; }
     if (!Array.isArray(nodes))
         nodes = [nodes];
-    return querying_1.findOne(getAttribCheck("id", id), nodes, recurse);
+    return (0, querying_1.findOne)(getAttribCheck("id", id), nodes, recurse);
 }
 exports.getElementById = getElementById;
 /**
@@ -3011,7 +3268,7 @@ exports.getElementById = getElementById;
 function getElementsByTagName(tagName, nodes, recurse, limit) {
     if (recurse === void 0) { recurse = true; }
     if (limit === void 0) { limit = Infinity; }
-    return querying_1.filter(Checks.tag_name(tagName), nodes, recurse, limit);
+    return (0, querying_1.filter)(Checks.tag_name(tagName), nodes, recurse, limit);
 }
 exports.getElementsByTagName = getElementsByTagName;
 /**
@@ -3024,11 +3281,11 @@ exports.getElementsByTagName = getElementsByTagName;
 function getElementsByTagType(type, nodes, recurse, limit) {
     if (recurse === void 0) { recurse = true; }
     if (limit === void 0) { limit = Infinity; }
-    return querying_1.filter(Checks.tag_type(type), nodes, recurse, limit);
+    return (0, querying_1.filter)(Checks.tag_type(type), nodes, recurse, limit);
 }
 exports.getElementsByTagType = getElementsByTagType;
 
-},{"./querying":17,"domhandler":11}],16:[function(require,module,exports){
+},{"./querying":18,"domhandler":11}],17:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.prepend = exports.prependChild = exports.append = exports.appendChild = exports.replaceElement = exports.removeElement = void 0;
@@ -3159,7 +3416,7 @@ function prepend(elem, prev) {
 }
 exports.prepend = prepend;
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findAll = exports.existsOne = exports.findOne = exports.findOneChild = exports.find = exports.filter = void 0;
@@ -3199,7 +3456,7 @@ function find(test, nodes, recurse, limit) {
             if (--limit <= 0)
                 break;
         }
-        if (recurse && domhandler_1.hasChildren(elem) && elem.children.length > 0) {
+        if (recurse && (0, domhandler_1.hasChildren)(elem) && elem.children.length > 0) {
             var children = find(test, elem.children, recurse, limit);
             result.push.apply(result, children);
             limit -= children.length;
@@ -3234,7 +3491,7 @@ function findOne(test, nodes, recurse) {
     var elem = null;
     for (var i = 0; i < nodes.length && !elem; i++) {
         var checked = nodes[i];
-        if (!domhandler_1.isTag(checked)) {
+        if (!(0, domhandler_1.isTag)(checked)) {
             continue;
         }
         else if (test(checked)) {
@@ -3254,7 +3511,7 @@ exports.findOne = findOne;
  */
 function existsOne(test, nodes) {
     return nodes.some(function (checked) {
-        return domhandler_1.isTag(checked) &&
+        return (0, domhandler_1.isTag)(checked) &&
             (test(checked) ||
                 (checked.children.length > 0 &&
                     existsOne(test, checked.children)));
@@ -3287,7 +3544,7 @@ function findAll(test, nodes) {
 }
 exports.findAll = findAll;
 
-},{"domhandler":11}],18:[function(require,module,exports){
+},{"domhandler":11}],19:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -3304,7 +3561,7 @@ var domelementtype_1 = require("domelementtype");
  * @returns `node`'s outer HTML.
  */
 function getOuterHTML(node, options) {
-    return dom_serializer_1.default(node, options);
+    return (0, dom_serializer_1.default)(node, options);
 }
 exports.getOuterHTML = getOuterHTML;
 /**
@@ -3314,7 +3571,7 @@ exports.getOuterHTML = getOuterHTML;
  * @returns `node`'s inner HTML.
  */
 function getInnerHTML(node, options) {
-    return domhandler_1.hasChildren(node)
+    return (0, domhandler_1.hasChildren)(node)
         ? node.children.map(function (node) { return getOuterHTML(node, options); }).join("")
         : "";
 }
@@ -3329,11 +3586,11 @@ exports.getInnerHTML = getInnerHTML;
 function getText(node) {
     if (Array.isArray(node))
         return node.map(getText).join("");
-    if (domhandler_1.isTag(node))
+    if ((0, domhandler_1.isTag)(node))
         return node.name === "br" ? "\n" : getText(node.children);
-    if (domhandler_1.isCDATA(node))
+    if ((0, domhandler_1.isCDATA)(node))
         return getText(node.children);
-    if (domhandler_1.isText(node))
+    if ((0, domhandler_1.isText)(node))
         return node.data;
     return "";
 }
@@ -3348,11 +3605,10 @@ exports.getText = getText;
 function textContent(node) {
     if (Array.isArray(node))
         return node.map(textContent).join("");
-    if (domhandler_1.isTag(node))
+    if ((0, domhandler_1.hasChildren)(node) && !(0, domhandler_1.isComment)(node)) {
         return textContent(node.children);
-    if (domhandler_1.isCDATA(node))
-        return textContent(node.children);
-    if (domhandler_1.isText(node))
+    }
+    if ((0, domhandler_1.isText)(node))
         return node.data;
     return "";
 }
@@ -3367,18 +3623,16 @@ exports.textContent = textContent;
 function innerText(node) {
     if (Array.isArray(node))
         return node.map(innerText).join("");
-    if (domhandler_1.hasChildren(node) && node.type === domelementtype_1.ElementType.Tag) {
+    if ((0, domhandler_1.hasChildren)(node) && (node.type === domelementtype_1.ElementType.Tag || (0, domhandler_1.isCDATA)(node))) {
         return innerText(node.children);
     }
-    if (domhandler_1.isCDATA(node))
-        return innerText(node.children);
-    if (domhandler_1.isText(node))
+    if ((0, domhandler_1.isText)(node))
         return node.data;
     return "";
 }
 exports.innerText = innerText;
 
-},{"dom-serializer":9,"domelementtype":10,"domhandler":11}],19:[function(require,module,exports){
+},{"dom-serializer":9,"domelementtype":10,"domhandler":11}],20:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.prevElementSibling = exports.nextElementSibling = exports.getName = exports.hasAttrib = exports.getAttributeValue = exports.getSiblings = exports.getParent = exports.getChildren = void 0;
@@ -3477,7 +3731,7 @@ exports.getName = getName;
 function nextElementSibling(elem) {
     var _a;
     var next = elem.next;
-    while (next !== null && !domhandler_1.isTag(next))
+    while (next !== null && !(0, domhandler_1.isTag)(next))
         (_a = next, next = _a.next);
     return next;
 }
@@ -3491,13 +3745,13 @@ exports.nextElementSibling = nextElementSibling;
 function prevElementSibling(elem) {
     var _a;
     var prev = elem.prev;
-    while (prev !== null && !domhandler_1.isTag(prev))
+    while (prev !== null && !(0, domhandler_1.isTag)(prev))
         (_a = prev, prev = _a.prev);
     return prev;
 }
 exports.prevElementSibling = prevElementSibling;
 
-},{"domhandler":11}],20:[function(require,module,exports){
+},{"domhandler":11}],21:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -3552,7 +3806,7 @@ function getReplacer(map) {
     };
 }
 
-},{"./decode_codepoint":21,"./maps/entities.json":25,"./maps/legacy.json":26,"./maps/xml.json":27}],21:[function(require,module,exports){
+},{"./decode_codepoint":22,"./maps/entities.json":26,"./maps/legacy.json":27,"./maps/xml.json":28}],22:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -3584,7 +3838,7 @@ function decodeCodePoint(codePoint) {
 }
 exports.default = decodeCodePoint;
 
-},{"./maps/decode.json":24}],22:[function(require,module,exports){
+},{"./maps/decode.json":25}],23:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -3722,7 +3976,7 @@ function getASCIIEncoder(obj) {
     };
 }
 
-},{"./maps/entities.json":25,"./maps/xml.json":27}],23:[function(require,module,exports){
+},{"./maps/entities.json":26,"./maps/xml.json":28}],24:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decodeXMLStrict = exports.decodeHTML5Strict = exports.decodeHTML4Strict = exports.decodeHTML5 = exports.decodeHTML4 = exports.decodeHTMLStrict = exports.decodeHTML = exports.decodeXML = exports.encodeHTML5 = exports.encodeHTML4 = exports.escapeUTF8 = exports.escape = exports.encodeNonAsciiHTML = exports.encodeHTML = exports.encodeXML = exports.encode = exports.decodeStrict = exports.decode = void 0;
@@ -3781,24 +4035,24 @@ Object.defineProperty(exports, "decodeHTML4Strict", { enumerable: true, get: fun
 Object.defineProperty(exports, "decodeHTML5Strict", { enumerable: true, get: function () { return decode_2.decodeHTMLStrict; } });
 Object.defineProperty(exports, "decodeXMLStrict", { enumerable: true, get: function () { return decode_2.decodeXML; } });
 
-},{"./decode":20,"./encode":22}],24:[function(require,module,exports){
+},{"./decode":21,"./encode":23}],25:[function(require,module,exports){
 module.exports={"0":65533,"128":8364,"130":8218,"131":402,"132":8222,"133":8230,"134":8224,"135":8225,"136":710,"137":8240,"138":352,"139":8249,"140":338,"142":381,"145":8216,"146":8217,"147":8220,"148":8221,"149":8226,"150":8211,"151":8212,"152":732,"153":8482,"154":353,"155":8250,"156":339,"158":382,"159":376}
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 module.exports={"Aacute":"Á","aacute":"á","Abreve":"Ă","abreve":"ă","ac":"∾","acd":"∿","acE":"∾̳","Acirc":"Â","acirc":"â","acute":"´","Acy":"А","acy":"а","AElig":"Æ","aelig":"æ","af":"⁡","Afr":"𝔄","afr":"𝔞","Agrave":"À","agrave":"à","alefsym":"ℵ","aleph":"ℵ","Alpha":"Α","alpha":"α","Amacr":"Ā","amacr":"ā","amalg":"⨿","amp":"&","AMP":"&","andand":"⩕","And":"⩓","and":"∧","andd":"⩜","andslope":"⩘","andv":"⩚","ang":"∠","ange":"⦤","angle":"∠","angmsdaa":"⦨","angmsdab":"⦩","angmsdac":"⦪","angmsdad":"⦫","angmsdae":"⦬","angmsdaf":"⦭","angmsdag":"⦮","angmsdah":"⦯","angmsd":"∡","angrt":"∟","angrtvb":"⊾","angrtvbd":"⦝","angsph":"∢","angst":"Å","angzarr":"⍼","Aogon":"Ą","aogon":"ą","Aopf":"𝔸","aopf":"𝕒","apacir":"⩯","ap":"≈","apE":"⩰","ape":"≊","apid":"≋","apos":"'","ApplyFunction":"⁡","approx":"≈","approxeq":"≊","Aring":"Å","aring":"å","Ascr":"𝒜","ascr":"𝒶","Assign":"≔","ast":"*","asymp":"≈","asympeq":"≍","Atilde":"Ã","atilde":"ã","Auml":"Ä","auml":"ä","awconint":"∳","awint":"⨑","backcong":"≌","backepsilon":"϶","backprime":"‵","backsim":"∽","backsimeq":"⋍","Backslash":"∖","Barv":"⫧","barvee":"⊽","barwed":"⌅","Barwed":"⌆","barwedge":"⌅","bbrk":"⎵","bbrktbrk":"⎶","bcong":"≌","Bcy":"Б","bcy":"б","bdquo":"„","becaus":"∵","because":"∵","Because":"∵","bemptyv":"⦰","bepsi":"϶","bernou":"ℬ","Bernoullis":"ℬ","Beta":"Β","beta":"β","beth":"ℶ","between":"≬","Bfr":"𝔅","bfr":"𝔟","bigcap":"⋂","bigcirc":"◯","bigcup":"⋃","bigodot":"⨀","bigoplus":"⨁","bigotimes":"⨂","bigsqcup":"⨆","bigstar":"★","bigtriangledown":"▽","bigtriangleup":"△","biguplus":"⨄","bigvee":"⋁","bigwedge":"⋀","bkarow":"⤍","blacklozenge":"⧫","blacksquare":"▪","blacktriangle":"▴","blacktriangledown":"▾","blacktriangleleft":"◂","blacktriangleright":"▸","blank":"␣","blk12":"▒","blk14":"░","blk34":"▓","block":"█","bne":"=⃥","bnequiv":"≡⃥","bNot":"⫭","bnot":"⌐","Bopf":"𝔹","bopf":"𝕓","bot":"⊥","bottom":"⊥","bowtie":"⋈","boxbox":"⧉","boxdl":"┐","boxdL":"╕","boxDl":"╖","boxDL":"╗","boxdr":"┌","boxdR":"╒","boxDr":"╓","boxDR":"╔","boxh":"─","boxH":"═","boxhd":"┬","boxHd":"╤","boxhD":"╥","boxHD":"╦","boxhu":"┴","boxHu":"╧","boxhU":"╨","boxHU":"╩","boxminus":"⊟","boxplus":"⊞","boxtimes":"⊠","boxul":"┘","boxuL":"╛","boxUl":"╜","boxUL":"╝","boxur":"└","boxuR":"╘","boxUr":"╙","boxUR":"╚","boxv":"│","boxV":"║","boxvh":"┼","boxvH":"╪","boxVh":"╫","boxVH":"╬","boxvl":"┤","boxvL":"╡","boxVl":"╢","boxVL":"╣","boxvr":"├","boxvR":"╞","boxVr":"╟","boxVR":"╠","bprime":"‵","breve":"˘","Breve":"˘","brvbar":"¦","bscr":"𝒷","Bscr":"ℬ","bsemi":"⁏","bsim":"∽","bsime":"⋍","bsolb":"⧅","bsol":"\\","bsolhsub":"⟈","bull":"•","bullet":"•","bump":"≎","bumpE":"⪮","bumpe":"≏","Bumpeq":"≎","bumpeq":"≏","Cacute":"Ć","cacute":"ć","capand":"⩄","capbrcup":"⩉","capcap":"⩋","cap":"∩","Cap":"⋒","capcup":"⩇","capdot":"⩀","CapitalDifferentialD":"ⅅ","caps":"∩︀","caret":"⁁","caron":"ˇ","Cayleys":"ℭ","ccaps":"⩍","Ccaron":"Č","ccaron":"č","Ccedil":"Ç","ccedil":"ç","Ccirc":"Ĉ","ccirc":"ĉ","Cconint":"∰","ccups":"⩌","ccupssm":"⩐","Cdot":"Ċ","cdot":"ċ","cedil":"¸","Cedilla":"¸","cemptyv":"⦲","cent":"¢","centerdot":"·","CenterDot":"·","cfr":"𝔠","Cfr":"ℭ","CHcy":"Ч","chcy":"ч","check":"✓","checkmark":"✓","Chi":"Χ","chi":"χ","circ":"ˆ","circeq":"≗","circlearrowleft":"↺","circlearrowright":"↻","circledast":"⊛","circledcirc":"⊚","circleddash":"⊝","CircleDot":"⊙","circledR":"®","circledS":"Ⓢ","CircleMinus":"⊖","CirclePlus":"⊕","CircleTimes":"⊗","cir":"○","cirE":"⧃","cire":"≗","cirfnint":"⨐","cirmid":"⫯","cirscir":"⧂","ClockwiseContourIntegral":"∲","CloseCurlyDoubleQuote":"”","CloseCurlyQuote":"’","clubs":"♣","clubsuit":"♣","colon":":","Colon":"∷","Colone":"⩴","colone":"≔","coloneq":"≔","comma":",","commat":"@","comp":"∁","compfn":"∘","complement":"∁","complexes":"ℂ","cong":"≅","congdot":"⩭","Congruent":"≡","conint":"∮","Conint":"∯","ContourIntegral":"∮","copf":"𝕔","Copf":"ℂ","coprod":"∐","Coproduct":"∐","copy":"©","COPY":"©","copysr":"℗","CounterClockwiseContourIntegral":"∳","crarr":"↵","cross":"✗","Cross":"⨯","Cscr":"𝒞","cscr":"𝒸","csub":"⫏","csube":"⫑","csup":"⫐","csupe":"⫒","ctdot":"⋯","cudarrl":"⤸","cudarrr":"⤵","cuepr":"⋞","cuesc":"⋟","cularr":"↶","cularrp":"⤽","cupbrcap":"⩈","cupcap":"⩆","CupCap":"≍","cup":"∪","Cup":"⋓","cupcup":"⩊","cupdot":"⊍","cupor":"⩅","cups":"∪︀","curarr":"↷","curarrm":"⤼","curlyeqprec":"⋞","curlyeqsucc":"⋟","curlyvee":"⋎","curlywedge":"⋏","curren":"¤","curvearrowleft":"↶","curvearrowright":"↷","cuvee":"⋎","cuwed":"⋏","cwconint":"∲","cwint":"∱","cylcty":"⌭","dagger":"†","Dagger":"‡","daleth":"ℸ","darr":"↓","Darr":"↡","dArr":"⇓","dash":"‐","Dashv":"⫤","dashv":"⊣","dbkarow":"⤏","dblac":"˝","Dcaron":"Ď","dcaron":"ď","Dcy":"Д","dcy":"д","ddagger":"‡","ddarr":"⇊","DD":"ⅅ","dd":"ⅆ","DDotrahd":"⤑","ddotseq":"⩷","deg":"°","Del":"∇","Delta":"Δ","delta":"δ","demptyv":"⦱","dfisht":"⥿","Dfr":"𝔇","dfr":"𝔡","dHar":"⥥","dharl":"⇃","dharr":"⇂","DiacriticalAcute":"´","DiacriticalDot":"˙","DiacriticalDoubleAcute":"˝","DiacriticalGrave":"`","DiacriticalTilde":"˜","diam":"⋄","diamond":"⋄","Diamond":"⋄","diamondsuit":"♦","diams":"♦","die":"¨","DifferentialD":"ⅆ","digamma":"ϝ","disin":"⋲","div":"÷","divide":"÷","divideontimes":"⋇","divonx":"⋇","DJcy":"Ђ","djcy":"ђ","dlcorn":"⌞","dlcrop":"⌍","dollar":"$","Dopf":"𝔻","dopf":"𝕕","Dot":"¨","dot":"˙","DotDot":"⃜","doteq":"≐","doteqdot":"≑","DotEqual":"≐","dotminus":"∸","dotplus":"∔","dotsquare":"⊡","doublebarwedge":"⌆","DoubleContourIntegral":"∯","DoubleDot":"¨","DoubleDownArrow":"⇓","DoubleLeftArrow":"⇐","DoubleLeftRightArrow":"⇔","DoubleLeftTee":"⫤","DoubleLongLeftArrow":"⟸","DoubleLongLeftRightArrow":"⟺","DoubleLongRightArrow":"⟹","DoubleRightArrow":"⇒","DoubleRightTee":"⊨","DoubleUpArrow":"⇑","DoubleUpDownArrow":"⇕","DoubleVerticalBar":"∥","DownArrowBar":"⤓","downarrow":"↓","DownArrow":"↓","Downarrow":"⇓","DownArrowUpArrow":"⇵","DownBreve":"̑","downdownarrows":"⇊","downharpoonleft":"⇃","downharpoonright":"⇂","DownLeftRightVector":"⥐","DownLeftTeeVector":"⥞","DownLeftVectorBar":"⥖","DownLeftVector":"↽","DownRightTeeVector":"⥟","DownRightVectorBar":"⥗","DownRightVector":"⇁","DownTeeArrow":"↧","DownTee":"⊤","drbkarow":"⤐","drcorn":"⌟","drcrop":"⌌","Dscr":"𝒟","dscr":"𝒹","DScy":"Ѕ","dscy":"ѕ","dsol":"⧶","Dstrok":"Đ","dstrok":"đ","dtdot":"⋱","dtri":"▿","dtrif":"▾","duarr":"⇵","duhar":"⥯","dwangle":"⦦","DZcy":"Џ","dzcy":"џ","dzigrarr":"⟿","Eacute":"É","eacute":"é","easter":"⩮","Ecaron":"Ě","ecaron":"ě","Ecirc":"Ê","ecirc":"ê","ecir":"≖","ecolon":"≕","Ecy":"Э","ecy":"э","eDDot":"⩷","Edot":"Ė","edot":"ė","eDot":"≑","ee":"ⅇ","efDot":"≒","Efr":"𝔈","efr":"𝔢","eg":"⪚","Egrave":"È","egrave":"è","egs":"⪖","egsdot":"⪘","el":"⪙","Element":"∈","elinters":"⏧","ell":"ℓ","els":"⪕","elsdot":"⪗","Emacr":"Ē","emacr":"ē","empty":"∅","emptyset":"∅","EmptySmallSquare":"◻","emptyv":"∅","EmptyVerySmallSquare":"▫","emsp13":" ","emsp14":" ","emsp":" ","ENG":"Ŋ","eng":"ŋ","ensp":" ","Eogon":"Ę","eogon":"ę","Eopf":"𝔼","eopf":"𝕖","epar":"⋕","eparsl":"⧣","eplus":"⩱","epsi":"ε","Epsilon":"Ε","epsilon":"ε","epsiv":"ϵ","eqcirc":"≖","eqcolon":"≕","eqsim":"≂","eqslantgtr":"⪖","eqslantless":"⪕","Equal":"⩵","equals":"=","EqualTilde":"≂","equest":"≟","Equilibrium":"⇌","equiv":"≡","equivDD":"⩸","eqvparsl":"⧥","erarr":"⥱","erDot":"≓","escr":"ℯ","Escr":"ℰ","esdot":"≐","Esim":"⩳","esim":"≂","Eta":"Η","eta":"η","ETH":"Ð","eth":"ð","Euml":"Ë","euml":"ë","euro":"€","excl":"!","exist":"∃","Exists":"∃","expectation":"ℰ","exponentiale":"ⅇ","ExponentialE":"ⅇ","fallingdotseq":"≒","Fcy":"Ф","fcy":"ф","female":"♀","ffilig":"ﬃ","fflig":"ﬀ","ffllig":"ﬄ","Ffr":"𝔉","ffr":"𝔣","filig":"ﬁ","FilledSmallSquare":"◼","FilledVerySmallSquare":"▪","fjlig":"fj","flat":"♭","fllig":"ﬂ","fltns":"▱","fnof":"ƒ","Fopf":"𝔽","fopf":"𝕗","forall":"∀","ForAll":"∀","fork":"⋔","forkv":"⫙","Fouriertrf":"ℱ","fpartint":"⨍","frac12":"½","frac13":"⅓","frac14":"¼","frac15":"⅕","frac16":"⅙","frac18":"⅛","frac23":"⅔","frac25":"⅖","frac34":"¾","frac35":"⅗","frac38":"⅜","frac45":"⅘","frac56":"⅚","frac58":"⅝","frac78":"⅞","frasl":"⁄","frown":"⌢","fscr":"𝒻","Fscr":"ℱ","gacute":"ǵ","Gamma":"Γ","gamma":"γ","Gammad":"Ϝ","gammad":"ϝ","gap":"⪆","Gbreve":"Ğ","gbreve":"ğ","Gcedil":"Ģ","Gcirc":"Ĝ","gcirc":"ĝ","Gcy":"Г","gcy":"г","Gdot":"Ġ","gdot":"ġ","ge":"≥","gE":"≧","gEl":"⪌","gel":"⋛","geq":"≥","geqq":"≧","geqslant":"⩾","gescc":"⪩","ges":"⩾","gesdot":"⪀","gesdoto":"⪂","gesdotol":"⪄","gesl":"⋛︀","gesles":"⪔","Gfr":"𝔊","gfr":"𝔤","gg":"≫","Gg":"⋙","ggg":"⋙","gimel":"ℷ","GJcy":"Ѓ","gjcy":"ѓ","gla":"⪥","gl":"≷","glE":"⪒","glj":"⪤","gnap":"⪊","gnapprox":"⪊","gne":"⪈","gnE":"≩","gneq":"⪈","gneqq":"≩","gnsim":"⋧","Gopf":"𝔾","gopf":"𝕘","grave":"`","GreaterEqual":"≥","GreaterEqualLess":"⋛","GreaterFullEqual":"≧","GreaterGreater":"⪢","GreaterLess":"≷","GreaterSlantEqual":"⩾","GreaterTilde":"≳","Gscr":"𝒢","gscr":"ℊ","gsim":"≳","gsime":"⪎","gsiml":"⪐","gtcc":"⪧","gtcir":"⩺","gt":">","GT":">","Gt":"≫","gtdot":"⋗","gtlPar":"⦕","gtquest":"⩼","gtrapprox":"⪆","gtrarr":"⥸","gtrdot":"⋗","gtreqless":"⋛","gtreqqless":"⪌","gtrless":"≷","gtrsim":"≳","gvertneqq":"≩︀","gvnE":"≩︀","Hacek":"ˇ","hairsp":" ","half":"½","hamilt":"ℋ","HARDcy":"Ъ","hardcy":"ъ","harrcir":"⥈","harr":"↔","hArr":"⇔","harrw":"↭","Hat":"^","hbar":"ℏ","Hcirc":"Ĥ","hcirc":"ĥ","hearts":"♥","heartsuit":"♥","hellip":"…","hercon":"⊹","hfr":"𝔥","Hfr":"ℌ","HilbertSpace":"ℋ","hksearow":"⤥","hkswarow":"⤦","hoarr":"⇿","homtht":"∻","hookleftarrow":"↩","hookrightarrow":"↪","hopf":"𝕙","Hopf":"ℍ","horbar":"―","HorizontalLine":"─","hscr":"𝒽","Hscr":"ℋ","hslash":"ℏ","Hstrok":"Ħ","hstrok":"ħ","HumpDownHump":"≎","HumpEqual":"≏","hybull":"⁃","hyphen":"‐","Iacute":"Í","iacute":"í","ic":"⁣","Icirc":"Î","icirc":"î","Icy":"И","icy":"и","Idot":"İ","IEcy":"Е","iecy":"е","iexcl":"¡","iff":"⇔","ifr":"𝔦","Ifr":"ℑ","Igrave":"Ì","igrave":"ì","ii":"ⅈ","iiiint":"⨌","iiint":"∭","iinfin":"⧜","iiota":"℩","IJlig":"Ĳ","ijlig":"ĳ","Imacr":"Ī","imacr":"ī","image":"ℑ","ImaginaryI":"ⅈ","imagline":"ℐ","imagpart":"ℑ","imath":"ı","Im":"ℑ","imof":"⊷","imped":"Ƶ","Implies":"⇒","incare":"℅","in":"∈","infin":"∞","infintie":"⧝","inodot":"ı","intcal":"⊺","int":"∫","Int":"∬","integers":"ℤ","Integral":"∫","intercal":"⊺","Intersection":"⋂","intlarhk":"⨗","intprod":"⨼","InvisibleComma":"⁣","InvisibleTimes":"⁢","IOcy":"Ё","iocy":"ё","Iogon":"Į","iogon":"į","Iopf":"𝕀","iopf":"𝕚","Iota":"Ι","iota":"ι","iprod":"⨼","iquest":"¿","iscr":"𝒾","Iscr":"ℐ","isin":"∈","isindot":"⋵","isinE":"⋹","isins":"⋴","isinsv":"⋳","isinv":"∈","it":"⁢","Itilde":"Ĩ","itilde":"ĩ","Iukcy":"І","iukcy":"і","Iuml":"Ï","iuml":"ï","Jcirc":"Ĵ","jcirc":"ĵ","Jcy":"Й","jcy":"й","Jfr":"𝔍","jfr":"𝔧","jmath":"ȷ","Jopf":"𝕁","jopf":"𝕛","Jscr":"𝒥","jscr":"𝒿","Jsercy":"Ј","jsercy":"ј","Jukcy":"Є","jukcy":"є","Kappa":"Κ","kappa":"κ","kappav":"ϰ","Kcedil":"Ķ","kcedil":"ķ","Kcy":"К","kcy":"к","Kfr":"𝔎","kfr":"𝔨","kgreen":"ĸ","KHcy":"Х","khcy":"х","KJcy":"Ќ","kjcy":"ќ","Kopf":"𝕂","kopf":"𝕜","Kscr":"𝒦","kscr":"𝓀","lAarr":"⇚","Lacute":"Ĺ","lacute":"ĺ","laemptyv":"⦴","lagran":"ℒ","Lambda":"Λ","lambda":"λ","lang":"⟨","Lang":"⟪","langd":"⦑","langle":"⟨","lap":"⪅","Laplacetrf":"ℒ","laquo":"«","larrb":"⇤","larrbfs":"⤟","larr":"←","Larr":"↞","lArr":"⇐","larrfs":"⤝","larrhk":"↩","larrlp":"↫","larrpl":"⤹","larrsim":"⥳","larrtl":"↢","latail":"⤙","lAtail":"⤛","lat":"⪫","late":"⪭","lates":"⪭︀","lbarr":"⤌","lBarr":"⤎","lbbrk":"❲","lbrace":"{","lbrack":"[","lbrke":"⦋","lbrksld":"⦏","lbrkslu":"⦍","Lcaron":"Ľ","lcaron":"ľ","Lcedil":"Ļ","lcedil":"ļ","lceil":"⌈","lcub":"{","Lcy":"Л","lcy":"л","ldca":"⤶","ldquo":"“","ldquor":"„","ldrdhar":"⥧","ldrushar":"⥋","ldsh":"↲","le":"≤","lE":"≦","LeftAngleBracket":"⟨","LeftArrowBar":"⇤","leftarrow":"←","LeftArrow":"←","Leftarrow":"⇐","LeftArrowRightArrow":"⇆","leftarrowtail":"↢","LeftCeiling":"⌈","LeftDoubleBracket":"⟦","LeftDownTeeVector":"⥡","LeftDownVectorBar":"⥙","LeftDownVector":"⇃","LeftFloor":"⌊","leftharpoondown":"↽","leftharpoonup":"↼","leftleftarrows":"⇇","leftrightarrow":"↔","LeftRightArrow":"↔","Leftrightarrow":"⇔","leftrightarrows":"⇆","leftrightharpoons":"⇋","leftrightsquigarrow":"↭","LeftRightVector":"⥎","LeftTeeArrow":"↤","LeftTee":"⊣","LeftTeeVector":"⥚","leftthreetimes":"⋋","LeftTriangleBar":"⧏","LeftTriangle":"⊲","LeftTriangleEqual":"⊴","LeftUpDownVector":"⥑","LeftUpTeeVector":"⥠","LeftUpVectorBar":"⥘","LeftUpVector":"↿","LeftVectorBar":"⥒","LeftVector":"↼","lEg":"⪋","leg":"⋚","leq":"≤","leqq":"≦","leqslant":"⩽","lescc":"⪨","les":"⩽","lesdot":"⩿","lesdoto":"⪁","lesdotor":"⪃","lesg":"⋚︀","lesges":"⪓","lessapprox":"⪅","lessdot":"⋖","lesseqgtr":"⋚","lesseqqgtr":"⪋","LessEqualGreater":"⋚","LessFullEqual":"≦","LessGreater":"≶","lessgtr":"≶","LessLess":"⪡","lesssim":"≲","LessSlantEqual":"⩽","LessTilde":"≲","lfisht":"⥼","lfloor":"⌊","Lfr":"𝔏","lfr":"𝔩","lg":"≶","lgE":"⪑","lHar":"⥢","lhard":"↽","lharu":"↼","lharul":"⥪","lhblk":"▄","LJcy":"Љ","ljcy":"љ","llarr":"⇇","ll":"≪","Ll":"⋘","llcorner":"⌞","Lleftarrow":"⇚","llhard":"⥫","lltri":"◺","Lmidot":"Ŀ","lmidot":"ŀ","lmoustache":"⎰","lmoust":"⎰","lnap":"⪉","lnapprox":"⪉","lne":"⪇","lnE":"≨","lneq":"⪇","lneqq":"≨","lnsim":"⋦","loang":"⟬","loarr":"⇽","lobrk":"⟦","longleftarrow":"⟵","LongLeftArrow":"⟵","Longleftarrow":"⟸","longleftrightarrow":"⟷","LongLeftRightArrow":"⟷","Longleftrightarrow":"⟺","longmapsto":"⟼","longrightarrow":"⟶","LongRightArrow":"⟶","Longrightarrow":"⟹","looparrowleft":"↫","looparrowright":"↬","lopar":"⦅","Lopf":"𝕃","lopf":"𝕝","loplus":"⨭","lotimes":"⨴","lowast":"∗","lowbar":"_","LowerLeftArrow":"↙","LowerRightArrow":"↘","loz":"◊","lozenge":"◊","lozf":"⧫","lpar":"(","lparlt":"⦓","lrarr":"⇆","lrcorner":"⌟","lrhar":"⇋","lrhard":"⥭","lrm":"‎","lrtri":"⊿","lsaquo":"‹","lscr":"𝓁","Lscr":"ℒ","lsh":"↰","Lsh":"↰","lsim":"≲","lsime":"⪍","lsimg":"⪏","lsqb":"[","lsquo":"‘","lsquor":"‚","Lstrok":"Ł","lstrok":"ł","ltcc":"⪦","ltcir":"⩹","lt":"<","LT":"<","Lt":"≪","ltdot":"⋖","lthree":"⋋","ltimes":"⋉","ltlarr":"⥶","ltquest":"⩻","ltri":"◃","ltrie":"⊴","ltrif":"◂","ltrPar":"⦖","lurdshar":"⥊","luruhar":"⥦","lvertneqq":"≨︀","lvnE":"≨︀","macr":"¯","male":"♂","malt":"✠","maltese":"✠","Map":"⤅","map":"↦","mapsto":"↦","mapstodown":"↧","mapstoleft":"↤","mapstoup":"↥","marker":"▮","mcomma":"⨩","Mcy":"М","mcy":"м","mdash":"—","mDDot":"∺","measuredangle":"∡","MediumSpace":" ","Mellintrf":"ℳ","Mfr":"𝔐","mfr":"𝔪","mho":"℧","micro":"µ","midast":"*","midcir":"⫰","mid":"∣","middot":"·","minusb":"⊟","minus":"−","minusd":"∸","minusdu":"⨪","MinusPlus":"∓","mlcp":"⫛","mldr":"…","mnplus":"∓","models":"⊧","Mopf":"𝕄","mopf":"𝕞","mp":"∓","mscr":"𝓂","Mscr":"ℳ","mstpos":"∾","Mu":"Μ","mu":"μ","multimap":"⊸","mumap":"⊸","nabla":"∇","Nacute":"Ń","nacute":"ń","nang":"∠⃒","nap":"≉","napE":"⩰̸","napid":"≋̸","napos":"ŉ","napprox":"≉","natural":"♮","naturals":"ℕ","natur":"♮","nbsp":" ","nbump":"≎̸","nbumpe":"≏̸","ncap":"⩃","Ncaron":"Ň","ncaron":"ň","Ncedil":"Ņ","ncedil":"ņ","ncong":"≇","ncongdot":"⩭̸","ncup":"⩂","Ncy":"Н","ncy":"н","ndash":"–","nearhk":"⤤","nearr":"↗","neArr":"⇗","nearrow":"↗","ne":"≠","nedot":"≐̸","NegativeMediumSpace":"​","NegativeThickSpace":"​","NegativeThinSpace":"​","NegativeVeryThinSpace":"​","nequiv":"≢","nesear":"⤨","nesim":"≂̸","NestedGreaterGreater":"≫","NestedLessLess":"≪","NewLine":"\n","nexist":"∄","nexists":"∄","Nfr":"𝔑","nfr":"𝔫","ngE":"≧̸","nge":"≱","ngeq":"≱","ngeqq":"≧̸","ngeqslant":"⩾̸","nges":"⩾̸","nGg":"⋙̸","ngsim":"≵","nGt":"≫⃒","ngt":"≯","ngtr":"≯","nGtv":"≫̸","nharr":"↮","nhArr":"⇎","nhpar":"⫲","ni":"∋","nis":"⋼","nisd":"⋺","niv":"∋","NJcy":"Њ","njcy":"њ","nlarr":"↚","nlArr":"⇍","nldr":"‥","nlE":"≦̸","nle":"≰","nleftarrow":"↚","nLeftarrow":"⇍","nleftrightarrow":"↮","nLeftrightarrow":"⇎","nleq":"≰","nleqq":"≦̸","nleqslant":"⩽̸","nles":"⩽̸","nless":"≮","nLl":"⋘̸","nlsim":"≴","nLt":"≪⃒","nlt":"≮","nltri":"⋪","nltrie":"⋬","nLtv":"≪̸","nmid":"∤","NoBreak":"⁠","NonBreakingSpace":" ","nopf":"𝕟","Nopf":"ℕ","Not":"⫬","not":"¬","NotCongruent":"≢","NotCupCap":"≭","NotDoubleVerticalBar":"∦","NotElement":"∉","NotEqual":"≠","NotEqualTilde":"≂̸","NotExists":"∄","NotGreater":"≯","NotGreaterEqual":"≱","NotGreaterFullEqual":"≧̸","NotGreaterGreater":"≫̸","NotGreaterLess":"≹","NotGreaterSlantEqual":"⩾̸","NotGreaterTilde":"≵","NotHumpDownHump":"≎̸","NotHumpEqual":"≏̸","notin":"∉","notindot":"⋵̸","notinE":"⋹̸","notinva":"∉","notinvb":"⋷","notinvc":"⋶","NotLeftTriangleBar":"⧏̸","NotLeftTriangle":"⋪","NotLeftTriangleEqual":"⋬","NotLess":"≮","NotLessEqual":"≰","NotLessGreater":"≸","NotLessLess":"≪̸","NotLessSlantEqual":"⩽̸","NotLessTilde":"≴","NotNestedGreaterGreater":"⪢̸","NotNestedLessLess":"⪡̸","notni":"∌","notniva":"∌","notnivb":"⋾","notnivc":"⋽","NotPrecedes":"⊀","NotPrecedesEqual":"⪯̸","NotPrecedesSlantEqual":"⋠","NotReverseElement":"∌","NotRightTriangleBar":"⧐̸","NotRightTriangle":"⋫","NotRightTriangleEqual":"⋭","NotSquareSubset":"⊏̸","NotSquareSubsetEqual":"⋢","NotSquareSuperset":"⊐̸","NotSquareSupersetEqual":"⋣","NotSubset":"⊂⃒","NotSubsetEqual":"⊈","NotSucceeds":"⊁","NotSucceedsEqual":"⪰̸","NotSucceedsSlantEqual":"⋡","NotSucceedsTilde":"≿̸","NotSuperset":"⊃⃒","NotSupersetEqual":"⊉","NotTilde":"≁","NotTildeEqual":"≄","NotTildeFullEqual":"≇","NotTildeTilde":"≉","NotVerticalBar":"∤","nparallel":"∦","npar":"∦","nparsl":"⫽⃥","npart":"∂̸","npolint":"⨔","npr":"⊀","nprcue":"⋠","nprec":"⊀","npreceq":"⪯̸","npre":"⪯̸","nrarrc":"⤳̸","nrarr":"↛","nrArr":"⇏","nrarrw":"↝̸","nrightarrow":"↛","nRightarrow":"⇏","nrtri":"⋫","nrtrie":"⋭","nsc":"⊁","nsccue":"⋡","nsce":"⪰̸","Nscr":"𝒩","nscr":"𝓃","nshortmid":"∤","nshortparallel":"∦","nsim":"≁","nsime":"≄","nsimeq":"≄","nsmid":"∤","nspar":"∦","nsqsube":"⋢","nsqsupe":"⋣","nsub":"⊄","nsubE":"⫅̸","nsube":"⊈","nsubset":"⊂⃒","nsubseteq":"⊈","nsubseteqq":"⫅̸","nsucc":"⊁","nsucceq":"⪰̸","nsup":"⊅","nsupE":"⫆̸","nsupe":"⊉","nsupset":"⊃⃒","nsupseteq":"⊉","nsupseteqq":"⫆̸","ntgl":"≹","Ntilde":"Ñ","ntilde":"ñ","ntlg":"≸","ntriangleleft":"⋪","ntrianglelefteq":"⋬","ntriangleright":"⋫","ntrianglerighteq":"⋭","Nu":"Ν","nu":"ν","num":"#","numero":"№","numsp":" ","nvap":"≍⃒","nvdash":"⊬","nvDash":"⊭","nVdash":"⊮","nVDash":"⊯","nvge":"≥⃒","nvgt":">⃒","nvHarr":"⤄","nvinfin":"⧞","nvlArr":"⤂","nvle":"≤⃒","nvlt":"<⃒","nvltrie":"⊴⃒","nvrArr":"⤃","nvrtrie":"⊵⃒","nvsim":"∼⃒","nwarhk":"⤣","nwarr":"↖","nwArr":"⇖","nwarrow":"↖","nwnear":"⤧","Oacute":"Ó","oacute":"ó","oast":"⊛","Ocirc":"Ô","ocirc":"ô","ocir":"⊚","Ocy":"О","ocy":"о","odash":"⊝","Odblac":"Ő","odblac":"ő","odiv":"⨸","odot":"⊙","odsold":"⦼","OElig":"Œ","oelig":"œ","ofcir":"⦿","Ofr":"𝔒","ofr":"𝔬","ogon":"˛","Ograve":"Ò","ograve":"ò","ogt":"⧁","ohbar":"⦵","ohm":"Ω","oint":"∮","olarr":"↺","olcir":"⦾","olcross":"⦻","oline":"‾","olt":"⧀","Omacr":"Ō","omacr":"ō","Omega":"Ω","omega":"ω","Omicron":"Ο","omicron":"ο","omid":"⦶","ominus":"⊖","Oopf":"𝕆","oopf":"𝕠","opar":"⦷","OpenCurlyDoubleQuote":"“","OpenCurlyQuote":"‘","operp":"⦹","oplus":"⊕","orarr":"↻","Or":"⩔","or":"∨","ord":"⩝","order":"ℴ","orderof":"ℴ","ordf":"ª","ordm":"º","origof":"⊶","oror":"⩖","orslope":"⩗","orv":"⩛","oS":"Ⓢ","Oscr":"𝒪","oscr":"ℴ","Oslash":"Ø","oslash":"ø","osol":"⊘","Otilde":"Õ","otilde":"õ","otimesas":"⨶","Otimes":"⨷","otimes":"⊗","Ouml":"Ö","ouml":"ö","ovbar":"⌽","OverBar":"‾","OverBrace":"⏞","OverBracket":"⎴","OverParenthesis":"⏜","para":"¶","parallel":"∥","par":"∥","parsim":"⫳","parsl":"⫽","part":"∂","PartialD":"∂","Pcy":"П","pcy":"п","percnt":"%","period":".","permil":"‰","perp":"⊥","pertenk":"‱","Pfr":"𝔓","pfr":"𝔭","Phi":"Φ","phi":"φ","phiv":"ϕ","phmmat":"ℳ","phone":"☎","Pi":"Π","pi":"π","pitchfork":"⋔","piv":"ϖ","planck":"ℏ","planckh":"ℎ","plankv":"ℏ","plusacir":"⨣","plusb":"⊞","pluscir":"⨢","plus":"+","plusdo":"∔","plusdu":"⨥","pluse":"⩲","PlusMinus":"±","plusmn":"±","plussim":"⨦","plustwo":"⨧","pm":"±","Poincareplane":"ℌ","pointint":"⨕","popf":"𝕡","Popf":"ℙ","pound":"£","prap":"⪷","Pr":"⪻","pr":"≺","prcue":"≼","precapprox":"⪷","prec":"≺","preccurlyeq":"≼","Precedes":"≺","PrecedesEqual":"⪯","PrecedesSlantEqual":"≼","PrecedesTilde":"≾","preceq":"⪯","precnapprox":"⪹","precneqq":"⪵","precnsim":"⋨","pre":"⪯","prE":"⪳","precsim":"≾","prime":"′","Prime":"″","primes":"ℙ","prnap":"⪹","prnE":"⪵","prnsim":"⋨","prod":"∏","Product":"∏","profalar":"⌮","profline":"⌒","profsurf":"⌓","prop":"∝","Proportional":"∝","Proportion":"∷","propto":"∝","prsim":"≾","prurel":"⊰","Pscr":"𝒫","pscr":"𝓅","Psi":"Ψ","psi":"ψ","puncsp":" ","Qfr":"𝔔","qfr":"𝔮","qint":"⨌","qopf":"𝕢","Qopf":"ℚ","qprime":"⁗","Qscr":"𝒬","qscr":"𝓆","quaternions":"ℍ","quatint":"⨖","quest":"?","questeq":"≟","quot":"\"","QUOT":"\"","rAarr":"⇛","race":"∽̱","Racute":"Ŕ","racute":"ŕ","radic":"√","raemptyv":"⦳","rang":"⟩","Rang":"⟫","rangd":"⦒","range":"⦥","rangle":"⟩","raquo":"»","rarrap":"⥵","rarrb":"⇥","rarrbfs":"⤠","rarrc":"⤳","rarr":"→","Rarr":"↠","rArr":"⇒","rarrfs":"⤞","rarrhk":"↪","rarrlp":"↬","rarrpl":"⥅","rarrsim":"⥴","Rarrtl":"⤖","rarrtl":"↣","rarrw":"↝","ratail":"⤚","rAtail":"⤜","ratio":"∶","rationals":"ℚ","rbarr":"⤍","rBarr":"⤏","RBarr":"⤐","rbbrk":"❳","rbrace":"}","rbrack":"]","rbrke":"⦌","rbrksld":"⦎","rbrkslu":"⦐","Rcaron":"Ř","rcaron":"ř","Rcedil":"Ŗ","rcedil":"ŗ","rceil":"⌉","rcub":"}","Rcy":"Р","rcy":"р","rdca":"⤷","rdldhar":"⥩","rdquo":"”","rdquor":"”","rdsh":"↳","real":"ℜ","realine":"ℛ","realpart":"ℜ","reals":"ℝ","Re":"ℜ","rect":"▭","reg":"®","REG":"®","ReverseElement":"∋","ReverseEquilibrium":"⇋","ReverseUpEquilibrium":"⥯","rfisht":"⥽","rfloor":"⌋","rfr":"𝔯","Rfr":"ℜ","rHar":"⥤","rhard":"⇁","rharu":"⇀","rharul":"⥬","Rho":"Ρ","rho":"ρ","rhov":"ϱ","RightAngleBracket":"⟩","RightArrowBar":"⇥","rightarrow":"→","RightArrow":"→","Rightarrow":"⇒","RightArrowLeftArrow":"⇄","rightarrowtail":"↣","RightCeiling":"⌉","RightDoubleBracket":"⟧","RightDownTeeVector":"⥝","RightDownVectorBar":"⥕","RightDownVector":"⇂","RightFloor":"⌋","rightharpoondown":"⇁","rightharpoonup":"⇀","rightleftarrows":"⇄","rightleftharpoons":"⇌","rightrightarrows":"⇉","rightsquigarrow":"↝","RightTeeArrow":"↦","RightTee":"⊢","RightTeeVector":"⥛","rightthreetimes":"⋌","RightTriangleBar":"⧐","RightTriangle":"⊳","RightTriangleEqual":"⊵","RightUpDownVector":"⥏","RightUpTeeVector":"⥜","RightUpVectorBar":"⥔","RightUpVector":"↾","RightVectorBar":"⥓","RightVector":"⇀","ring":"˚","risingdotseq":"≓","rlarr":"⇄","rlhar":"⇌","rlm":"‏","rmoustache":"⎱","rmoust":"⎱","rnmid":"⫮","roang":"⟭","roarr":"⇾","robrk":"⟧","ropar":"⦆","ropf":"𝕣","Ropf":"ℝ","roplus":"⨮","rotimes":"⨵","RoundImplies":"⥰","rpar":")","rpargt":"⦔","rppolint":"⨒","rrarr":"⇉","Rrightarrow":"⇛","rsaquo":"›","rscr":"𝓇","Rscr":"ℛ","rsh":"↱","Rsh":"↱","rsqb":"]","rsquo":"’","rsquor":"’","rthree":"⋌","rtimes":"⋊","rtri":"▹","rtrie":"⊵","rtrif":"▸","rtriltri":"⧎","RuleDelayed":"⧴","ruluhar":"⥨","rx":"℞","Sacute":"Ś","sacute":"ś","sbquo":"‚","scap":"⪸","Scaron":"Š","scaron":"š","Sc":"⪼","sc":"≻","sccue":"≽","sce":"⪰","scE":"⪴","Scedil":"Ş","scedil":"ş","Scirc":"Ŝ","scirc":"ŝ","scnap":"⪺","scnE":"⪶","scnsim":"⋩","scpolint":"⨓","scsim":"≿","Scy":"С","scy":"с","sdotb":"⊡","sdot":"⋅","sdote":"⩦","searhk":"⤥","searr":"↘","seArr":"⇘","searrow":"↘","sect":"§","semi":";","seswar":"⤩","setminus":"∖","setmn":"∖","sext":"✶","Sfr":"𝔖","sfr":"𝔰","sfrown":"⌢","sharp":"♯","SHCHcy":"Щ","shchcy":"щ","SHcy":"Ш","shcy":"ш","ShortDownArrow":"↓","ShortLeftArrow":"←","shortmid":"∣","shortparallel":"∥","ShortRightArrow":"→","ShortUpArrow":"↑","shy":"­","Sigma":"Σ","sigma":"σ","sigmaf":"ς","sigmav":"ς","sim":"∼","simdot":"⩪","sime":"≃","simeq":"≃","simg":"⪞","simgE":"⪠","siml":"⪝","simlE":"⪟","simne":"≆","simplus":"⨤","simrarr":"⥲","slarr":"←","SmallCircle":"∘","smallsetminus":"∖","smashp":"⨳","smeparsl":"⧤","smid":"∣","smile":"⌣","smt":"⪪","smte":"⪬","smtes":"⪬︀","SOFTcy":"Ь","softcy":"ь","solbar":"⌿","solb":"⧄","sol":"/","Sopf":"𝕊","sopf":"𝕤","spades":"♠","spadesuit":"♠","spar":"∥","sqcap":"⊓","sqcaps":"⊓︀","sqcup":"⊔","sqcups":"⊔︀","Sqrt":"√","sqsub":"⊏","sqsube":"⊑","sqsubset":"⊏","sqsubseteq":"⊑","sqsup":"⊐","sqsupe":"⊒","sqsupset":"⊐","sqsupseteq":"⊒","square":"□","Square":"□","SquareIntersection":"⊓","SquareSubset":"⊏","SquareSubsetEqual":"⊑","SquareSuperset":"⊐","SquareSupersetEqual":"⊒","SquareUnion":"⊔","squarf":"▪","squ":"□","squf":"▪","srarr":"→","Sscr":"𝒮","sscr":"𝓈","ssetmn":"∖","ssmile":"⌣","sstarf":"⋆","Star":"⋆","star":"☆","starf":"★","straightepsilon":"ϵ","straightphi":"ϕ","strns":"¯","sub":"⊂","Sub":"⋐","subdot":"⪽","subE":"⫅","sube":"⊆","subedot":"⫃","submult":"⫁","subnE":"⫋","subne":"⊊","subplus":"⪿","subrarr":"⥹","subset":"⊂","Subset":"⋐","subseteq":"⊆","subseteqq":"⫅","SubsetEqual":"⊆","subsetneq":"⊊","subsetneqq":"⫋","subsim":"⫇","subsub":"⫕","subsup":"⫓","succapprox":"⪸","succ":"≻","succcurlyeq":"≽","Succeeds":"≻","SucceedsEqual":"⪰","SucceedsSlantEqual":"≽","SucceedsTilde":"≿","succeq":"⪰","succnapprox":"⪺","succneqq":"⪶","succnsim":"⋩","succsim":"≿","SuchThat":"∋","sum":"∑","Sum":"∑","sung":"♪","sup1":"¹","sup2":"²","sup3":"³","sup":"⊃","Sup":"⋑","supdot":"⪾","supdsub":"⫘","supE":"⫆","supe":"⊇","supedot":"⫄","Superset":"⊃","SupersetEqual":"⊇","suphsol":"⟉","suphsub":"⫗","suplarr":"⥻","supmult":"⫂","supnE":"⫌","supne":"⊋","supplus":"⫀","supset":"⊃","Supset":"⋑","supseteq":"⊇","supseteqq":"⫆","supsetneq":"⊋","supsetneqq":"⫌","supsim":"⫈","supsub":"⫔","supsup":"⫖","swarhk":"⤦","swarr":"↙","swArr":"⇙","swarrow":"↙","swnwar":"⤪","szlig":"ß","Tab":"\t","target":"⌖","Tau":"Τ","tau":"τ","tbrk":"⎴","Tcaron":"Ť","tcaron":"ť","Tcedil":"Ţ","tcedil":"ţ","Tcy":"Т","tcy":"т","tdot":"⃛","telrec":"⌕","Tfr":"𝔗","tfr":"𝔱","there4":"∴","therefore":"∴","Therefore":"∴","Theta":"Θ","theta":"θ","thetasym":"ϑ","thetav":"ϑ","thickapprox":"≈","thicksim":"∼","ThickSpace":"  ","ThinSpace":" ","thinsp":" ","thkap":"≈","thksim":"∼","THORN":"Þ","thorn":"þ","tilde":"˜","Tilde":"∼","TildeEqual":"≃","TildeFullEqual":"≅","TildeTilde":"≈","timesbar":"⨱","timesb":"⊠","times":"×","timesd":"⨰","tint":"∭","toea":"⤨","topbot":"⌶","topcir":"⫱","top":"⊤","Topf":"𝕋","topf":"𝕥","topfork":"⫚","tosa":"⤩","tprime":"‴","trade":"™","TRADE":"™","triangle":"▵","triangledown":"▿","triangleleft":"◃","trianglelefteq":"⊴","triangleq":"≜","triangleright":"▹","trianglerighteq":"⊵","tridot":"◬","trie":"≜","triminus":"⨺","TripleDot":"⃛","triplus":"⨹","trisb":"⧍","tritime":"⨻","trpezium":"⏢","Tscr":"𝒯","tscr":"𝓉","TScy":"Ц","tscy":"ц","TSHcy":"Ћ","tshcy":"ћ","Tstrok":"Ŧ","tstrok":"ŧ","twixt":"≬","twoheadleftarrow":"↞","twoheadrightarrow":"↠","Uacute":"Ú","uacute":"ú","uarr":"↑","Uarr":"↟","uArr":"⇑","Uarrocir":"⥉","Ubrcy":"Ў","ubrcy":"ў","Ubreve":"Ŭ","ubreve":"ŭ","Ucirc":"Û","ucirc":"û","Ucy":"У","ucy":"у","udarr":"⇅","Udblac":"Ű","udblac":"ű","udhar":"⥮","ufisht":"⥾","Ufr":"𝔘","ufr":"𝔲","Ugrave":"Ù","ugrave":"ù","uHar":"⥣","uharl":"↿","uharr":"↾","uhblk":"▀","ulcorn":"⌜","ulcorner":"⌜","ulcrop":"⌏","ultri":"◸","Umacr":"Ū","umacr":"ū","uml":"¨","UnderBar":"_","UnderBrace":"⏟","UnderBracket":"⎵","UnderParenthesis":"⏝","Union":"⋃","UnionPlus":"⊎","Uogon":"Ų","uogon":"ų","Uopf":"𝕌","uopf":"𝕦","UpArrowBar":"⤒","uparrow":"↑","UpArrow":"↑","Uparrow":"⇑","UpArrowDownArrow":"⇅","updownarrow":"↕","UpDownArrow":"↕","Updownarrow":"⇕","UpEquilibrium":"⥮","upharpoonleft":"↿","upharpoonright":"↾","uplus":"⊎","UpperLeftArrow":"↖","UpperRightArrow":"↗","upsi":"υ","Upsi":"ϒ","upsih":"ϒ","Upsilon":"Υ","upsilon":"υ","UpTeeArrow":"↥","UpTee":"⊥","upuparrows":"⇈","urcorn":"⌝","urcorner":"⌝","urcrop":"⌎","Uring":"Ů","uring":"ů","urtri":"◹","Uscr":"𝒰","uscr":"𝓊","utdot":"⋰","Utilde":"Ũ","utilde":"ũ","utri":"▵","utrif":"▴","uuarr":"⇈","Uuml":"Ü","uuml":"ü","uwangle":"⦧","vangrt":"⦜","varepsilon":"ϵ","varkappa":"ϰ","varnothing":"∅","varphi":"ϕ","varpi":"ϖ","varpropto":"∝","varr":"↕","vArr":"⇕","varrho":"ϱ","varsigma":"ς","varsubsetneq":"⊊︀","varsubsetneqq":"⫋︀","varsupsetneq":"⊋︀","varsupsetneqq":"⫌︀","vartheta":"ϑ","vartriangleleft":"⊲","vartriangleright":"⊳","vBar":"⫨","Vbar":"⫫","vBarv":"⫩","Vcy":"В","vcy":"в","vdash":"⊢","vDash":"⊨","Vdash":"⊩","VDash":"⊫","Vdashl":"⫦","veebar":"⊻","vee":"∨","Vee":"⋁","veeeq":"≚","vellip":"⋮","verbar":"|","Verbar":"‖","vert":"|","Vert":"‖","VerticalBar":"∣","VerticalLine":"|","VerticalSeparator":"❘","VerticalTilde":"≀","VeryThinSpace":" ","Vfr":"𝔙","vfr":"𝔳","vltri":"⊲","vnsub":"⊂⃒","vnsup":"⊃⃒","Vopf":"𝕍","vopf":"𝕧","vprop":"∝","vrtri":"⊳","Vscr":"𝒱","vscr":"𝓋","vsubnE":"⫋︀","vsubne":"⊊︀","vsupnE":"⫌︀","vsupne":"⊋︀","Vvdash":"⊪","vzigzag":"⦚","Wcirc":"Ŵ","wcirc":"ŵ","wedbar":"⩟","wedge":"∧","Wedge":"⋀","wedgeq":"≙","weierp":"℘","Wfr":"𝔚","wfr":"𝔴","Wopf":"𝕎","wopf":"𝕨","wp":"℘","wr":"≀","wreath":"≀","Wscr":"𝒲","wscr":"𝓌","xcap":"⋂","xcirc":"◯","xcup":"⋃","xdtri":"▽","Xfr":"𝔛","xfr":"𝔵","xharr":"⟷","xhArr":"⟺","Xi":"Ξ","xi":"ξ","xlarr":"⟵","xlArr":"⟸","xmap":"⟼","xnis":"⋻","xodot":"⨀","Xopf":"𝕏","xopf":"𝕩","xoplus":"⨁","xotime":"⨂","xrarr":"⟶","xrArr":"⟹","Xscr":"𝒳","xscr":"𝓍","xsqcup":"⨆","xuplus":"⨄","xutri":"△","xvee":"⋁","xwedge":"⋀","Yacute":"Ý","yacute":"ý","YAcy":"Я","yacy":"я","Ycirc":"Ŷ","ycirc":"ŷ","Ycy":"Ы","ycy":"ы","yen":"¥","Yfr":"𝔜","yfr":"𝔶","YIcy":"Ї","yicy":"ї","Yopf":"𝕐","yopf":"𝕪","Yscr":"𝒴","yscr":"𝓎","YUcy":"Ю","yucy":"ю","yuml":"ÿ","Yuml":"Ÿ","Zacute":"Ź","zacute":"ź","Zcaron":"Ž","zcaron":"ž","Zcy":"З","zcy":"з","Zdot":"Ż","zdot":"ż","zeetrf":"ℨ","ZeroWidthSpace":"​","Zeta":"Ζ","zeta":"ζ","zfr":"𝔷","Zfr":"ℨ","ZHcy":"Ж","zhcy":"ж","zigrarr":"⇝","zopf":"𝕫","Zopf":"ℤ","Zscr":"𝒵","zscr":"𝓏","zwj":"‍","zwnj":"‌"}
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 module.exports={"Aacute":"Á","aacute":"á","Acirc":"Â","acirc":"â","acute":"´","AElig":"Æ","aelig":"æ","Agrave":"À","agrave":"à","amp":"&","AMP":"&","Aring":"Å","aring":"å","Atilde":"Ã","atilde":"ã","Auml":"Ä","auml":"ä","brvbar":"¦","Ccedil":"Ç","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","COPY":"©","curren":"¤","deg":"°","divide":"÷","Eacute":"É","eacute":"é","Ecirc":"Ê","ecirc":"ê","Egrave":"È","egrave":"è","ETH":"Ð","eth":"ð","Euml":"Ë","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","GT":">","Iacute":"Í","iacute":"í","Icirc":"Î","icirc":"î","iexcl":"¡","Igrave":"Ì","igrave":"ì","iquest":"¿","Iuml":"Ï","iuml":"ï","laquo":"«","lt":"<","LT":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","Ntilde":"Ñ","ntilde":"ñ","Oacute":"Ó","oacute":"ó","Ocirc":"Ô","ocirc":"ô","Ograve":"Ò","ograve":"ò","ordf":"ª","ordm":"º","Oslash":"Ø","oslash":"ø","Otilde":"Õ","otilde":"õ","Ouml":"Ö","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\"","QUOT":"\"","raquo":"»","reg":"®","REG":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","THORN":"Þ","thorn":"þ","times":"×","Uacute":"Ú","uacute":"ú","Ucirc":"Û","ucirc":"û","Ugrave":"Ù","ugrave":"ù","uml":"¨","Uuml":"Ü","uuml":"ü","Yacute":"Ý","yacute":"ý","yen":"¥","yuml":"ÿ"}
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 module.exports={"amp":"&","apos":"'","gt":">","lt":"<","quot":"\""}
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 var GetIntrinsic = require('get-intrinsic');
 
-var $gOPD = GetIntrinsic('%Object.getOwnPropertyDescriptor%');
+var $gOPD = GetIntrinsic('%Object.getOwnPropertyDescriptor%', true);
 if ($gOPD) {
 	try {
 		$gOPD([], 'length');
@@ -3810,7 +4064,7 @@ if ($gOPD) {
 
 module.exports = $gOPD;
 
-},{"get-intrinsic":33}],29:[function(require,module,exports){
+},{"get-intrinsic":34}],30:[function(require,module,exports){
 /**
  * ascii-folder.js
  * https://github.com/mplatt/fold-to-ascii-js
@@ -5110,31 +5364,71 @@ ASCIIFolder.mapping = new Map([
 
 module.exports = ASCIIFolder;
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
+'use strict';
 
-var hasOwn = Object.prototype.hasOwnProperty;
-var toString = Object.prototype.toString;
+var isCallable = require('is-callable');
 
-module.exports = function forEach (obj, fn, ctx) {
-    if (toString.call(fn) !== '[object Function]') {
-        throw new TypeError('iterator must be a function');
-    }
-    var l = obj.length;
-    if (l === +l) {
-        for (var i = 0; i < l; i++) {
-            fn.call(ctx, obj[i], i, obj);
-        }
-    } else {
-        for (var k in obj) {
-            if (hasOwn.call(obj, k)) {
-                fn.call(ctx, obj[k], k, obj);
+var toStr = Object.prototype.toString;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+var forEachArray = function forEachArray(array, iterator, receiver) {
+    for (var i = 0, len = array.length; i < len; i++) {
+        if (hasOwnProperty.call(array, i)) {
+            if (receiver == null) {
+                iterator(array[i], i, array);
+            } else {
+                iterator.call(receiver, array[i], i, array);
             }
         }
     }
 };
 
+var forEachString = function forEachString(string, iterator, receiver) {
+    for (var i = 0, len = string.length; i < len; i++) {
+        // no such thing as a sparse string.
+        if (receiver == null) {
+            iterator(string.charAt(i), i, string);
+        } else {
+            iterator.call(receiver, string.charAt(i), i, string);
+        }
+    }
+};
 
-},{}],31:[function(require,module,exports){
+var forEachObject = function forEachObject(object, iterator, receiver) {
+    for (var k in object) {
+        if (hasOwnProperty.call(object, k)) {
+            if (receiver == null) {
+                iterator(object[k], k, object);
+            } else {
+                iterator.call(receiver, object[k], k, object);
+            }
+        }
+    }
+};
+
+var forEach = function forEach(list, iterator, thisArg) {
+    if (!isCallable(iterator)) {
+        throw new TypeError('iterator must be a function');
+    }
+
+    var receiver;
+    if (arguments.length >= 3) {
+        receiver = thisArg;
+    }
+
+    if (toStr.call(list) === '[object Array]') {
+        forEachArray(list, iterator, receiver);
+    } else if (typeof list === 'string') {
+        forEachString(list, iterator, receiver);
+    } else {
+        forEachObject(list, iterator, receiver);
+    }
+};
+
+module.exports = forEach;
+
+},{"is-callable":57}],32:[function(require,module,exports){
 'use strict';
 
 /* eslint no-invalid-this: 1 */
@@ -5188,14 +5482,14 @@ module.exports = function bind(that) {
     return bound;
 };
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 'use strict';
 
 var implementation = require('./implementation');
 
 module.exports = Function.prototype.bind || implementation;
 
-},{"./implementation":31}],33:[function(require,module,exports){
+},{"./implementation":32}],34:[function(require,module,exports){
 'use strict';
 
 var undefined;
@@ -5400,6 +5694,7 @@ var $concat = bind.call(Function.call, Array.prototype.concat);
 var $spliceApply = bind.call(Function.apply, Array.prototype.splice);
 var $replace = bind.call(Function.call, String.prototype.replace);
 var $strSlice = bind.call(Function.call, String.prototype.slice);
+var $exec = bind.call(Function.call, RegExp.prototype.exec);
 
 /* adapted from https://github.com/lodash/lodash/blob/4.17.15/dist/lodash.js#L6735-L6744 */
 var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
@@ -5455,6 +5750,9 @@ module.exports = function GetIntrinsic(name, allowMissing) {
 		throw new $TypeError('"allowMissing" argument must be a boolean');
 	}
 
+	if ($exec(/^%?[^%]*%?$/g, name) === null) {
+		throw new $SyntaxError('`%` may not be present anywhere but at the beginning and end of the intrinsic name');
+	}
 	var parts = stringToPath(name);
 	var intrinsicBaseName = parts.length > 0 ? parts[0] : '';
 
@@ -5527,7 +5825,7 @@ module.exports = function GetIntrinsic(name, allowMissing) {
 	return value;
 };
 
-},{"function-bind":32,"has":36,"has-symbols":34}],34:[function(require,module,exports){
+},{"function-bind":33,"has":38,"has-symbols":35}],35:[function(require,module,exports){
 'use strict';
 
 var origSymbol = typeof Symbol !== 'undefined' && Symbol;
@@ -5542,7 +5840,7 @@ module.exports = function hasNativeSymbols() {
 	return hasSymbolSham();
 };
 
-},{"./shams":35}],35:[function(require,module,exports){
+},{"./shams":36}],36:[function(require,module,exports){
 'use strict';
 
 /* eslint complexity: [2, 18], max-statements: [2, 33] */
@@ -5586,14 +5884,23 @@ module.exports = function hasSymbols() {
 	return true;
 };
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
+'use strict';
+
+var hasSymbols = require('has-symbols/shams');
+
+module.exports = function hasToStringTagShams() {
+	return hasSymbols() && !!Symbol.toStringTag;
+};
+
+},{"has-symbols/shams":36}],38:[function(require,module,exports){
 'use strict';
 
 var bind = require('function-bind');
 
 module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
 
-},{"function-bind":32}],37:[function(require,module,exports){
+},{"function-bind":33}],39:[function(require,module,exports){
 (function (global){(function (){
 /*! https://mths.be/he v1.2.0 by @mathias | MIT license */
 ;(function(root) {
@@ -5942,10 +6249,10 @@ module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
 }(this));
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],38:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 module.exports = require('./lib/html-to-text');
 
-},{"./lib/html-to-text":42}],39:[function(require,module,exports){
+},{"./lib/html-to-text":44}],41:[function(require,module,exports){
 
 // eslint-disable-next-line no-unused-vars
 const { Picker } = require('selderee');
@@ -5977,7 +6284,7 @@ class BlockTextBuilder {
   constructor (options, picker) {
     this.options = options;
     this.picker = picker;
-    this.whitepaceProcessor = new WhitespaceProcessor(options);
+    this.whitespaceProcessor = new WhitespaceProcessor(options);
     /** @type { StackItem } */
     this._stackItem = new BlockStackItem(options);
     /** @type { TransformerStackItem } */
@@ -6083,19 +6390,31 @@ class BlockTextBuilder {
     }
 
     if (
-      this.whitepaceProcessor.testContainsWords(str) || // There are words to add;
-      (str.length && !this._stackItem.stashedLineBreaks) // or at least spaces to take into account.
-    ) {
-      if (this._stackItem.stashedLineBreaks) {
-        this._stackItem.inlineTextBuilder.startNewLine(this._stackItem.stashedLineBreaks);
+      str.length === 0 || // empty string
+      (
+        this._stackItem.stashedLineBreaks && // stashed linebreaks make whitespace irrelevant
+        !this.whitespaceProcessor.testContainsWords(str) // no words to add
+      )
+    ) { return; }
+
+    if (this.options.preserveNewlines) {
+      const newlinesNumber = this.whitespaceProcessor.countNewlinesNoWords(str);
+      if (newlinesNumber > 0) {
+        this._stackItem.inlineTextBuilder.startNewLine(newlinesNumber);
+        // keep stashedLineBreaks unchanged
+        return;
       }
-      this.whitepaceProcessor.shrinkWrapAdd(
-        str,
-        this._stackItem.inlineTextBuilder,
-        (this._wordTransformer && !noWordTransform) ? this._getCombinedWordTransformer() : undefined
-      );
-      this._stackItem.stashedLineBreaks = 0; // inline text doesn't introduce line breaks
     }
+
+    if (this._stackItem.stashedLineBreaks) {
+      this._stackItem.inlineTextBuilder.startNewLine(this._stackItem.stashedLineBreaks);
+    }
+    this.whitespaceProcessor.shrinkWrapAdd(
+      str,
+      this._stackItem.inlineTextBuilder,
+      (this._wordTransformer && !noWordTransform) ? this._getCombinedWordTransformer() : undefined
+    );
+    this._stackItem.stashedLineBreaks = 0; // inline text doesn't introduce line breaks
   }
 
   /**
@@ -6268,7 +6587,7 @@ class BlockTextBuilder {
    * @param { object | number } [optionsObjectOrColSpacing]
    * Object holding the parameters of the table.
    *
-   * Number value is depreceted.
+   * Number value is deprecated.
    *
    * @param { number } [optionsObjectOrColSpacing.colSpacing = 3]
    * Number of spaces between table columns.
@@ -6362,7 +6681,7 @@ function addText (stackItem, text, leadingLineBreaks, trailingLineBreaks) {
 
 module.exports = { BlockTextBuilder: BlockTextBuilder };
 
-},{"./helper":41,"./stack-item":44,"./table-printer":45,"./typedefs":46,"./whitespace-processor":47,"selderee":68}],40:[function(require,module,exports){
+},{"./helper":43,"./stack-item":46,"./table-printer":47,"./typedefs":48,"./whitespace-processor":49,"selderee":71}],42:[function(require,module,exports){
 const he = require('he');
 
 const { get, numberToLetterSequence, numberToRoman, splitClassesAndIds, trimCharacter } = require('./helper');
@@ -6491,6 +6810,18 @@ function formatBlockquote (elem, walk, builder, formatOptions) {
   });
 }
 
+function withBrackets (str, brackets) {
+  if (!brackets) { return str; }
+
+  const lbr = (typeof brackets[0] === 'string')
+    ? brackets[0]
+    : '[';
+  const rbr = (typeof brackets[1] === 'string')
+    ? brackets[1]
+    : ']';
+  return lbr + str + rbr;
+}
+
 /**
  * Process an image.
  *
@@ -6509,8 +6840,8 @@ function formatImage (elem, walk, builder, formatOptions) {
   const text = (!src)
     ? alt
     : (!alt)
-      ? '[' + src + ']'
-      : alt + ' [' + src + ']';
+      ? withBrackets(src, formatOptions.linkBrackets)
+      : alt + ' ' + withBrackets(src, formatOptions.linkBrackets);
 
   builder.addInline(text);
 }
@@ -6550,9 +6881,7 @@ function formatAnchor (elem, walk, builder, formatOptions) {
       builder.addInline(
         (!text)
           ? href
-          : (formatOptions.noLinkBrackets)
-            ? ' ' + href
-            : ' [' + href + ']',
+          : ' ' + withBrackets(href, formatOptions.linkBrackets),
         { noWordTransform: true }
       );
     }
@@ -6564,7 +6893,7 @@ function formatAnchor (elem, walk, builder, formatOptions) {
  * @param { RecursiveCallback } walk               Recursive callback to process child nodes.
  * @param { BlockTextBuilder }  builder            Passed around to accumulate output text.
  * @param { FormatOptions }     formatOptions      Options specific to a formatter.
- * @param { () => string }      nextPrefixCallback Function that returns inreasing index each time it is called.
+ * @param { () => string }      nextPrefixCallback Function that returns increasing index each time it is called.
  */
 function formatList (elem, walk, builder, formatOptions, nextPrefixCallback) {
   const isNestedList = get(elem, ['parent', 'name']) === 'li';
@@ -6573,7 +6902,7 @@ function formatList (elem, walk, builder, formatOptions, nextPrefixCallback) {
   // so the dumb length comparison is the most robust way to get the correct value.
   let maxPrefixLength = 0;
   const listItems = (elem.children || [])
-    // it might be more accuurate to check only for html spaces here, but no significant benefit
+    // it might be more accurate to check only for html spaces here, but no significant benefit
     .filter(child => child.type !== 'text' || !/^\s*$/.test(child.data))
     .map(function (child) {
       if (child.name !== 'li') {
@@ -6753,7 +7082,7 @@ module.exports = {
   wbr: formatWbr
 };
 
-},{"./helper":41,"./typedefs":46,"he":37}],41:[function(require,module,exports){
+},{"./helper":43,"./typedefs":48,"he":39}],43:[function(require,module,exports){
 
 const merge = require('deepmerge');
 
@@ -6875,26 +7204,6 @@ function get (obj, path) {
 }
 
 /**
- * Set a nested property of an object.
- *
- * @param { object }   obj   The object to modify.
- * @param { string[] } path  The path to the property.
- * @param { any }      value The value to set.
- */
-function set (obj, path, value) {
-  const valueKey = path.pop();
-  for (const key of path) {
-    let nested = obj[key];
-    if (!nested) {
-      nested = {};
-      obj[key] = nested;
-    }
-    obj = nested;
-  }
-  obj[valueKey] = value;
-}
-
-/**
  * Deduplicate an array by a given key callback.
  * Item properties are merged recursively and with the preference for last defined values.
  * Of items with the same key, merged item takes the place of the last item,
@@ -6927,12 +7236,11 @@ module.exports = {
   mergeDuplicatesPreferLast: mergeDuplicatesPreferLast,
   numberToLetterSequence: numberToLetterSequence,
   numberToRoman: numberToRoman,
-  set: set,
   splitClassesAndIds: splitClassesAndIds,
   trimCharacter: trimCharacter
 };
 
-},{"deepmerge":7}],42:[function(require,module,exports){
+},{"deepmerge":7}],44:[function(require,module,exports){
 (function (process){(function (){
 const { hp2Builder } = require('@selderee/plugin-htmlparser2');
 const merge = require('deepmerge');
@@ -6942,7 +7250,7 @@ const selderee = require('selderee');
 
 const { BlockTextBuilder } = require('./block-text-builder');
 const defaultFormatters = require('./formatter');
-const { limitedDepthRecursive, mergeDuplicatesPreferLast, set } = require('./helper');
+const { limitedDepthRecursive, mergeDuplicatesPreferLast, get } = require('./helper');
 
 // eslint-disable-next-line import/no-unassigned-import
 require('./typedefs');
@@ -6988,8 +7296,8 @@ const DEFAULT_OPTIONS = {
         baseUrl: null,
         hideLinkHrefIfSameAsText: false,
         ignoreHref: false,
-        noAnchorUrl: true,
-        noLinkBrackets: false
+        linkBrackets: ['[', ']'],
+        noAnchorUrl: true
       }
     },
     { selector: 'article', format: 'block' },
@@ -7015,7 +7323,11 @@ const DEFAULT_OPTIONS = {
       format: 'horizontalLine',
       options: { leadingLineBreaks: 2, length: undefined, trailingLineBreaks: 2 }
     },
-    { selector: 'img', format: 'image', options: { baseUrl: null } },
+    {
+      selector: 'img',
+      format: 'image',
+      options: { baseUrl: null, linkBrackets: ['[', ']'] }
+    },
     { selector: 'main', format: 'block' },
     { selector: 'nav', format: 'block' },
     {
@@ -7076,11 +7388,11 @@ function compile (options = {}) {
     }
   );
   options.formatters = Object.assign({}, defaultFormatters, options.formatters);
+  options.selectors = mergeDuplicatesPreferLast(options.selectors, (s => s.selector));
 
   handleDeprecatedOptions(options);
 
-  const uniqueSelectors = mergeDuplicatesPreferLast(options.selectors, (s => s.selector));
-  const selectorsWithoutFormat = uniqueSelectors.filter(s => !s.format);
+  const selectorsWithoutFormat = options.selectors.filter(s => !s.format);
   if (selectorsWithoutFormat.length) {
     throw new Error(
       'Following selectors have no specified format: ' +
@@ -7088,7 +7400,7 @@ function compile (options = {}) {
     );
   }
   const picker = new selderee.DecisionTree(
-    uniqueSelectors.map(s => [s.selector, s])
+    options.selectors.map(s => [s.selector, s])
   ).build(hp2Builder);
 
   const baseSelectorsPicker = new selderee.DecisionTree(
@@ -7177,6 +7489,19 @@ function handleDeprecatedOptions (options) {
     selectorDefinitions.push(...tagDefinitions);
   }
 
+  function set (obj, path, value) {
+    const valueKey = path.pop();
+    for (const key of path) {
+      let nested = obj[key];
+      if (!nested) {
+        nested = {};
+        obj[key] = nested;
+      }
+      obj = nested;
+    }
+    obj[valueKey] = value;
+  }
+
   function copyFormatterOption (source, format, target) {
     if (options[source] === undefined) { return; }
     for (const definition of selectorDefinitions) {
@@ -7227,6 +7552,12 @@ function handleDeprecatedOptions (options) {
   }
   if (options['returnDomByDefault'] !== undefined) {
     set(options, ['baseElements', 'returnDomByDefault'], options['returnDomByDefault']);
+  }
+
+  for (const definition of selectorDefinitions) {
+    if (definition.format === 'anchor' && get(definition, ['options', 'noLinkBrackets'])) {
+      set(definition, ['options', 'linkBrackets'], false);
+    }
   }
 }
 
@@ -7327,7 +7658,7 @@ module.exports = {
 };
 
 }).call(this)}).call(this,require('_process'))
-},{"./block-text-builder":39,"./formatter":40,"./helper":41,"./typedefs":46,"@selderee/plugin-htmlparser2":1,"_process":64,"deepmerge":7,"he":37,"htmlparser2":51,"selderee":68}],43:[function(require,module,exports){
+},{"./block-text-builder":41,"./formatter":42,"./helper":43,"./typedefs":48,"@selderee/plugin-htmlparser2":1,"_process":67,"deepmerge":7,"he":39,"htmlparser2":53,"selderee":71}],45:[function(require,module,exports){
 // eslint-disable-next-line import/no-unassigned-import
 require('./typedefs');
 
@@ -7517,7 +7848,7 @@ class InlineTextBuilder {
 
 module.exports = { InlineTextBuilder: InlineTextBuilder };
 
-},{"./typedefs":46}],44:[function(require,module,exports){
+},{"./typedefs":48}],46:[function(require,module,exports){
 /* eslint-disable max-classes-per-file */
 
 const { InlineTextBuilder } = require('./inline-text-builder');
@@ -7582,7 +7913,7 @@ module.exports = {
   TransformerStackItem: TransformerStackItem,
 };
 
-},{"./inline-text-builder":43}],45:[function(require,module,exports){
+},{"./inline-text-builder":45}],47:[function(require,module,exports){
 
 function getRow (matrix, j) {
   if (!matrix[j]) { matrix[j] = []; }
@@ -7693,7 +8024,7 @@ function tableToString (tableRows, rowSpacing, colSpacing) {
 
 module.exports = { tableToString: tableToString };
 
-},{}],46:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 
 /**
  * @typedef { object } Options
@@ -7705,7 +8036,7 @@ module.exports = { tableToString: tableToString };
  * @property { DecodeOptions }        [decodeOptions]
  * Text decoding options given to `he.decode`.
  *
- * For more informations see the [he](https://github.com/mathiasbynens/he) module.
+ * For more information see the [he](https://github.com/mathiasbynens/he) module.
  *
  * @property { object.< string, FormatCallback > } [formatters = {}]
  * A dictionary with custom formatting functions for specific kinds of elements.
@@ -7765,13 +8096,13 @@ module.exports = { tableToString: tableToString };
  * @typedef { object } DecodeOptions
  * Text decoding options given to `he.decode`.
  *
- * For more informations see the [he](https://github.com/mathiasbynens/he) module.
+ * For more information see the [he](https://github.com/mathiasbynens/he) module.
  *
  * @property { boolean } [isAttributeValue = false]
- * TLDR: If set to `true` - leave attribute values raw, don't parse them as text content.
+ * TL;DR: If set to `true` - leave attribute values raw, don't parse them as text content.
  *
  * @property { boolean } [strict = false]
- * TLDR: If set to `true` - throw an error on invalid HTML input.
+ * TL;DR: If set to `true` - throw an error on invalid HTML input.
  */
 
 /**
@@ -7871,11 +8202,13 @@ module.exports = { tableToString: tableToString };
  * @property { boolean } [ignoreHref = false]
  * (Only for: `anchor` formatter.) Ignore all links. Only process internal text of anchor tags.
  *
+ * @property { [string, string] | false } [linkBrackets]
+ * (Only for: `anchor` and `image` formatters.) Surround links with these brackets. Default: `['[', ']']`.
+ *
+ * Set to `false` or `['', '']` to disable.
+ *
  * @property { boolean } [noAnchorUrl = true]
  * (Only for: `anchor` formatter.) Ignore anchor links (where `href='#...'`).
- *
- * @property { boolean } [noLinkBrackets = false]
- * (Only for: `anchor` formatter.) Don't print brackets around links.
  *
  * @property { string } [itemPrefix = ' * ']
  * (Only for: `unorderedList` formatter.) String prefix for each list item.
@@ -7949,7 +8282,7 @@ module.exports = { tableToString: tableToString };
  * @param   { BlockTextBuilder } builder Passed around to accumulate output text. Contains options object.
  */
 
-},{}],47:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 
 // eslint-disable-next-line no-unused-vars
 const { InlineTextBuilder } = require('./inline-text-builder');
@@ -7985,10 +8318,11 @@ class WhitespaceProcessor {
     this.leadingWhitespaceRe = new RegExp(`^[${whitespaceCodes}]`);
     this.trailingWhitespaceRe = new RegExp(`[${whitespaceCodes}]$`);
     this.allWhitespaceOrEmptyRe = new RegExp(`^[${whitespaceCodes}]*$`);
+    this.newlineOrNonWhitespaceRe = new RegExp(`(\\n|[^\\n${whitespaceCodes}])`, 'g');
 
     if (options.preserveNewlines) {
 
-      const wordOrNewlineRe = new RegExp(`\n|[^\n${whitespaceCodes}]+`, 'gm');
+      const wordOrNewlineRe = new RegExp(`\\n|[^\\n${whitespaceCodes}]+`, 'gm');
 
       /**
        * Shrink whitespaces and wrap text, add to the builder.
@@ -8080,11 +8414,33 @@ class WhitespaceProcessor {
     return !this.allWhitespaceOrEmptyRe.test(text);
   }
 
+  /**
+   * Return the number of newlines if there are no words.
+   *
+   * If any word is found then return zero regardless of the actual number of newlines.
+   *
+   * @param   { string }  text  Input string.
+   * @returns { number }
+   */
+  countNewlinesNoWords (text) {
+    this.newlineOrNonWhitespaceRe.lastIndex = 0;
+    let counter = 0;
+    let match;
+    while ((match = this.newlineOrNonWhitespaceRe.exec(text)) !== null) {
+      if (match[0] === '\n') {
+        counter++;
+      } else {
+        return 0;
+      }
+    }
+    return counter;
+  }
+
 }
 
 module.exports = { WhitespaceProcessor: WhitespaceProcessor };
 
-},{"./inline-text-builder":43,"./typedefs":46}],48:[function(require,module,exports){
+},{"./inline-text-builder":45,"./typedefs":48}],50:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -8321,7 +8677,7 @@ function parseFeed(feed, options) {
 }
 exports.parseFeed = parseFeed;
 
-},{"./Parser":49,"domhandler":11,"domutils":14}],49:[function(require,module,exports){
+},{"./Parser":51,"domhandler":11,"domutils":15}],51:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -8704,7 +9060,7 @@ var Parser = /** @class */ (function () {
 }());
 exports.Parser = Parser;
 
-},{"./Tokenizer":50}],50:[function(require,module,exports){
+},{"./Tokenizer":52}],52:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -9615,7 +9971,7 @@ var Tokenizer = /** @class */ (function () {
 }());
 exports.default = Tokenizer;
 
-},{"entities/lib/decode_codepoint":21,"entities/lib/maps/entities.json":25,"entities/lib/maps/legacy.json":26,"entities/lib/maps/xml.json":27}],51:[function(require,module,exports){
+},{"entities/lib/decode_codepoint":22,"entities/lib/maps/entities.json":26,"entities/lib/maps/legacy.json":27,"entities/lib/maps/xml.json":28}],53:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -9701,7 +10057,7 @@ exports.DomUtils = __importStar(require("domutils"));
 var FeedHandler_1 = require("./FeedHandler");
 Object.defineProperty(exports, "RssHandler", { enumerable: true, get: function () { return FeedHandler_1.FeedHandler; } });
 
-},{"./FeedHandler":48,"./Parser":49,"./Tokenizer":50,"domelementtype":10,"domhandler":11,"domutils":14}],52:[function(require,module,exports){
+},{"./FeedHandler":50,"./Parser":51,"./Tokenizer":52,"domelementtype":10,"domhandler":11,"domutils":15}],54:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -9730,10 +10086,10 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],53:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 'use strict';
 
-var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
+var hasToStringTag = require('has-tostringtag/shams')();
 var callBound = require('call-bind/callBound');
 
 var $toString = callBound('Object.prototype.toString');
@@ -9765,7 +10121,7 @@ isStandardArguments.isLegacyArguments = isLegacyArguments; // for tests
 
 module.exports = supportsStandardArguments ? isStandardArguments : isLegacyArguments;
 
-},{"call-bind/callBound":4}],54:[function(require,module,exports){
+},{"call-bind/callBound":4,"has-tostringtag/shams":37}],56:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -9788,13 +10144,89 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],55:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
+'use strict';
+
+var fnToStr = Function.prototype.toString;
+var reflectApply = typeof Reflect === 'object' && Reflect !== null && Reflect.apply;
+var badArrayLike;
+var isCallableMarker;
+if (typeof reflectApply === 'function' && typeof Object.defineProperty === 'function') {
+	try {
+		badArrayLike = Object.defineProperty({}, 'length', {
+			get: function () {
+				throw isCallableMarker;
+			}
+		});
+		isCallableMarker = {};
+		// eslint-disable-next-line no-throw-literal
+		reflectApply(function () { throw 42; }, null, badArrayLike);
+	} catch (_) {
+		if (_ !== isCallableMarker) {
+			reflectApply = null;
+		}
+	}
+} else {
+	reflectApply = null;
+}
+
+var constructorRegex = /^\s*class\b/;
+var isES6ClassFn = function isES6ClassFunction(value) {
+	try {
+		var fnStr = fnToStr.call(value);
+		return constructorRegex.test(fnStr);
+	} catch (e) {
+		return false; // not a function
+	}
+};
+
+var tryFunctionObject = function tryFunctionToStr(value) {
+	try {
+		if (isES6ClassFn(value)) { return false; }
+		fnToStr.call(value);
+		return true;
+	} catch (e) {
+		return false;
+	}
+};
+var toStr = Object.prototype.toString;
+var fnClass = '[object Function]';
+var genClass = '[object GeneratorFunction]';
+var hasToStringTag = typeof Symbol === 'function' && !!Symbol.toStringTag; // better: use `has-tostringtag`
+/* globals document: false */
+var documentDotAll = typeof document === 'object' && typeof document.all === 'undefined' && document.all !== undefined ? document.all : {};
+
+module.exports = reflectApply
+	? function isCallable(value) {
+		if (value === documentDotAll) { return true; }
+		if (!value) { return false; }
+		if (typeof value !== 'function' && typeof value !== 'object') { return false; }
+		if (typeof value === 'function' && !value.prototype) { return true; }
+		try {
+			reflectApply(value, null, badArrayLike);
+		} catch (e) {
+			if (e !== isCallableMarker) { return false; }
+		}
+		return !isES6ClassFn(value);
+	}
+	: function isCallable(value) {
+		if (value === documentDotAll) { return true; }
+		if (!value) { return false; }
+		if (typeof value !== 'function' && typeof value !== 'object') { return false; }
+		if (typeof value === 'function' && !value.prototype) { return true; }
+		if (hasToStringTag) { return tryFunctionObject(value); }
+		if (isES6ClassFn(value)) { return false; }
+		var strClass = toStr.call(value);
+		return strClass === fnClass || strClass === genClass;
+	};
+
+},{}],58:[function(require,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
 var fnToStr = Function.prototype.toString;
 var isFnRegex = /^\s*(?:function)?\*/;
-var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
+var hasToStringTag = require('has-tostringtag/shams')();
 var getProto = Object.getPrototypeOf;
 var getGeneratorFunc = function () { // eslint-disable-line consistent-return
 	if (!hasToStringTag) {
@@ -9828,18 +10260,18 @@ module.exports = function isGeneratorFunction(fn) {
 	return getProto(fn) === GeneratorFunction;
 };
 
-},{}],56:[function(require,module,exports){
+},{"has-tostringtag/shams":37}],59:[function(require,module,exports){
 (function (global){(function (){
 'use strict';
 
-var forEach = require('foreach');
+var forEach = require('for-each');
 var availableTypedArrays = require('available-typed-arrays');
 var callBound = require('call-bind/callBound');
 
 var $toString = callBound('Object.prototype.toString');
-var hasSymbols = require('has-symbols')();
-var hasToStringTag = hasSymbols && typeof Symbol.toStringTag === 'symbol';
+var hasToStringTag = require('has-tostringtag/shams')();
 
+var g = typeof globalThis === 'undefined' ? global : globalThis;
 var typedArrays = availableTypedArrays();
 
 var $indexOf = callBound('Array.prototype.indexOf', true) || function indexOf(array, value) {
@@ -9856,17 +10288,16 @@ var gOPD = require('es-abstract/helpers/getOwnPropertyDescriptor');
 var getPrototypeOf = Object.getPrototypeOf; // require('getprototypeof');
 if (hasToStringTag && gOPD && getPrototypeOf) {
 	forEach(typedArrays, function (typedArray) {
-		var arr = new global[typedArray]();
-		if (!(Symbol.toStringTag in arr)) {
-			throw new EvalError('this engine has support for Symbol.toStringTag, but ' + typedArray + ' does not have the property! Please report this.');
+		var arr = new g[typedArray]();
+		if (Symbol.toStringTag in arr) {
+			var proto = getPrototypeOf(arr);
+			var descriptor = gOPD(proto, Symbol.toStringTag);
+			if (!descriptor) {
+				var superProto = getPrototypeOf(proto);
+				descriptor = gOPD(superProto, Symbol.toStringTag);
+			}
+			toStrTags[typedArray] = descriptor.get;
 		}
-		var proto = getPrototypeOf(arr);
-		var descriptor = gOPD(proto, Symbol.toStringTag);
-		if (!descriptor) {
-			var superProto = getPrototypeOf(proto);
-			descriptor = gOPD(superProto, Symbol.toStringTag);
-		}
-		toStrTags[typedArray] = descriptor.get;
 	});
 }
 
@@ -9884,7 +10315,7 @@ var tryTypedArrays = function tryAllTypedArrays(value) {
 
 module.exports = function isTypedArray(value) {
 	if (!value || typeof value !== 'object') { return false; }
-	if (!hasToStringTag) {
+	if (!hasToStringTag || !(Symbol.toStringTag in value)) {
 		var tag = $slice($toString(value), 8, -1);
 		return $indexOf(typedArrays, tag) > -1;
 	}
@@ -9893,7 +10324,7 @@ module.exports = function isTypedArray(value) {
 };
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"available-typed-arrays":2,"call-bind/callBound":4,"es-abstract/helpers/getOwnPropertyDescriptor":28,"foreach":30,"has-symbols":34}],57:[function(require,module,exports){
+},{"available-typed-arrays":2,"call-bind/callBound":4,"es-abstract/helpers/getOwnPropertyDescriptor":29,"for-each":31,"has-tostringtag/shams":37}],60:[function(require,module,exports){
 (function (global){(function (){
 /**
  * @license
@@ -27106,9 +27537,9 @@ module.exports = function isTypedArray(value) {
 }.call(this));
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],58:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 //! moment.js
-//! version : 2.29.1
+//! version : 2.29.3
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -27185,8 +27616,9 @@ module.exports = function isTypedArray(value) {
 
     function map(arr, fn) {
         var res = [],
-            i;
-        for (i = 0; i < arr.length; ++i) {
+            i,
+            arrLen = arr.length;
+        for (i = 0; i < arrLen; ++i) {
             res.push(fn(arr[i], i));
         }
         return res;
@@ -27315,7 +27747,10 @@ module.exports = function isTypedArray(value) {
         updateInProgress = false;
 
     function copyConfig(to, from) {
-        var i, prop, val;
+        var i,
+            prop,
+            val,
+            momentPropertiesLen = momentProperties.length;
 
         if (!isUndefined(from._isAMomentObject)) {
             to._isAMomentObject = from._isAMomentObject;
@@ -27348,8 +27783,8 @@ module.exports = function isTypedArray(value) {
             to._locale = from._locale;
         }
 
-        if (momentProperties.length > 0) {
-            for (i = 0; i < momentProperties.length; i++) {
+        if (momentPropertiesLen > 0) {
+            for (i = 0; i < momentPropertiesLen; i++) {
                 prop = momentProperties[i];
                 val = from[prop];
                 if (!isUndefined(val)) {
@@ -27404,8 +27839,9 @@ module.exports = function isTypedArray(value) {
                 var args = [],
                     arg,
                     i,
-                    key;
-                for (i = 0; i < arguments.length; i++) {
+                    key,
+                    argLen = arguments.length;
+                for (i = 0; i < argLen; i++) {
                     arg = '';
                     if (typeof arguments[i] === 'object') {
                         arg += '\n[' + i + '] ';
@@ -27555,7 +27991,8 @@ module.exports = function isTypedArray(value) {
         );
     }
 
-    var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|N{1,5}|YYYYYY|YYYYY|YYYY|YY|y{2,4}|yo?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,
+    var formattingTokens =
+            /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|N{1,5}|YYYYYY|YYYYY|YYYY|YY|y{2,4}|yo?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,
         localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,
         formatFunctions = {},
         formatTokenFunctions = {};
@@ -27859,8 +28296,9 @@ module.exports = function isTypedArray(value) {
         if (typeof units === 'object') {
             units = normalizeObjectUnits(units);
             var prioritized = getPrioritizedUnits(units),
-                i;
-            for (i = 0; i < prioritized.length; i++) {
+                i,
+                prioritizedLen = prioritized.length;
+            for (i = 0; i < prioritizedLen; i++) {
                 this[prioritized[i].unit](units[prioritized[i].unit]);
             }
         } else {
@@ -27890,7 +28328,8 @@ module.exports = function isTypedArray(value) {
         matchTimestamp = /[+-]?\d+(\.\d{1,3})?/, // 123456789 123456789.123
         // any word (or two) characters or numbers including two/three word month in arabic.
         // includes scottish gaelic two word and hyphenated months
-        matchWord = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i,
+        matchWord =
+            /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i,
         regexes;
 
     regexes = {};
@@ -27916,15 +28355,12 @@ module.exports = function isTypedArray(value) {
         return regexEscape(
             s
                 .replace('\\', '')
-                .replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (
-                    matched,
-                    p1,
-                    p2,
-                    p3,
-                    p4
-                ) {
-                    return p1 || p2 || p3 || p4;
-                })
+                .replace(
+                    /\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g,
+                    function (matched, p1, p2, p3, p4) {
+                        return p1 || p2 || p3 || p4;
+                    }
+                )
         );
     }
 
@@ -27936,7 +28372,8 @@ module.exports = function isTypedArray(value) {
 
     function addParseToken(token, callback) {
         var i,
-            func = callback;
+            func = callback,
+            tokenLen;
         if (typeof token === 'string') {
             token = [token];
         }
@@ -27945,7 +28382,8 @@ module.exports = function isTypedArray(value) {
                 array[callback] = toInt(input);
             };
         }
-        for (i = 0; i < token.length; i++) {
+        tokenLen = token.length;
+        for (i = 0; i < tokenLen; i++) {
             tokens[token[i]] = func;
         }
     }
@@ -28056,12 +28494,12 @@ module.exports = function isTypedArray(value) {
 
     // LOCALES
 
-    var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
-            '_'
-        ),
-        defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split(
-            '_'
-        ),
+    var defaultLocaleMonths =
+            'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+                '_'
+            ),
+        defaultLocaleMonthsShort =
+            'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
         MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/,
         defaultMonthsShortRegex = matchWord,
         defaultMonthsRegex = matchWord;
@@ -28503,14 +28941,12 @@ module.exports = function isTypedArray(value) {
     addRegexToken('W', match1to2);
     addRegexToken('WW', match1to2, match2);
 
-    addWeekParseToken(['w', 'ww', 'W', 'WW'], function (
-        input,
-        week,
-        config,
-        token
-    ) {
-        week[token.substr(0, 1)] = toInt(input);
-    });
+    addWeekParseToken(
+        ['w', 'ww', 'W', 'WW'],
+        function (input, week, config, token) {
+            week[token.substr(0, 1)] = toInt(input);
+        }
+    );
 
     // HELPERS
 
@@ -28635,9 +29071,8 @@ module.exports = function isTypedArray(value) {
         return ws.slice(n, 7).concat(ws.slice(0, n));
     }
 
-    var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
-            '_'
-        ),
+    var defaultLocaleWeekdays =
+            'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
         defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
         defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
         defaultWeekdaysRegex = matchWord,
@@ -29185,6 +29620,11 @@ module.exports = function isTypedArray(value) {
         return globalLocale;
     }
 
+    function isLocaleNameSane(name) {
+        // Prevent names that look like filesystem paths, i.e contain '/' or '\'
+        return name.match('^[^/\\\\]*$') != null;
+    }
+
     function loadLocale(name) {
         var oldLocale = null,
             aliasedRequire;
@@ -29193,7 +29633,8 @@ module.exports = function isTypedArray(value) {
             locales[name] === undefined &&
             typeof module !== 'undefined' &&
             module &&
-            module.exports
+            module.exports &&
+            isLocaleNameSane(name)
         ) {
             try {
                 oldLocale = globalLocale._abbr;
@@ -29410,8 +29851,10 @@ module.exports = function isTypedArray(value) {
 
     // iso 8601 regex
     // 0000-00-00 0000-W00 or 0000-W00-0 + T + 00 or 00:00 or 00:00:00 or 00:00:00.000 + +00:00 or +0000 or +00)
-    var extendedIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
-        basicIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d|))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
+    var extendedIsoRegex =
+            /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
+        basicIsoRegex =
+            /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d|))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
         tzRegex = /Z|[+-]\d\d(?::?\d\d)?/,
         isoDates = [
             ['YYYYYY-MM-DD', /[+-]\d{6}-\d\d-\d\d/],
@@ -29442,7 +29885,8 @@ module.exports = function isTypedArray(value) {
         ],
         aspNetJsonRegex = /^\/?Date\((-?\d+)/i,
         // RFC 2822 regex: For details see https://tools.ietf.org/html/rfc2822#section-3.3
-        rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/,
+        rfc2822 =
+            /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/,
         obsOffsets = {
             UT: 0,
             GMT: 0,
@@ -29465,12 +29909,13 @@ module.exports = function isTypedArray(value) {
             allowTime,
             dateFormat,
             timeFormat,
-            tzFormat;
+            tzFormat,
+            isoDatesLen = isoDates.length,
+            isoTimesLen = isoTimes.length;
 
         if (match) {
             getParsingFlags(config).iso = true;
-
-            for (i = 0, l = isoDates.length; i < l; i++) {
+            for (i = 0, l = isoDatesLen; i < l; i++) {
                 if (isoDates[i][1].exec(match[1])) {
                     dateFormat = isoDates[i][0];
                     allowTime = isoDates[i][2] !== false;
@@ -29482,7 +29927,7 @@ module.exports = function isTypedArray(value) {
                 return;
             }
             if (match[3]) {
-                for (i = 0, l = isoTimes.length; i < l; i++) {
+                for (i = 0, l = isoTimesLen; i < l; i++) {
                     if (isoTimes[i][1].exec(match[3])) {
                         // match[2] should be 'T' or space
                         timeFormat = (match[2] || ' ') + isoTimes[i][0];
@@ -29862,12 +30307,13 @@ module.exports = function isTypedArray(value) {
             skipped,
             stringLength = string.length,
             totalParsedInputLength = 0,
-            era;
+            era,
+            tokenLen;
 
         tokens =
             expandFormat(config._f, config._locale).match(formattingTokens) || [];
-
-        for (i = 0; i < tokens.length; i++) {
+        tokenLen = tokens.length;
+        for (i = 0; i < tokenLen; i++) {
             token = tokens[i];
             parsedInput = (string.match(getParseRegexForToken(token, config)) ||
                 [])[0];
@@ -29962,15 +30408,16 @@ module.exports = function isTypedArray(value) {
             i,
             currentScore,
             validFormatFound,
-            bestFormatIsValid = false;
+            bestFormatIsValid = false,
+            configfLen = config._f.length;
 
-        if (config._f.length === 0) {
+        if (configfLen === 0) {
             getParsingFlags(config).invalidFormat = true;
             config._d = new Date(NaN);
             return;
         }
 
-        for (i = 0; i < config._f.length; i++) {
+        for (i = 0; i < configfLen; i++) {
             currentScore = 0;
             validFormatFound = false;
             tempConfig = copyConfig({}, config);
@@ -30211,7 +30658,8 @@ module.exports = function isTypedArray(value) {
     function isDurationValid(m) {
         var key,
             unitHasDecimal = false,
-            i;
+            i,
+            orderLen = ordering.length;
         for (key in m) {
             if (
                 hasOwnProp(m, key) &&
@@ -30224,7 +30672,7 @@ module.exports = function isTypedArray(value) {
             }
         }
 
-        for (i = 0; i < ordering.length; ++i) {
+        for (i = 0; i < orderLen; ++i) {
             if (m[ordering[i]]) {
                 if (unitHasDecimal) {
                     return false; // only allow non-integers for smallest unit
@@ -30549,7 +30997,8 @@ module.exports = function isTypedArray(value) {
         // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
         // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
         // and further modified to allow for strings containing both week and day
-        isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
+        isoRegex =
+            /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
 
     function createDuration(input, key) {
         var duration = input,
@@ -30770,9 +31219,10 @@ module.exports = function isTypedArray(value) {
                 'ms',
             ],
             i,
-            property;
+            property,
+            propertyLen = properties.length;
 
-        for (i = 0; i < properties.length; i += 1) {
+        for (i = 0; i < propertyLen; i += 1) {
             property = properties[i];
             propertyTest = propertyTest || hasOwnProp(input, property);
         }
@@ -31395,19 +31845,17 @@ module.exports = function isTypedArray(value) {
     addRegexToken('NNNN', matchEraName);
     addRegexToken('NNNNN', matchEraNarrow);
 
-    addParseToken(['N', 'NN', 'NNN', 'NNNN', 'NNNNN'], function (
-        input,
-        array,
-        config,
-        token
-    ) {
-        var era = config._locale.erasParse(input, token, config._strict);
-        if (era) {
-            getParsingFlags(config).era = era;
-        } else {
-            getParsingFlags(config).invalidEra = input;
+    addParseToken(
+        ['N', 'NN', 'NNN', 'NNNN', 'NNNNN'],
+        function (input, array, config, token) {
+            var era = config._locale.erasParse(input, token, config._strict);
+            if (era) {
+                getParsingFlags(config).era = era;
+            } else {
+                getParsingFlags(config).invalidEra = input;
+            }
         }
-    });
+    );
 
     addRegexToken('y', matchUnsigned);
     addRegexToken('yy', matchUnsigned);
@@ -31699,14 +32147,12 @@ module.exports = function isTypedArray(value) {
     addRegexToken('GGGGG', match1to6, match6);
     addRegexToken('ggggg', match1to6, match6);
 
-    addWeekParseToken(['gggg', 'ggggg', 'GGGG', 'GGGGG'], function (
-        input,
-        week,
-        config,
-        token
-    ) {
-        week[token.substr(0, 2)] = toInt(input);
-    });
+    addWeekParseToken(
+        ['gggg', 'ggggg', 'GGGG', 'GGGGG'],
+        function (input, week, config, token) {
+            week[token.substr(0, 2)] = toInt(input);
+        }
+    );
 
     addWeekParseToken(['gg', 'GG'], function (input, week, config, token) {
         week[token] = hooks.parseTwoDigitYear(input);
@@ -32729,7 +33175,7 @@ module.exports = function isTypedArray(value) {
 
     //! moment.js
 
-    hooks.version = '2.29.1';
+    hooks.version = '2.29.3';
 
     setHookCallback(createLocal);
 
@@ -32778,7 +33224,7 @@ module.exports = function isTypedArray(value) {
 
 })));
 
-},{}],59:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     define([], factory) /* global define */
@@ -33380,7 +33826,7 @@ module.exports = function isTypedArray(value) {
 
 }));
 
-},{}],60:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -34154,7 +34600,7 @@ module.exports = function isTypedArray(value) {
 
 })));
 
-},{}],61:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 (function(root, factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory();
@@ -34720,7 +35166,7 @@ module.exports = function isTypedArray(value) {
 
 }));
 
-},{}],62:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -35072,7 +35518,7 @@ exports.parse = parse;
 exports.parse1 = parse1;
 exports.serialize = serialize;
 
-},{"moo":59,"nearley":61}],63:[function(require,module,exports){
+},{"moo":62,"nearley":64}],66:[function(require,module,exports){
 (function (process){(function (){
 // 'path' module extracted from Node.js v8.11.1 (only the posix part)
 // transplited with Babel
@@ -35605,7 +36051,7 @@ posix.posix = posix;
 module.exports = posix;
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":64}],64:[function(require,module,exports){
+},{"_process":67}],67:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -35791,7 +36237,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],65:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 'use strict';
 
 var has = Object.prototype.hasOwnProperty
@@ -35911,7 +36357,7 @@ function querystringify(obj, prefix) {
 exports.stringify = querystringify;
 exports.parse = querystring;
 
-},{}],66:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 'use strict';
 
 /**
@@ -35951,7 +36397,7 @@ module.exports = function required(port, protocol) {
   return port !== 0;
 };
 
-},{}],67:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 /**
  * @overview
  * RFC 5646 Language Tags Implementation
@@ -36329,7 +36775,7 @@ LanguageTag.Types = Types
 
 module.exports = LanguageTag
 
-},{"util":72}],68:[function(require,module,exports){
+},{"util":75}],71:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -36877,25 +37323,29 @@ exports.Picker = Picker;
 exports.Treeify = TreeifyBuilder;
 exports.Types = Types;
 
-},{"parseley":62}],69:[function(require,module,exports){
+},{"parseley":65}],72:[function(require,module,exports){
 (function (global){(function (){
 'use strict';
 
 var required = require('requires-port')
   , qs = require('querystringify')
-  , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:[\\/]+/
-  , protocolre = /^([a-z][a-z0-9.+-]*:)?([\\/]{1,})?([\S\s]*)/i
-  , whitespace = '[\\x09\\x0A\\x0B\\x0C\\x0D\\x20\\xA0\\u1680\\u180E\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200A\\u202F\\u205F\\u3000\\u2028\\u2029\\uFEFF]'
-  , left = new RegExp('^'+ whitespace +'+');
+  , controlOrWhitespace = /^[\x00-\x20\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]+/
+  , CRHTLF = /[\n\r\t]/g
+  , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//
+  , port = /:\d+$/
+  , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\\/]+)?([\S\s]*)/i
+  , windowsDriveLetter = /^[a-zA-Z]:/;
 
 /**
- * Trim a given string.
+ * Remove control characters and whitespace from the beginning of a string.
  *
- * @param {String} str String to trim.
+ * @param {Object|String} str String to trim.
+ * @returns {String} A new string representing `str` stripped of control
+ *     characters and whitespace from its beginning.
  * @public
  */
 function trimLeft(str) {
-  return (str ? str : '').toString().replace(left, '');
+  return (str ? str : '').toString().replace(controlOrWhitespace, '');
 }
 
 /**
@@ -36913,13 +37363,13 @@ function trimLeft(str) {
 var rules = [
   ['#', 'hash'],                        // Extract from the back.
   ['?', 'query'],                       // Extract from the back.
-  function sanitize(address) {          // Sanitize what is left of the address
-    return address.replace('\\', '/');
+  function sanitize(address, url) {     // Sanitize what is left of the address
+    return isSpecial(url.protocol) ? address.replace(/\\/g, '/') : address;
   },
   ['/', 'pathname'],                    // Extract from the back.
   ['@', 'auth', 1],                     // Extract from the front.
   [NaN, 'host', undefined, 1, 1],       // Set left over value.
-  [/:(\d+)$/, 'port', undefined, 1],    // RegExp the back.
+  [/:(\d*)$/, 'port', undefined, 1],    // RegExp the back.
   [NaN, 'hostname', undefined, 1, 1]    // Set left over.
 ];
 
@@ -36980,6 +37430,24 @@ function lolcation(loc) {
 }
 
 /**
+ * Check whether a protocol scheme is special.
+ *
+ * @param {String} The protocol scheme of the URL
+ * @return {Boolean} `true` if the protocol scheme is special, else `false`
+ * @private
+ */
+function isSpecial(scheme) {
+  return (
+    scheme === 'file:' ||
+    scheme === 'ftp:' ||
+    scheme === 'http:' ||
+    scheme === 'https:' ||
+    scheme === 'ws:' ||
+    scheme === 'wss:'
+  );
+}
+
+/**
  * @typedef ProtocolExtract
  * @type Object
  * @property {String} protocol Protocol matched in the URL, in lowercase.
@@ -36991,20 +37459,57 @@ function lolcation(loc) {
  * Extract protocol information from a URL with/without double slash ("//").
  *
  * @param {String} address URL we want to extract from.
+ * @param {Object} location
  * @return {ProtocolExtract} Extracted information.
  * @private
  */
-function extractProtocol(address) {
+function extractProtocol(address, location) {
   address = trimLeft(address);
+  address = address.replace(CRHTLF, '');
+  location = location || {};
 
-  var match = protocolre.exec(address)
-    , protocol = match[1] ? match[1].toLowerCase() : ''
-    , slashes = !!(match[2] && match[2].length >= 2)
-    , rest =  match[2] && match[2].length === 1 ? '/' + match[3] : match[3];
+  var match = protocolre.exec(address);
+  var protocol = match[1] ? match[1].toLowerCase() : '';
+  var forwardSlashes = !!match[2];
+  var otherSlashes = !!match[3];
+  var slashesCount = 0;
+  var rest;
+
+  if (forwardSlashes) {
+    if (otherSlashes) {
+      rest = match[2] + match[3] + match[4];
+      slashesCount = match[2].length + match[3].length;
+    } else {
+      rest = match[2] + match[4];
+      slashesCount = match[2].length;
+    }
+  } else {
+    if (otherSlashes) {
+      rest = match[3] + match[4];
+      slashesCount = match[3].length;
+    } else {
+      rest = match[4]
+    }
+  }
+
+  if (protocol === 'file:') {
+    if (slashesCount >= 2) {
+      rest = rest.slice(2);
+    }
+  } else if (isSpecial(protocol)) {
+    rest = match[4];
+  } else if (protocol) {
+    if (forwardSlashes) {
+      rest = rest.slice(2);
+    }
+  } else if (slashesCount >= 2 && isSpecial(location.protocol)) {
+    rest = match[4];
+  }
 
   return {
     protocol: protocol,
-    slashes: slashes,
+    slashes: forwardSlashes || isSpecial(protocol),
+    slashesCount: slashesCount,
     rest: rest
   };
 }
@@ -37061,6 +37566,7 @@ function resolve(relative, base) {
  */
 function Url(address, location, parser) {
   address = trimLeft(address);
+  address = address.replace(CRHTLF, '');
 
   if (!(this instanceof Url)) {
     return new Url(address, location, parser);
@@ -37095,7 +37601,7 @@ function Url(address, location, parser) {
   //
   // Extract protocol information before running the instructions.
   //
-  extracted = extractProtocol(address || '');
+  extracted = extractProtocol(address || '', location);
   relative = !extracted.protocol && !extracted.slashes;
   url.slashes = extracted.slashes || relative && location.slashes;
   url.protocol = extracted.protocol || location.protocol || '';
@@ -37105,13 +37611,22 @@ function Url(address, location, parser) {
   // When the authority component is absent the URL starts with a path
   // component.
   //
-  if (!extracted.slashes) instructions[3] = [/(.*)/, 'pathname'];
+  if (
+    extracted.protocol === 'file:' && (
+      extracted.slashesCount !== 2 || windowsDriveLetter.test(address)) ||
+    (!extracted.slashes &&
+      (extracted.protocol ||
+        extracted.slashesCount < 2 ||
+        !isSpecial(url.protocol)))
+  ) {
+    instructions[3] = [/(.*)/, 'pathname'];
+  }
 
   for (; i < instructions.length; i++) {
     instruction = instructions[i];
 
     if (typeof instruction === 'function') {
-      address = instruction(address);
+      address = instruction(address, url);
       continue;
     }
 
@@ -37121,7 +37636,11 @@ function Url(address, location, parser) {
     if (parse !== parse) {
       url[key] = address;
     } else if ('string' === typeof parse) {
-      if (~(index = address.indexOf(parse))) {
+      index = parse === '@'
+        ? address.lastIndexOf(parse)
+        : address.indexOf(parse);
+
+      if (~index) {
         if ('number' === typeof instruction[2]) {
           url[key] = address.slice(0, index);
           address = address.slice(index + instruction[2]);
@@ -37169,7 +37688,7 @@ function Url(address, location, parser) {
   // Default to a / for pathname if none exists. This normalizes the URL
   // to always have a /
   //
-  if (url.pathname.charAt(0) !== '/' && url.hostname) {
+  if (url.pathname.charAt(0) !== '/' && isSpecial(url.protocol)) {
     url.pathname = '/' + url.pathname;
   }
 
@@ -37187,13 +37706,24 @@ function Url(address, location, parser) {
   // Parse down the `auth` for the username and password.
   //
   url.username = url.password = '';
+
   if (url.auth) {
-    instruction = url.auth.split(':');
-    url.username = instruction[0] || '';
-    url.password = instruction[1] || '';
+    index = url.auth.indexOf(':');
+
+    if (~index) {
+      url.username = url.auth.slice(0, index);
+      url.username = encodeURIComponent(decodeURIComponent(url.username));
+
+      url.password = url.auth.slice(index + 1);
+      url.password = encodeURIComponent(decodeURIComponent(url.password))
+    } else {
+      url.username = encodeURIComponent(decodeURIComponent(url.auth));
+    }
+
+    url.auth = url.password ? url.username +':'+ url.password : url.username;
   }
 
-  url.origin = url.protocol && url.host && url.protocol !== 'file:'
+  url.origin = url.protocol !== 'file:' && isSpecial(url.protocol) && url.host
     ? url.protocol +'//'+ url.host
     : 'null';
 
@@ -37250,7 +37780,7 @@ function set(part, value, fn) {
     case 'host':
       url[part] = value;
 
-      if (/:\d+$/.test(value)) {
+      if (port.test(value)) {
         value = value.split(':');
         url.port = value.pop();
         url.hostname = value.join(':');
@@ -37276,8 +37806,23 @@ function set(part, value, fn) {
       }
       break;
 
-    default:
-      url[part] = value;
+    case 'username':
+    case 'password':
+      url[part] = encodeURIComponent(value);
+      break;
+
+    case 'auth':
+      var index = value.indexOf(':');
+
+      if (~index) {
+        url.username = value.slice(0, index);
+        url.username = encodeURIComponent(decodeURIComponent(url.username));
+
+        url.password = value.slice(index + 1);
+        url.password = encodeURIComponent(decodeURIComponent(url.password));
+      } else {
+        url.username = encodeURIComponent(decodeURIComponent(value));
+      }
   }
 
   for (var i = 0; i < rules.length; i++) {
@@ -37286,7 +37831,9 @@ function set(part, value, fn) {
     if (ins[4]) url[ins[1]] = url[ins[1]].toLowerCase();
   }
 
-  url.origin = url.protocol && url.host && url.protocol !== 'file:'
+  url.auth = url.password ? url.username +':'+ url.password : url.username;
+
+  url.origin = url.protocol !== 'file:' && isSpecial(url.protocol) && url.host
     ? url.protocol +'//'+ url.host
     : 'null';
 
@@ -37307,19 +37854,45 @@ function toString(stringify) {
 
   var query
     , url = this
+    , host = url.host
     , protocol = url.protocol;
 
   if (protocol && protocol.charAt(protocol.length - 1) !== ':') protocol += ':';
 
-  var result = protocol + (url.slashes ? '//' : '');
+  var result =
+    protocol +
+    ((url.protocol && url.slashes) || isSpecial(url.protocol) ? '//' : '');
 
   if (url.username) {
     result += url.username;
     if (url.password) result += ':'+ url.password;
     result += '@';
+  } else if (url.password) {
+    result += ':'+ url.password;
+    result += '@';
+  } else if (
+    url.protocol !== 'file:' &&
+    isSpecial(url.protocol) &&
+    !host &&
+    url.pathname !== '/'
+  ) {
+    //
+    // Add back the empty userinfo, otherwise the original invalid URL
+    // might be transformed into a valid one with `url.pathname` as host.
+    //
+    result += '@';
   }
 
-  result += url.host + url.pathname;
+  //
+  // Trailing colon is removed from `url.host` when it is parsed. If it still
+  // ends with a colon, then add back the trailing colon that was removed. This
+  // prevents an invalid URL from being transformed into a valid one.
+  //
+  if (host[host.length - 1] === ':' || (port.test(url.hostname) && !url.port)) {
+    host += ':';
+  }
+
+  result += host + url.pathname;
 
   query = 'object' === typeof url.query ? stringify(url.query) : url.query;
   if (query) result += '?' !== query.charAt(0) ? '?'+ query : query;
@@ -37343,14 +37916,14 @@ Url.qs = qs;
 module.exports = Url;
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"querystringify":65,"requires-port":66}],70:[function(require,module,exports){
+},{"querystringify":68,"requires-port":69}],73:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],71:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 // Currently in sync with Node.js lib/internal/util/types.js
 // https://github.com/nodejs/node/commit/112cc7c27551254aa2b17098fb774867f05ed0d9
 
@@ -37686,7 +38259,7 @@ exports.isAnyArrayBuffer = isAnyArrayBuffer;
   });
 });
 
-},{"is-arguments":53,"is-generator-function":55,"is-typed-array":56,"which-typed-array":75}],72:[function(require,module,exports){
+},{"is-arguments":55,"is-generator-function":58,"is-typed-array":59,"which-typed-array":78}],75:[function(require,module,exports){
 (function (process){(function (){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -38405,7 +38978,7 @@ function callbackify(original) {
 exports.callbackify = callbackify;
 
 }).call(this)}).call(this,require('_process'))
-},{"./support/isBuffer":70,"./support/types":71,"_process":64,"inherits":52}],73:[function(require,module,exports){
+},{"./support/isBuffer":73,"./support/types":74,"_process":67,"inherits":54}],76:[function(require,module,exports){
 const bigInt = require('big-integer');
 
 const knownBases = {
@@ -38536,7 +39109,7 @@ class UuidEncoder {
 
 module.exports = UuidEncoder;
 
-},{"big-integer":3}],74:[function(require,module,exports){
+},{"big-integer":3}],77:[function(require,module,exports){
 (function (Buffer){(function (){
 // Regular expression used for basic parsing of the uuid.
 var pattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -38638,18 +39211,18 @@ var extractVersion = module.exports.version = function (uuid) {
 };
 
 }).call(this)}).call(this,{"isBuffer":require("../is-buffer/index.js")})
-},{"../is-buffer/index.js":54}],75:[function(require,module,exports){
+},{"../is-buffer/index.js":56}],78:[function(require,module,exports){
 (function (global){(function (){
 'use strict';
 
-var forEach = require('foreach');
+var forEach = require('for-each');
 var availableTypedArrays = require('available-typed-arrays');
 var callBound = require('call-bind/callBound');
 
 var $toString = callBound('Object.prototype.toString');
-var hasSymbols = require('has-symbols')();
-var hasToStringTag = hasSymbols && typeof Symbol.toStringTag === 'symbol';
+var hasToStringTag = require('has-tostringtag/shams')();
 
+var g = typeof globalThis === 'undefined' ? global : globalThis;
 var typedArrays = availableTypedArrays();
 
 var $slice = callBound('String.prototype.slice');
@@ -38658,18 +39231,17 @@ var gOPD = require('es-abstract/helpers/getOwnPropertyDescriptor');
 var getPrototypeOf = Object.getPrototypeOf; // require('getprototypeof');
 if (hasToStringTag && gOPD && getPrototypeOf) {
 	forEach(typedArrays, function (typedArray) {
-		if (typeof global[typedArray] === 'function') {
-			var arr = new global[typedArray]();
-			if (!(Symbol.toStringTag in arr)) {
-				throw new EvalError('this engine has support for Symbol.toStringTag, but ' + typedArray + ' does not have the property! Please report this.');
+		if (typeof g[typedArray] === 'function') {
+			var arr = new g[typedArray]();
+			if (Symbol.toStringTag in arr) {
+				var proto = getPrototypeOf(arr);
+				var descriptor = gOPD(proto, Symbol.toStringTag);
+				if (!descriptor) {
+					var superProto = getPrototypeOf(proto);
+					descriptor = gOPD(superProto, Symbol.toStringTag);
+				}
+				toStrTags[typedArray] = descriptor.get;
 			}
-			var proto = getPrototypeOf(arr);
-			var descriptor = gOPD(proto, Symbol.toStringTag);
-			if (!descriptor) {
-				var superProto = getPrototypeOf(proto);
-				descriptor = gOPD(superProto, Symbol.toStringTag);
-			}
-			toStrTags[typedArray] = descriptor.get;
 		}
 	});
 }
@@ -38693,15 +39265,15 @@ var isTypedArray = require('is-typed-array');
 
 module.exports = function whichTypedArray(value) {
 	if (!isTypedArray(value)) { return false; }
-	if (!hasToStringTag) { return $slice($toString(value), 8, -1); }
+	if (!hasToStringTag || !(Symbol.toStringTag in value)) { return $slice($toString(value), 8, -1); }
 	return tryTypedArrays(value);
 };
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"available-typed-arrays":2,"call-bind/callBound":4,"es-abstract/helpers/getOwnPropertyDescriptor":28,"foreach":30,"has-symbols":34,"is-typed-array":56}],76:[function(require,module,exports){
+},{"available-typed-arrays":2,"call-bind/callBound":4,"es-abstract/helpers/getOwnPropertyDescriptor":29,"for-each":31,"has-tostringtag/shams":37,"is-typed-array":59}],79:[function(require,module,exports){
 module.exports = require('./lib/jsonata-extended');
 
-},{"./lib/jsonata-extended":77}],77:[function(require,module,exports){
+},{"./lib/jsonata-extended":80}],80:[function(require,module,exports){
 (function (global){(function (){
 const jsonataOriginal = (typeof window !== "undefined" ? window['jsonata'] : typeof global !== "undefined" ? global['jsonata'] : null);
 const jsonataFunctions = require('./jsonata-functions');
@@ -38729,7 +39301,7 @@ function jsonataExtended(expr, options) {
 module.exports = jsonataExtended;
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./jsonata-functions":78}],78:[function(require,module,exports){
+},{"./jsonata-functions":81}],81:[function(require,module,exports){
 /**
  * Extension functions for JSONata
  * @module jsonata-functions
@@ -39419,5 +39991,5 @@ module.exports = {
   registerWithJSONATA,
 };
 
-},{"countries-list":6,"fold-to-ascii":29,"html-to-text":38,"lodash":57,"moment":58,"mustache":60,"path":63,"rfc5646":67,"url-parse":69,"uuid-encoder":73,"uuid-validate":74}]},{},[76])(76)
+},{"countries-list":6,"fold-to-ascii":30,"html-to-text":40,"lodash":60,"moment":61,"mustache":63,"path":66,"rfc5646":70,"url-parse":72,"uuid-encoder":76,"uuid-validate":77}]},{},[79])(79)
 });
