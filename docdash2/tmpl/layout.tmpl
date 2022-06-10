@@ -101,6 +101,7 @@ const notebooks = elements.reduce((notebooks, element) => {
     const innerText = element.firstChild
     const currentCell = window.RunKit.createNotebook({
         element,
+        nodeVersion:"12.x.x",
         source: innerText.textContent,
         // Remove the text content of the pre tag after the embed has loaded
         onLoad: () => innerText.remove()
