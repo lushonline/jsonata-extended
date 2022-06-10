@@ -12,7 +12,7 @@
 	},
 	"scripts": {
 		"lint": "eslint src/**/*.js",
-		"mocha": "node ./node_modules/mocha/bin/mocha \"test/**/*.js\"",
+		"mocha": "mocha",
 		"predoc": "npm run clean-doc",
 		"doc": "jsdoc --readme README.md --configure jsdoc.json .",
 		"pretest": "npm run lint",
@@ -21,7 +21,7 @@
 		"preversion": "npm run test",
 		"postversion": "git push && git push --tags && npm run changelog && git push ",
 		"changelog": "rimraf CHANGELOG.md && auto-changelog --template keepachangelog && git add . && git commit . -m changelog && git push",
-		"coverage": "nyc --reporter=lcov --reporter=text-summary npm run mocha",
+		"coverage": "c8 npm run mocha",
 		"browserify": "browserify src/index.js --outfile dist/jsonata-extended.js --standalone jsonata-extended",
 		"minify": "uglifyjs dist/jsonata-extended.js -o dist/jsonata-extended.min.js --compress --mangle",
 		"clean-dist": "rimraf ./dist && mkdirp ./dist",
@@ -41,33 +41,34 @@
 	"dependencies": {
 		"countries-list": "^2.6.1",
 		"fold-to-ascii": "^5.0.0",
-		"html-to-text": "^8.0.0",
-		"jsonata": "^1.8.4",
+		"html-to-text": "^8.2.0",
+		"jsonata": "^1.8.6",
 		"lodash": "^4.17.21",
-		"moment": "^2.29.1",
+		"moment": "^2.29.3",
 		"mustache": "^4.2.0",
 		"rfc5646": "^3.0.0",
-		"url-parse": "^1.5.1",
+		"url-parse": "^1.5.10",
 		"uuid-encoder": "^1.2.0",
 		"uuid-validate": "0.0.3"
 	},
 	"devDependencies": {
-		"auto-changelog": "^2.3.0",
-		"babel-eslint": "^10.1.0",
+		"@babel/eslint-parser": "^7.18.2",
+		"auto-changelog": "^2.4.0",
 		"browserify": "^17.0.0",
 		"browserify-shim": "^3.8.14",
-		"chai": "^4.3.4",
+		"c8": "^7.11.3",
+		"chai": "^4.3.6",
 		"coveralls": "^3.1.1",
 		"docdash": "^1.2.0",
-		"eslint": "^7.31.0",
-		"eslint-config-airbnb-base": "^14.2.1",
+		"eslint": "^8.8.0",
+		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-import": "^2.23.4",
-		"eslint-plugin-prettier": "^3.4.0",
-		"jsdoc": "^3.6.7",
-		"mocha": "^9.0.2",
+		"eslint-plugin-import": "^2.25.2",
+		"eslint-plugin-prettier": "^4.0.0",
+		"jsdoc": "^3.6.10",
+		"mocha": "^10.0.0",
 		"nyc": "^15.1.0",
-		"prettier": "^2.3.2",
+		"prettier": "^2.6.2",
 		"rimraf": "^3.0.2",
 		"uglify-es": "^3.3.9"
 	},
@@ -81,5 +82,10 @@
 	},
 	"browserify-shim": {
 		"jsonata": "global:jsonata"
+	},
+	"mocha": {
+		"spec": [
+			"test/**/*.js"
+		]
 	}
 }

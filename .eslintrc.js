@@ -2,7 +2,7 @@ module.exports = {
   extends: ['airbnb-base', 'plugin:prettier/recommended', 'prettier'],
   env: {
     es6: true,
-    node: true
+    node: true,
   },
   rules: {
     'max-len': [
@@ -15,10 +15,13 @@ module.exports = {
         ignoreUrls: true,
         ignoreStrings: true,
         ignoreTemplateLiterals: true,
-        ignoreRegExpLiterals: true
-      }
+        ignoreRegExpLiterals: true,
+      },
     ],
-    'no-underscore-dangle': ['error', { allowAfterThis: true }]
+    'no-underscore-dangle': ['error', { allowAfterThis: true }],
   },
-  parser: 'babel-eslint'
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false,
+  },
 };
