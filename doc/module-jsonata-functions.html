@@ -31,7 +31,7 @@
     
     <input type="text" id="nav-search" placeholder="Search" />
     
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/martinholden-skillsoft/jsonata-extended.git" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-jsonata-functions.html">jsonata-functions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~htmltotext">htmltotext</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~languageInfo">languageInfo</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~moment">moment</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~momentDuration">momentDuration</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~mustache">mustache</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parsePath">parsePath</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parseUrl">parseUrl</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~registerWithJSONATA">registerWithJSONATA</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~shortenUuid">shortenUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~truncate">truncate</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~unicodeToASCII">unicodeToASCII</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#jsonataExtended">jsonataExtended</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/martinholden-skillsoft/jsonata-extended.git" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-jsonata-functions.html">jsonata-functions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~decodeUuid">decodeUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~encodeUuid">encodeUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~htmltotext">htmltotext</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~languageInfo">languageInfo</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~moment">moment</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~momentDuration">momentDuration</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~mustache">mustache</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parsePath">parsePath</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parseUrl">parseUrl</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~registerWithJSONATA">registerWithJSONATA</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~shortenUuid">shortenUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~truncate">truncate</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~unicodeToASCII">unicodeToASCII</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~unshortenUuid">unshortenUuid</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#jsonataExtended">jsonataExtended</a></li></ul>
 </nav>
 
 <div id="main">
@@ -160,6 +160,578 @@
 
     
         <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~decodeUuid"><span class="type-signature">(private, inner) </span>decodeUuid<span class="signature">(value, base<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String|Void}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line208">line 208</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.npmjs.com/package/uuid-encoder">uuid-encoder NPM</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    Decode the supplied shortened UUID
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage within a JSONata transform</p>
+    
+    <pre class="prettyprint"><code>// returns
+// result = '1b49aa30-e719-11e6-9835-f723b46a2688'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$decodeUuid("1m5otdkthiyq143crwujacdqg", "base36")');
+const result = expr.evaluate();</code></pre>
+    <h5>Try on RUNKIT</h5>
+    <pre class="embedrunkit">// returns
+// result = '1b49aa30-e719-11e6-9835-f723b46a2688'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$decodeUuid("1m5otdkthiyq143crwujacdqg", "base36")');
+const result = expr.evaluate();</pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Shortened UUID</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>base</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">'base2'</span>
+|
+
+<span class="param-type">'base10'</span>
+|
+
+<span class="param-type">'base16'</span>
+|
+
+<span class="param-type">'base32'</span>
+|
+
+<span class="param-type">'base36'</span>
+|
+
+<span class="param-type">'base58'</span>
+|
+
+<span class="param-type">'base62'</span>
+|
+
+<span class="param-type">'base64'</span>
+|
+
+<span class="param-type">'base64url'</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'base36'</code>
+                
+                </td>
+            
+
+            <td class="description last">A valid base to use for the process, case sensitive <a href="https://www.npmjs.com/package/uuid-encoder#encoding">Encoding Options</a></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+    <div class="param-desc usertext">
+    
+        Will throw an error if the value is not a valid uuid
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc usertext">
+    
+        Will throw an error if the base is not a valid option
+    
+    </div>
+
+</li>
+    </ul>
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns a string containing the encoded version of the uuid, or undefined for undefined input
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~encodeUuid"><span class="type-signature">(private, inner) </span>encodeUuid<span class="signature">(value, base<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String|Void}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line140">line 140</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.npmjs.com/package/uuid-encoder">uuid-encoder NPM</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    Encode the supplied UUID
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage within a JSONata transform</p>
+    
+    <pre class="prettyprint"><code>// returns
+// result = '1m5otdkthiyq143crwujacdqg'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$encodeUuid("1b49aa30-e719-11e6-9835-f723b46a2688", "base36")');
+const result = expr.evaluate();</code></pre>
+    <h5>Try on RUNKIT</h5>
+    <pre class="embedrunkit">// returns
+// result = '1m5otdkthiyq143crwujacdqg'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$encodeUuid("1b49aa30-e719-11e6-9835-f723b46a2688", "base36")');
+const result = expr.evaluate();</pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Properly formatted UUID</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>base</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">'base2'</span>
+|
+
+<span class="param-type">'base10'</span>
+|
+
+<span class="param-type">'base16'</span>
+|
+
+<span class="param-type">'base32'</span>
+|
+
+<span class="param-type">'base36'</span>
+|
+
+<span class="param-type">'base58'</span>
+|
+
+<span class="param-type">'base62'</span>
+|
+
+<span class="param-type">'base64'</span>
+|
+
+<span class="param-type">'base64url'</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'base36'</code>
+                
+                </td>
+            
+
+            <td class="description last">A valid base to use for the process, case sensitive <a href="https://www.npmjs.com/package/uuid-encoder#encoding">Encoding Options</a></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+    <div class="param-desc usertext">
+    
+        Will throw an error if the value is not a valid uuid
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc usertext">
+    
+        Will throw an error if the base is not a valid option
+    
+    </div>
+
+</li>
+    </ul>
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns a string containing the encoded version of the uuid, or undefined for undefined input
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
 
         
             
@@ -1338,7 +1910,7 @@ const result = expr.evaluate();</pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line242">line 242</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line333">line 333</a>
     </li></ul></dd>
     
 
@@ -1743,7 +2315,7 @@ const result = expr.evaluate();</pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line380">line 380</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line471">line 471</a>
     </li></ul></dd>
     
 
@@ -1951,7 +2523,7 @@ const result = expr.evaluate();</pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line408">line 408</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line499">line 499</a>
     </li></ul></dd>
     
 
@@ -2161,7 +2733,7 @@ const result = expr.evaluate();</pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line436">line 436</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line527">line 527</a>
     </li></ul></dd>
     
 
@@ -2405,7 +2977,7 @@ const result = expr.evaluate();</pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line348">line 348</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line439">line 439</a>
     </li></ul></dd>
     
 
@@ -2630,7 +3202,7 @@ const result = expr.evaluate();</pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line304">line 304</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line395">line 395</a>
     </li></ul></dd>
     
 
@@ -2877,7 +3449,7 @@ const result = expr.evaluate();</pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line633">line 633</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line724">line 724</a>
     </li></ul></dd>
     
 
@@ -3133,13 +3705,13 @@ const result = expression.evaluate();</pre>
     <pre class="prettyprint"><code>// returns
 // result = '1m5otdkthiyq143crwujacdqg'
 const jsonata = require('jsonata-extended');
-const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688"), "base36"');
+const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688", "base36")');
 const result = expr.evaluate();</code></pre>
     <h5>Try on RUNKIT</h5>
     <pre class="embedrunkit">// returns
 // result = '1m5otdkthiyq143crwujacdqg'
 const jsonata = require('jsonata-extended');
-const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688"), "base36"');
+const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688", "base36")');
 const result = expr.evaluate();</pre>
 
 
@@ -3354,7 +3926,7 @@ const result = expr.evaluate();</pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line530">line 530</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line621">line 621</a>
     </li></ul></dd>
     
 
@@ -3801,7 +4373,7 @@ const result = expr.evaluate();</pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line482">line 482</a>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line573">line 573</a>
     </li></ul></dd>
     
 
@@ -4127,6 +4699,292 @@ const result = expr.evaluate();</pre>
 
 
         
+            
+
+    
+
+    <h4 class="name" id="~unshortenUuid"><span class="type-signature">(private, inner) </span>unshortenUuid<span class="signature">(value, base<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String|Void}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jsonata-functions.js.html">jsonata-functions.js</a>, <a href="jsonata-functions.js.html#line163">line 163</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.npmjs.com/package/uuid-encoder">uuid-encoder NPM</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    UnShorten the supplied shortened UUID
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage within a JSONata transform</p>
+    
+    <pre class="prettyprint"><code>// returns
+// result = '1b49aa30-e719-11e6-9835-f723b46a2688'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$unshortenUuid("1m5otdkthiyq143crwujacdqg", "base36")');
+const result = expr.evaluate();</code></pre>
+    <h5>Try on RUNKIT</h5>
+    <pre class="embedrunkit">// returns
+// result = '1b49aa30-e719-11e6-9835-f723b46a2688'
+const jsonata = require('jsonata-extended');
+const expr = jsonata('$unshortenUuid("1m5otdkthiyq143crwujacdqg", "base36")');
+const result = expr.evaluate();</pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Shortened UUID</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>base</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">'base2'</span>
+|
+
+<span class="param-type">'base10'</span>
+|
+
+<span class="param-type">'base16'</span>
+|
+
+<span class="param-type">'base32'</span>
+|
+
+<span class="param-type">'base36'</span>
+|
+
+<span class="param-type">'base58'</span>
+|
+
+<span class="param-type">'base62'</span>
+|
+
+<span class="param-type">'base64'</span>
+|
+
+<span class="param-type">'base64url'</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'base36'</code>
+                
+                </td>
+            
+
+            <td class="description last">A valid base to use for the process, case sensitive <a href="https://www.npmjs.com/package/uuid-encoder#encoding">Encoding Options</a></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+    <div class="param-desc usertext">
+    
+        Will throw an error if the value is not a valid uuid
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc usertext">
+    
+        Will throw an error if the base is not a valid option
+    
+    </div>
+
+</li>
+    </ul>
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns a string containing the encoded version of the uuid, or undefined for undefined input
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
     
 
     
@@ -4165,6 +5023,7 @@ const notebooks = elements.reduce((notebooks, element) => {
     const innerText = element.firstChild
     const currentCell = window.RunKit.createNotebook({
         element,
+        nodeVersion:"12.x.x",
         source: innerText.textContent,
         // Remove the text content of the pre tag after the embed has loaded
         onLoad: () => innerText.remove()

@@ -31,7 +31,7 @@
     
     <input type="text" id="nav-search" placeholder="Search" />
     
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/martinholden-skillsoft/jsonata-extended.git" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-jsonata-functions.html">jsonata-functions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~htmltotext">htmltotext</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~languageInfo">languageInfo</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~moment">moment</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~momentDuration">momentDuration</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~mustache">mustache</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parsePath">parsePath</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parseUrl">parseUrl</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~registerWithJSONATA">registerWithJSONATA</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~shortenUuid">shortenUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~truncate">truncate</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~unicodeToASCII">unicodeToASCII</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#jsonataExtended">jsonataExtended</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/martinholden-skillsoft/jsonata-extended.git" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Modules</h3><ul><li><a href="module-jsonata-functions.html">jsonata-functions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~decodeUuid">decodeUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~encodeUuid">encodeUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~htmltotext">htmltotext</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~languageInfo">languageInfo</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~moment">moment</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~momentDuration">momentDuration</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~mustache">mustache</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parsePath">parsePath</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~parseUrl">parseUrl</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~registerWithJSONATA">registerWithJSONATA</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~shortenUuid">shortenUuid</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~truncate">truncate</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~unicodeToASCII">unicodeToASCII</a></li><li data-type='method' style='display: none;'><a href="module-jsonata-functions.html#~unshortenUuid">unshortenUuid</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#jsonataExtended">jsonataExtended</a></li></ul>
 </nav>
 
 <div id="main">
@@ -129,7 +129,7 @@ const htmltotext = (value, options) => {
  * // returns
  * // result = '1m5otdkthiyq143crwujacdqg'
  * const jsonata = require('jsonata-extended');
- * const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688"), "base36"');
+ * const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688", "base36")');
  * const result = expr.evaluate();
  *
  * @throws Will throw an error if the value is not a valid uuid
@@ -164,6 +164,97 @@ const shortenUuid = (value, base = 'base36') => {
   }
 
   return new UuidEncoder(base).encode(value);
+};
+
+/**
+ * Encode the supplied UUID
+ * @access private
+ * @param {String} value - Properly formatted UUID
+ * @param {('base2'|'base10'|'base16'|'base32'|'base36'|'base58'|'base62'|'base64'|'base64url')} [base='base36'] - A valid base to use for the process, case sensitive {@link https://www.npmjs.com/package/uuid-encoder#encoding|Encoding Options}
+ *
+ * @example &lt;caption>Example usage within a JSONata transform&lt;/caption>
+ * // returns
+ * // result = '1m5otdkthiyq143crwujacdqg'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$encodeUuid("1b49aa30-e719-11e6-9835-f723b46a2688", "base36")');
+ * const result = expr.evaluate();
+ *
+ * @throws Will throw an error if the value is not a valid uuid
+ * @throws Will throw an error if the base is not a valid option
+ * @returns {String|Void} Returns a string containing the encoded version of the uuid, or undefined for undefined input
+ *
+ * @see {@link https://www.npmjs.com/package/uuid-encoder|uuid-encoder NPM}
+ */
+const encodeUuid = (value, base = 'base36') => {
+  return shortenUuid(value, base);
+};
+
+/**
+ * UnShorten the supplied shortened UUID
+ * @access private
+ * @param {String} value - Shortened UUID
+ * @param {('base2'|'base10'|'base16'|'base32'|'base36'|'base58'|'base62'|'base64'|'base64url')} [base='base36'] - A valid base to use for the process, case sensitive {@link https://www.npmjs.com/package/uuid-encoder#encoding|Encoding Options}
+ *
+ * @example &lt;caption>Example usage within a JSONata transform&lt;/caption>
+ * // returns
+ * // result = '1b49aa30-e719-11e6-9835-f723b46a2688'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$unshortenUuid("1m5otdkthiyq143crwujacdqg", "base36")');
+ * const result = expr.evaluate();
+ *
+ * @throws Will throw an error if the value is not a valid uuid
+ * @throws Will throw an error if the base is not a valid option
+ * @returns {String|Void} Returns a string containing the encoded version of the uuid, or undefined for undefined input
+ *
+ * @see {@link https://www.npmjs.com/package/uuid-encoder|uuid-encoder NPM}
+ */
+const unshortenUuid = (value, base = 'base36') => {
+  if (typeof value === 'undefined') {
+    return undefined;
+  }
+
+  const validBasex = [
+    'base2',
+    'base10',
+    'base16',
+    'base32',
+    'base36',
+    'base58',
+    'base62',
+    'base64',
+    'base64url',
+  ];
+
+  if (!validBasex.includes(base)) {
+    throw new Error(`Invalid basex. Valid values: ${validBasex.join(',')}`);
+  }
+
+  const result = new UuidEncoder(base).decode(value);
+
+  return result;
+};
+
+/**
+ * Decode the supplied shortened UUID
+ * @access private
+ * @param {String} value - Shortened UUID
+ * @param {('base2'|'base10'|'base16'|'base32'|'base36'|'base58'|'base62'|'base64'|'base64url')} [base='base36'] - A valid base to use for the process, case sensitive {@link https://www.npmjs.com/package/uuid-encoder#encoding|Encoding Options}
+ *
+ * @example &lt;caption>Example usage within a JSONata transform&lt;/caption>
+ * // returns
+ * // result = '1b49aa30-e719-11e6-9835-f723b46a2688'
+ * const jsonata = require('jsonata-extended');
+ * const expr = jsonata('$decodeUuid("1m5otdkthiyq143crwujacdqg", "base36")');
+ * const result = expr.evaluate();
+ *
+ * @throws Will throw an error if the value is not a valid uuid
+ * @throws Will throw an error if the base is not a valid option
+ * @returns {String|Void} Returns a string containing the encoded version of the uuid, or undefined for undefined input
+ *
+ * @see {@link https://www.npmjs.com/package/uuid-encoder|uuid-encoder NPM}
+ */
+const decodeUuid = (value, base = 'base36') => {
+  return unshortenUuid(value, base);
 };
 
 /**
@@ -694,6 +785,16 @@ const registerWithJSONATA = (expression) => {
     '&lt;s?s?:s>'
   );
 
+  expression.registerFunction(
+    'unshortenUuid',
+    (value, basex) => unshortenUuid(value, basex),
+    '&lt;s?s?:s>'
+  );
+
+  expression.registerFunction('encodeUuid', (value, basex) => encodeUuid(value, basex), '&lt;s?s?:s>');
+
+  expression.registerFunction('decodeUuid', (value, basex) => decodeUuid(value, basex), '&lt;s?s?:s>');
+
   expression.registerFunction('truncate', (value, options) => truncate(value, options), '&lt;s?o?:s>');
 
   expression.registerFunction('languageInfo', (value) => languageInfo(value), '&lt;s?:o>');
@@ -767,6 +868,7 @@ const notebooks = elements.reduce((notebooks, element) => {
     const innerText = element.firstChild
     const currentCell = window.RunKit.createNotebook({
         element,
+        nodeVersion:"12.x.x",
         source: innerText.textContent,
         // Remove the text content of the pre tag after the embed has loaded
         onLoad: () => innerText.remove()
