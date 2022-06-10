@@ -81,7 +81,7 @@ const htmltotext = (value, options) => {
  * // returns
  * // result = '1m5otdkthiyq143crwujacdqg'
  * const jsonata = require('jsonata-extended');
- * const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688"), "base36"');
+ * const expr = jsonata('$shortenUuid("1b49aa30-e719-11e6-9835-f723b46a2688", "base36")');
  * const result = expr.evaluate();
  *
  * @throws Will throw an error if the value is not a valid uuid
