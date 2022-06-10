@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when parameter 1 is not a string",
+  "expr": "$unshortenUuid(1)",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Argument 1 of function \"unshortenUuid\" does not match function signature"
+  }
+}
