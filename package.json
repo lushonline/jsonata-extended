@@ -1,6 +1,6 @@
 {
 	"name": "jsonata-extended",
-	"version": "0.3.9",
+	"version": "0.4.0",
 	"description": "Extended JSONata object with custom functions",
 	"repository": {
 		"type": "git",
