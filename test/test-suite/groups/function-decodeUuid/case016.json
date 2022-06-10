@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success - explicitly state base2",
+  "expr": "$decodeUuid(\"11011010010011010101000110000111001110001100100010001111001101001100000110101111101110010001110110100011010100010011010001000\",\"base2\")",
+  "dataset": "empty",
+  "bindings": {},
+  "result": "1b49aa30-e719-11e6-9835-f723b46a2688"
+}

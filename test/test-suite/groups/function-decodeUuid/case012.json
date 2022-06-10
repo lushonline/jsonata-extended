@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when parameter 1 is not a string",
+  "expr": "$decodeUuid(1)",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Argument 1 of function \"decodeUuid\" does not match function signature"
+  }
+}

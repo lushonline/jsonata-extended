@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when more than two parameter",
+  "expr": "$encodeUuid(\"1\",\"2\",1)",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Argument 3 of function \"encodeUuid\" does not match function signature"
+  }
+}

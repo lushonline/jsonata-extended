@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success - explicitly state base58",
+  "expr": "$encodeUuid(id,\"base58\")",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "4NSMyX1VHYAbjBZyDbjWFR"
+}

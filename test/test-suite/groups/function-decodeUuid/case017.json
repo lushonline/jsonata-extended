@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success - explicitly state base10",
+  "expr": "$decodeUuid(\"36271645440971537402116158924641674888\",\"base10\")",
+  "dataset": "empty",
+  "bindings": {},
+  "result": "1b49aa30-e719-11e6-9835-f723b46a2688"
+}

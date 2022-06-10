@@ -1,0 +1,9 @@
+{
+  "description": "Confirm error thrown when parameter is not an encoded UUID",
+  "expr": "$decodeUuid(\"Hello World\")",
+  "dataset": "empty",
+  "bindings": {},
+  "error": {
+    "message": "Invalid encoded data"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "description": "Confirm success - explicitly state base10",
+  "expr": "$encodeUuid(id,\"base10\")",
+  "dataset": "metadata",
+  "bindings": {},
+  "result": "36271645440971537402116158924641674888"
+}
