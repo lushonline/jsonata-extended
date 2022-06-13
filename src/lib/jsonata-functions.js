@@ -301,7 +301,7 @@ const decodeUuid = (value, base = 'base36') => {
  * //      }
  * //    ]
  * const jsonata = require('jsonata-extended');
- * const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { $languageInfo($v) }) )');
+ * const expr = jsonata('( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { $languageInfo($v) }) )');
  * const result = expr.evaluate();
  *
  * @example <caption>Example usage within a JSONata transform to get a new object with the RFC5646 tag, and a string 'region (language)' representing the native locale for three locales</caption>
@@ -321,7 +321,7 @@ const decodeUuid = (value, base = 'base36') => {
  * //        }
  * //      ]
  * const jsonata = require('jsonata-extended');
- * const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { ( $lang := $languageInfo($v); { "rfc5646": $lang.rfc5646, "locale" : $lang.region.native & " (" & $lang.language.native &")" })}) )');
+ * const expr = jsonata('( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { ( $lang := $languageInfo($v); { "rfc5646": $lang.rfc5646, "locale" : $lang.region.native & " (" & $lang.language.native &")" })}) )');
  * const result = expr.evaluate();
  *
  * @throws Will throw an error if the value is not a valid RFC5646 language tag
@@ -357,31 +357,31 @@ const languageInfo = (value) => {
  *
  * @example <caption>Example usage within a JSONata transform</caption>
  * // returns
- * result = {
- *    "slashes": true,
- *    "protocol": "http:",
- *    "hash": "#hash",
- *    "query": {
- *      "param1": "string",
- *      "param2": "true"
- *    },
- *    "pathname": "/p/a/t/page.html",
- *    "auth": "user:pass",
- *    "host": "host.com:8080",
- *    "port": "8080",
- *    "hostname": "host.com",
- *    "password": "pass",
- *    "username": "user",
- *    "origin": "http://host.com:8080",
- *    "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&param2=true#hash"
- *  }
+ * // result = {
+ * //   "slashes": true,
+ * //   "protocol": "http:",
+ * //   "hash": "#hash",
+ * //   "query": {
+ * //     "param1": "string",
+ * //     "param2": "true"
+ * //   },
+ * //   "pathname": "/p/a/t/page.html",
+ * //   "auth": "user:pass",
+ * //   "host": "host.com:8080",
+ * //   "port": "8080",
+ * //   "hostname": "host.com",
+ * //   "password": "pass",
+ * //   "username": "user",
+ * //   "origin": "http://host.com:8080",
+ * //   "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&param2=true#hash"
+ * // }
  * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&param2=true#hash")');
  * const result = expr.evaluate();
  *
  * @example <caption>Example usage within a JSONata transform to get the hostname</caption>
  * // returns
- * result = "host.com"
+ * // result = "host.com"
  *
  * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&param2=true#hash").hostname');
@@ -412,20 +412,20 @@ const parseUrl = (value) => {
  *
  * @example <caption>Example usage within a JSONata transform</caption>
  * // returns
- * result = {
- *    "base": "page.html",
- *    "dir": "/p/a/t",
- *    "ext": ".html",
- *    "name": "page",
- *    "root": "/"
- * }
+ * // result = {
+ * //     "base": "page.html",
+ * //     "dir": "/p/a/t",
+ * //     "ext": ".html",
+ * //     "name": "page",
+ * //     "root": "/"
+ * // }
  * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$parsePath("/p/a/t/page.html")');
  * const result = expr.evaluate();
  *
  * @example <caption>Example usage within a JSONata transform to get the file extension</caption>
  * // returns
- * result = ".html"
+ * // result = ".html"
  *
  * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$parsePath("/p/a/t/page.html").ext');
@@ -461,7 +461,7 @@ const parsePath = (value) => {
  * // returns
  * // result = "dicembre"
  * const jsonata = require('jsonata-extended');
- * const expr = jsonata('$.( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\")))');
+ * const expr = jsonata('( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\",\"MM-DD-YYYY\")) )');
  * const result = expr.evaluate();
  *
  * @returns {Object} A moment object
@@ -488,7 +488,7 @@ const moment = (...args) => {
  * // returns
  * // result = "74:02:10"
  * const jsonata = require('jsonata-extended');
- * const expr = jsonata('$.( $duration := $momentDuration(\"P3DT2H2M10S\"); $formatNumber($floor($duration.asHours()),\"#00\") & \":\" & $formatNumber($floor($duration.minutes()),\"00\") & \":\" & $formatNumber($floor($duration.seconds()),\"00\") )');
+ * const expr = jsonata('( $duration := $momentDuration(\"P3DT2H2M10S\"); $formatNumber($floor($duration.asHours()),\"#00\") & \":\" & $formatNumber($floor($duration.minutes()),\"00\") & \":\" & $formatNumber($floor($duration.seconds()),\"00\") )');
  * const result = expr.evaluate();
  *
  * @returns {Object} A moment duration object
@@ -706,7 +706,7 @@ const truncate = (value, options) => {
 
 /**
  * Register the functions in this library to the JSONata expression
- * @access public
+ * @access private
  * @param {Object} expression - The JSONata Expression Object {@link https://www.npmjs.com/package/jsonata|JSONata NPM}
  *
  * @example <caption>Example usage to add the functions in this library to a JSONata expression object, and utilise them</caption>
