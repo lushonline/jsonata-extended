@@ -2082,7 +2082,7 @@ const result = expr.evaluate();</pre>
 //      }
 //    ]
 const jsonata = require('jsonata-extended');
-const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { $languageInfo($v) }) )');
+const expr = jsonata('( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { $languageInfo($v) }) )');
 const result = expr.evaluate();</code></pre>
     <h5>Try on RUNKIT</h5>
     <pre class="embedrunkit">// returns
@@ -2149,7 +2149,7 @@ const result = expr.evaluate();</code></pre>
 //      }
 //    ]
 const jsonata = require('jsonata-extended');
-const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { $languageInfo($v) }) )');
+const expr = jsonata('( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { $languageInfo($v) }) )');
 const result = expr.evaluate();</pre>
 
         <p class="code-caption">Example usage within a JSONata transform to get a new object with the RFC5646 tag, and a string 'region (language)' representing the native locale for three locales</p>
@@ -2170,7 +2170,7 @@ const result = expr.evaluate();</pre>
 //        }
 //      ]
 const jsonata = require('jsonata-extended');
-const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { ( $lang := $languageInfo($v); { "rfc5646": $lang.rfc5646, "locale" : $lang.region.native &amp; " (" &amp; $lang.language.native &amp;")" })}) )');
+const expr = jsonata('( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { ( $lang := $languageInfo($v); { "rfc5646": $lang.rfc5646, "locale" : $lang.region.native &amp; " (" &amp; $lang.language.native &amp;")" })}) )');
 const result = expr.evaluate();</code></pre>
     <h5>Try on RUNKIT</h5>
     <pre class="embedrunkit">// returns
@@ -2189,7 +2189,7 @@ const result = expr.evaluate();</code></pre>
 //        }
 //      ]
 const jsonata = require('jsonata-extended');
-const expr = jsonata('$.( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { ( $lang := $languageInfo($v); { "rfc5646": $lang.rfc5646, "locale" : $lang.region.native &amp; " (" &amp; $lang.language.native &amp;")" })}) )');
+const expr = jsonata('( $allLocales:= ["en-US", "fr-FR", "zh-CN"]; $map($allLocales, function($v, $i, $a) { ( $lang := $languageInfo($v); { "rfc5646": $lang.rfc5646, "locale" : $lang.region.native &amp; " (" &amp; $lang.language.native &amp;")" })}) )');
 const result = expr.evaluate();</pre>
 
 
@@ -2394,13 +2394,13 @@ const result = expr.evaluate();</pre>
     <pre class="prettyprint"><code>// returns
 // result = "dicembre"
 const jsonata = require('jsonata-extended');
-const expr = jsonata('$.( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\")))');
+const expr = jsonata('( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\",\"MM-DD-YYYY\")) )');
 const result = expr.evaluate();</code></pre>
     <h5>Try on RUNKIT</h5>
     <pre class="embedrunkit">// returns
 // result = "dicembre"
 const jsonata = require('jsonata-extended');
-const expr = jsonata('$.( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\")))');
+const expr = jsonata('( $momentit := $moment().locale(\"it\"); $momentit.localeData().months($moment(\"12-12-1995\",\"MM-DD-YYYY\")) )');
 const result = expr.evaluate();</pre>
 
 
@@ -2604,13 +2604,13 @@ const result = expr.evaluate();</pre>
     <pre class="prettyprint"><code>// returns
 // result = "74:02:10"
 const jsonata = require('jsonata-extended');
-const expr = jsonata('$.( $duration := $momentDuration(\"P3DT2H2M10S\"); $formatNumber($floor($duration.asHours()),\"#00\") &amp; \":\" &amp; $formatNumber($floor($duration.minutes()),\"00\") &amp; \":\" &amp; $formatNumber($floor($duration.seconds()),\"00\") )');
+const expr = jsonata('( $duration := $momentDuration(\"P3DT2H2M10S\"); $formatNumber($floor($duration.asHours()),\"#00\") &amp; \":\" &amp; $formatNumber($floor($duration.minutes()),\"00\") &amp; \":\" &amp; $formatNumber($floor($duration.seconds()),\"00\") )');
 const result = expr.evaluate();</code></pre>
     <h5>Try on RUNKIT</h5>
     <pre class="embedrunkit">// returns
 // result = "74:02:10"
 const jsonata = require('jsonata-extended');
-const expr = jsonata('$.( $duration := $momentDuration(\"P3DT2H2M10S\"); $formatNumber($floor($duration.asHours()),\"#00\") &amp; \":\" &amp; $formatNumber($floor($duration.minutes()),\"00\") &amp; \":\" &amp; $formatNumber($floor($duration.seconds()),\"00\") )');
+const expr = jsonata('( $duration := $momentDuration(\"P3DT2H2M10S\"); $formatNumber($floor($duration.asHours()),\"#00\") &amp; \":\" &amp; $formatNumber($floor($duration.minutes()),\"00\") &amp; \":\" &amp; $formatNumber($floor($duration.seconds()),\"00\") )');
 const result = expr.evaluate();</pre>
 
 
@@ -3040,25 +3040,25 @@ const result = expr.evaluate();</pre>
         <p class="code-caption">Example usage within a JSONata transform</p>
     
     <pre class="prettyprint"><code>// returns
-result = {
-   "base": "page.html",
-   "dir": "/p/a/t",
-   "ext": ".html",
-   "name": "page",
-   "root": "/"
-}
+// result = {
+//     "base": "page.html",
+//     "dir": "/p/a/t",
+//     "ext": ".html",
+//     "name": "page",
+//     "root": "/"
+// }
 const jsonata = require('jsonata-extended');
 const expr = jsonata('$parsePath("/p/a/t/page.html")');
 const result = expr.evaluate();</code></pre>
     <h5>Try on RUNKIT</h5>
     <pre class="embedrunkit">// returns
-result = {
-   "base": "page.html",
-   "dir": "/p/a/t",
-   "ext": ".html",
-   "name": "page",
-   "root": "/"
-}
+// result = {
+//     "base": "page.html",
+//     "dir": "/p/a/t",
+//     "ext": ".html",
+//     "name": "page",
+//     "root": "/"
+// }
 const jsonata = require('jsonata-extended');
 const expr = jsonata('$parsePath("/p/a/t/page.html")');
 const result = expr.evaluate();</pre>
@@ -3066,14 +3066,14 @@ const result = expr.evaluate();</pre>
         <p class="code-caption">Example usage within a JSONata transform to get the file extension</p>
     
     <pre class="prettyprint"><code>// returns
-result = ".html"
+// result = ".html"
 
 const jsonata = require('jsonata-extended');
 const expr = jsonata('$parsePath("/p/a/t/page.html").ext');
 const result = expr.evaluate();</code></pre>
     <h5>Try on RUNKIT</h5>
     <pre class="embedrunkit">// returns
-result = ".html"
+// result = ".html"
 
 const jsonata = require('jsonata-extended');
 const expr = jsonata('$parsePath("/p/a/t/page.html").ext');
@@ -3265,47 +3265,47 @@ const result = expr.evaluate();</pre>
         <p class="code-caption">Example usage within a JSONata transform</p>
     
     <pre class="prettyprint"><code>// returns
-result = {
-   "slashes": true,
-   "protocol": "http:",
-   "hash": "#hash",
-   "query": {
-     "param1": "string",
-     "param2": "true"
-   },
-   "pathname": "/p/a/t/page.html",
-   "auth": "user:pass",
-   "host": "host.com:8080",
-   "port": "8080",
-   "hostname": "host.com",
-   "password": "pass",
-   "username": "user",
-   "origin": "http://host.com:8080",
-   "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash"
- }
+// result = {
+//   "slashes": true,
+//   "protocol": "http:",
+//   "hash": "#hash",
+//   "query": {
+//     "param1": "string",
+//     "param2": "true"
+//   },
+//   "pathname": "/p/a/t/page.html",
+//   "auth": "user:pass",
+//   "host": "host.com:8080",
+//   "port": "8080",
+//   "hostname": "host.com",
+//   "password": "pass",
+//   "username": "user",
+//   "origin": "http://host.com:8080",
+//   "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash"
+// }
 const jsonata = require('jsonata-extended');
 const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash")');
 const result = expr.evaluate();</code></pre>
     <h5>Try on RUNKIT</h5>
     <pre class="embedrunkit">// returns
-result = {
-   "slashes": true,
-   "protocol": "http:",
-   "hash": "#hash",
-   "query": {
-     "param1": "string",
-     "param2": "true"
-   },
-   "pathname": "/p/a/t/page.html",
-   "auth": "user:pass",
-   "host": "host.com:8080",
-   "port": "8080",
-   "hostname": "host.com",
-   "password": "pass",
-   "username": "user",
-   "origin": "http://host.com:8080",
-   "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash"
- }
+// result = {
+//   "slashes": true,
+//   "protocol": "http:",
+//   "hash": "#hash",
+//   "query": {
+//     "param1": "string",
+//     "param2": "true"
+//   },
+//   "pathname": "/p/a/t/page.html",
+//   "auth": "user:pass",
+//   "host": "host.com:8080",
+//   "port": "8080",
+//   "hostname": "host.com",
+//   "password": "pass",
+//   "username": "user",
+//   "origin": "http://host.com:8080",
+//   "href": "http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash"
+// }
 const jsonata = require('jsonata-extended');
 const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash")');
 const result = expr.evaluate();</pre>
@@ -3313,14 +3313,14 @@ const result = expr.evaluate();</pre>
         <p class="code-caption">Example usage within a JSONata transform to get the hostname</p>
     
     <pre class="prettyprint"><code>// returns
-result = "host.com"
+// result = "host.com"
 
 const jsonata = require('jsonata-extended');
 const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash").hostname');
 const result = expr.evaluate();</code></pre>
     <h5>Try on RUNKIT</h5>
     <pre class="embedrunkit">// returns
-result = "host.com"
+// result = "host.com"
 
 const jsonata = require('jsonata-extended');
 const expr = jsonata('$parseUrl("http://user:pass@host.com:8080/p/a/t/page.html?param1=string&amp;param2=true#hash").hostname');
@@ -3437,7 +3437,7 @@ const result = expr.evaluate();</pre>
 
     
 
-    <h4 class="name" id="~registerWithJSONATA"><span class="type-signature">(inner) </span>registerWithJSONATA<span class="signature">(expression)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~registerWithJSONATA"><span class="type-signature">(private, inner) </span>registerWithJSONATA<span class="signature">(expression)</span><span class="type-signature"></span></h4>
 
     
 
