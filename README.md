@@ -1,5 +1,5 @@
 # jsonata-extended
-[![JSONata Extended CI](https://github.com/martinholden-skillsoft/jsonata-extended/actions/workflows/main.yml/badge.svg)](https://github.com/martinholden-skillsoft/jsonata-extended/actions/workflows/main.yml)
+[![JSONata Extended CI](https://github.com/martinholden-skillsoft/jsonata-extended/actions/workflows/ci.yml/badge.svg)](https://github.com/martinholden-skillsoft/jsonata-extended/actions/workflows/ci.yml)
 
 Extended JSONata object with custom functions
 
