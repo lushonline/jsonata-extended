@@ -5,10 +5,12 @@ const jsonataFunctions = require('./jsonata-functions');
  * Return a JSONata expression object that includes the custom functions registered
  *
  * @param {Object} expr - JSONata expression {@link https://www.npmjs.com/package/jsonata|JSONata NPM}
- * @param {boolean} options - recover: attempt to recover on parse error
+ * @param {Object} options
+ * @param {boolean} options.recover: attempt to recover on parse error
+ * @param {Function} options.RegexEngine: RegEx class constructor to use
  * @example <caption>Example using the extended JSONata as a dropin replacement for the standard {@link https://www.npmjs.com/package/jsonata|JSONata NPM}</caption>
  * // const jsonata = require('jsonata');
- * const jsonata = require('./lib/jsonata/jsonata-extended');
+ * const jsonata = require('jsonata-extended');
  * const expr = jsonata('$htmltotext("<p>Leadership has a dark side; a &#34;leadership shadow&#34; that often creates an unknown; lurking fear.</p>")');
  * const result = expr.evaluate();
  * @see {@link https://www.npmjs.com/package/jsonata|JSONata NPM}
